@@ -1,8 +1,5 @@
 import { Router,Request, Response } from "express";
-import createBlog from '../controllers/create-Blog.controller.ts';
-import createUser from "../controllers/createUser.controller.ts";
-import getUsers from "../controllers/getUsers.controller.ts";
-import getSpecificBlog from "../controllers/getSpecificBlog.controller.ts"
+import {getSpecificBlog, getUsers, createBlog, createUser, getAllBlogs} from "../controllers/exports.controller.ts"
 import verifyUniqueUsername from "../middlewares/verifyUsername.middleware.ts";
 import verifyUniqueEmail from "../middlewares/verifyEmail.middleware.ts";
 
@@ -13,4 +10,5 @@ router.post("/blogs", createBlog);
 router.post("/auth/register", verifyUniqueUsername, verifyUniqueEmail, createUser);
 router.get("/users", getUsers);
 router.get("/blogs/:id", getSpecificBlog);
+router.get("/blogs", getAllBlogs);
 export default router;
