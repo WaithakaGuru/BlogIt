@@ -13,5 +13,4 @@ const createUser = async (req: Request, res: Response) => {
         res.status(500).json({message: "Something went wrong!!"})
     }
 }
-
 export default createUser;

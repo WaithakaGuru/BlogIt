@@ -7,6 +7,8 @@ function App() {
   <BrowserRouter>
     <Routes>
       <Route path="/" Component={BlogComponent} />
+      <Route path="/api/auth/register" Component={BlogComponent} />
+
     </Routes>
   </BrowserRouter>
   )
