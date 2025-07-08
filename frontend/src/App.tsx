@@ -1,12 +1,38 @@
+import { useState } from "react";
+
 import "./styles/index.css"
+import { Box, Typography, TextField } from "@mui/material"
+import Markdown from 'react-markdown'
+
 
 function App() {
 
+  const [markdown, setMarkdown] = useState("");
   return (
-    <>
-      Go to hell 
+    <Box p={2}>
+      <Typography variant="h6" gutterBottom>
+        Markdown Input
+      </Typography>
 
-    </>
+      <TextField
+        label="Write in Markdown"
+        multiline
+        minRows={6}
+        fullWidth
+        value={markdown}
+        onChange={(e) => setMarkdown(e.target.value)}
+      />
+
+      <Box mt={4}>
+        <Typography variant="h6" gutterBottom>
+          Preview
+        </Typography>
+
+        <Box p={2} border={1} borderColor="grey.300" borderRadius={2}>
+          <Markdown>{markdown}</Markdown>
+        </Box>
+      </Box>
+    </Box>
   )
 }
 
