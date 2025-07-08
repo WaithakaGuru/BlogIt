@@ -9,7 +9,7 @@ export default async function verifyIdentifier (req: Request, res: Response){
                 OR: [{userName: identifier}, {email: identifier}]
             }
         })
-        if(validIdentifier) return validIdentifier.password
+        if(validIdentifier) return validIdentifier;
         res.status(400).json({message: "Wrong login credentials"});
         return
     }catch(err) {

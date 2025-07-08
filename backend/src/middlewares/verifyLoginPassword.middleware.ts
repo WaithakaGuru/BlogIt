@@ -5,12 +5,14 @@ import verifyPassword from "../utils/verifyPassword.ts";
 export default async function verifyLoginPassword(req: Request, res: Response, next: NextFunction){
     try{
         const {enteredPassword} = req.body;
-        const hashedPassword = await verifyIdentifier(req, res);
+        const userInfo= await verifyIdentifier(req, res);
     
-        if(hashedPassword) {
-            const correctPassword = await verifyPassword(enteredPassword, hashedPassword);
-            if(correctPassword) next();
-            else{
+        if(userInfo?.password) {
+            const correctPassword = await verifyPassword(enteredPassword, userInfo.password);
+            if(correctPassword) {
+                res.locals.userInfo = userInfo
+                next()
+            }else{
                 res.status(400).json({message: "Wrong login credentials"})
                 return;
             }
