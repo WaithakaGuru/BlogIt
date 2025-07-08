@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.shared.json",
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "module": "ESNext",
+   
+
+    /* Bundler mode */
+    "moduleResolution": "node",
+  
+    /* Linting */
+    "erasableSyntaxOnly": true,
+
+    /* Emit tool scripts, if any */
+    "outDir": "dist"
+  },
+  "include": ["vite.config.ts"]
+}

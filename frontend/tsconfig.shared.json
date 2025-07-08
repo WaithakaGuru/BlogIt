@@ -1,0 +1,21 @@
+{ 
+    "compilerOptions": {
+     "composite": true,
+     "target": "ES2022",
+     "useDefineForClassFields": true,
+     "module": "ESNext",
+     "skipLibCheck": true,
+     "noEmit": true,
+
+     /* Bundler mode */
+     "allowImportingTsExtensions": true,
+     "verbatimModuleSyntax": true,
+
+     /* Linting */
+     "strict": true,
+     "noUnusedLocals": true,
+     "noUnusedParameters": true,
+     "noFallthroughCasesInSwitch": true,
+     "noUncheckedSideEffectImports": true
+    },
+}
