@@ -2,6 +2,7 @@ import express from 'express';
 import { Request, Response } from 'express';
 import {configDotenv} from 'dotenv';
 import Cors from 'cors';
+import router from './routes/Api.router.ts';
 
 
 configDotenv({path: "./.env"});
@@ -16,6 +17,8 @@ app.use(Cors({ origin: 'http://localhost:5173',
   allowedHeaders: ['Content-Type', 'Authorization'], 
   credentials: true
 }))
+
+app.use("/", router);
 
 app.listen(PORT, ()=>{
     console.log(`Server is up and running on Port: ${PORT}`);

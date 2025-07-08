@@ -1,4 +1,4 @@
-import client from "../utils/PrismaUtils"
+import client from "../utils/PrismaUtils.ts"
 import { Response, Request } from "express"
 
 const createBlog = async (req: Request, res: Response)=> {
