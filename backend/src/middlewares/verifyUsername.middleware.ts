@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import client from "../utils/PrismaUtils";
+import client from "../utils/PrismaUtils.ts";
 
 export default async function verifyUniqueUsername(req: Request, res:Response, next: NextFunction){
     try{
