@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import client from "../utils/PrismaUtils.ts";
 
-export default async function verifyUniqueUsername(req: Request, res:Response, next: NextFunction){
+export default async function authenticateUsername(req: Request, res:Response, next: NextFunction){
     try{
         const enteredUsername = req.body.userName;
         const usernameExists = await client.user.findFirst({

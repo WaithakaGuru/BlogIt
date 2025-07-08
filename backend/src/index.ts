@@ -2,7 +2,6 @@ import express from 'express';
 import {configDotenv} from 'dotenv';
 import Cors from 'cors';
 import router from './routes/Api.router.ts';
-import hashPassword from './utils/hashPassword.ts';
 
 
 configDotenv({path: "./.env"});
