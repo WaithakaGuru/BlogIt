@@ -17,8 +17,6 @@ app.use(Cors({ origin: 'http://localhost:5173',
 
 app.use("/api", router);
 
-console.log(hashPassword("Kimani"));
-
 app.listen(PORT, ()=>{
     console.log(`Server is up and running on Port: ${PORT}`);
 })
