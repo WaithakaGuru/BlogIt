@@ -30,7 +30,13 @@ model User {
 model Posts{
   id String @default(uuid()) @id @map("blogPost_id")
   title String @map("blog_title")
-  description String @map("blog_info")
+  synopsis String @map("blogPost_synopsis")
+  content String @map("blog_info")
+  featuredImageURL String @map("blog_image_url")
+  isDeleted Boolean @default(false) @map("is_deleted")
+  lastUpdated DateTime @updatedAt @map("last_updated_on")
+  creationDate DateTime @default(now()) @map("created_at")
+
   userId String 
   
   blogAuthor User @relation(fields: [userId], references: [id])
