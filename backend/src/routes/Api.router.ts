@@ -5,6 +5,8 @@ import authenticateEmail from "../middlewares/authenticateEmail.middleware.ts";
 import verifyLoginPassword from "../middlewares/verifyLoginPassword.middleware.ts";
 import createUserJWebToken from "../middlewares/createUserWebToken.middleware.ts";
 import verifyUserWebToken from "../middlewares/verifyUserJWebToken.middleware.ts";
+import getUserSpecificBlogs from "../controllers/getUserSpecificBlog.controller.ts";
+import deleteSpecificBlog from "../controllers/deleteSpecificBlog.controller.ts";
 
 const router = Router();
 
@@ -12,6 +14,8 @@ router.post("/auth/register", authenticateUsername, authenticateEmail, createUse
 router.post("/auth/login", verifyLoginPassword, createUserJWebToken)
 router.post("/blogs",verifyUserWebToken, createBlog);
 router.get("/users", getUsers);
+router.delete("/blogs/:blogId", deleteSpecificBlog)
+router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs)
 router.get("/blogs/:id",verifyUserWebToken, getSpecificBlog);
 router.get("/blogs",verifyUserWebToken, getAllBlogs);
 export default router;
@@ -39,5 +43,5 @@ PATCH /api/user: update user's primary information.
 
 PATCH /api/user/password: update user's password.
 
-GET /api/user/blogs: get all blogs belonging to a specific user.
+// GET /api/user/blogs: get all blogs belonging to a specific user.
  */
