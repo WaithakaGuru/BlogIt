@@ -21,14 +21,3 @@ app.use("/api", router);
 app.listen(PORT, ()=>{
     console.log(`Server is up and running on Port: ${PORT}`);
 })
-
-process.on('uncaughtException', (err, origin) => {
-    console.error('Caught exception:', err, 'Origin:', origin);
-    // You might want to log the error to a file and then exit gracefully
-    // process.exit(1); // Consider exiting after logging
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    // Log the error, but generally, unhandled rejections should be fixed.
-});
