@@ -13,7 +13,10 @@ export default async function verifyUserWebToken(req: Request, res: Response, ne
             return
         }
         const decodedTokenData = jwt.verify(token,  jwtKey);
-        if(decodedTokenData) next();
+        if(decodedTokenData) {
+            console.log(decodedTokenData);
+            next();
+        }
         else return;
     }catch(err){
         console.log(err);

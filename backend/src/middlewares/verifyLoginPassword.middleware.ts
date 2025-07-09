@@ -10,15 +10,14 @@ export default async function verifyLoginPassword(req: Request, res: Response, n
         if(userInfo?.password) {
             const correctPassword = await verifyPassword(enteredPassword, userInfo.password);
             if(correctPassword) {
-                res.locals.userInfo = userInfo
-                next()
+                res.locals.userInfo = userInfo;
+                next();
+                return;
             }else{
                 res.status(400).json({message: "Wrong login credentials"})
                 return;
             }
         }
-        res.status(400).json({message: "Wrong login credentials"})
-        return;
     }catch(err) {
         console.log(err);
         res.status(500).json({message: "Something is not working! please Login later!!"});

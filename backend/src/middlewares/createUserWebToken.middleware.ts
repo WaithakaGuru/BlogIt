@@ -5,7 +5,7 @@ import { configDotenv } from 'dotenv';
 configDotenv()
 
 
-function createUserJWebToken(req: Request, res: Response, next: NextFunction){
+function createUserJWebToken(_req: Request, res: Response){
     const jwtKey = process.env.SECRET_KEY
     const userInfo = res.locals.userInfo;
     if (!userInfo || !jwtKey) {
@@ -14,7 +14,6 @@ function createUserJWebToken(req: Request, res: Response, next: NextFunction){
     }
     const {password, email, ...userTokenInfo} = userInfo;
     const userToken = jwt.sign(userTokenInfo, jwtKey)
-    res.cookie('token', userToken);
-    next();
+    res.cookie('token', userToken, {maxAge: 24000*60*60, signed: true});
 }
 export default createUserJWebToken;

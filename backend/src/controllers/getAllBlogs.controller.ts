@@ -1,10 +1,10 @@
 import client from "../utils/PrismaUtils.ts";
 import { Request, Response } from "express";
 
-export default async function getAllBlogs(req:Request, res:Response) {
+export default async function getAllBlogs(_req:Request, res:Response) {
     try{
         const allBlogs = await client.posts.findMany()
-        if(allBlogs) res.status(200).json(allBlogs);
+        if(allBlogs) res.send(allBlogs);
         else res.status(404).json({message: "Empty: No blogs were found!!"});
     }catch(err){
         console.log(err);
