@@ -49,9 +49,9 @@ function HomePage () {
                         and thought leaders to share their stories, insights, and expertise with the world. Whether you're a casual blogger, professional journalist,
                          or content marketer, our platform provides the tools you need to write, publish, and grow your audience effortlessly.
                     </Typography>
-                    <Button variant="contained" size="large" endIcon={<East/>}  sx={{
+                    <Button variant="contained" size="large" endIcon={<East/>} href="/login"  sx={{
                         zIndex: 1,
-                        mt:2, background: "linear-gradient(to right, #3B82F6, #8B5CF6)"
+                        my:2, background: "linear-gradient(to right, #3B82F6, #8B5CF6)"
                     }}>
                         Create Account
                     </Button>        
@@ -95,7 +95,7 @@ function HomePage () {
                 <Typography variant="h6" align="center" gutterBottom fontSize={"1.5rem"}>
                     If you wanna share it, BlogIt 🫵🫡
                 </Typography>
-                <Button variant="contained" endIcon={<East/>} sx={{textTransform: 'none',
+                <Button variant="contained" endIcon={<East/>} href="login" sx={{textTransform: 'none',
                     fontFamily: "Montserrat", borderRadius: '1rem', width: "50%", minWidth: "max-content",
                     fontSize: '1.3rem', bgcolor: ` #8B5CF6`, mx: 'auto', px:3, py:1, my:2
                 }}>

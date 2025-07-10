@@ -12,10 +12,10 @@ function NavBar () {
                 maxWidth: "12rem", height: '4rem',my: 'auto'
             }}/>
             <Stack direction={"row"} gap={2} p={2}>
-                <Button href="#" variant="outlined" sx={{p:2}}>
+                <Button href="/login" variant="outlined" sx={{p:2}}>
                     LogIn
                 </Button>
-                <Button href="#" variant="contained" sx={{background: 
+                <Button href="/login" variant="contained" sx={{background: 
                     "linear-gradient(to right, #3B82F6, #8B5CF6)"}}>
                     Register Now
                 </Button>
