@@ -5,6 +5,7 @@ import getUsers from "./getUsers.controller.ts";
 import getAllBlogs from "./getAllBlogs.controller.ts";
 import getUserSpecificBlogs from "./getUserSpecificBlog.controller.ts";
 import deleteSpecificBlog from "./deleteSpecificBlog.controller.ts";
+import deleteUserToken from "./deleteUserToken.controller.ts";
 
 
-export {getSpecificBlog, getUsers, createBlog, createUser, getAllBlogs, getUserSpecificBlogs, deleteSpecificBlog}
+export {getSpecificBlog, getUsers, createBlog, createUser, getAllBlogs, getUserSpecificBlogs, deleteSpecificBlog, deleteUserToken}

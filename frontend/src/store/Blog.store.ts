@@ -9,13 +9,15 @@ type BlogPost = {
 
 type BlogItems = {
     blog?: BlogPost
-    name: string
+    name: string,
+    token: string 
 }
 
 
 const blogitStore: StateCreator<BlogItems> = (set)=>{
    return{
-    name: "Waithaka"
+    name: "Waithaka",
+    token: ""
    }
 }
 

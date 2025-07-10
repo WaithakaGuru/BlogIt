@@ -29,13 +29,14 @@ export default router;
 
 // GET /api/blogs/:blogId: get a specific blog.
 
-PATCH /api/blogs/:blogId: update a blog.
-
 // DELETE /api/blogs/:blogId: delete a blog
+
+// GET /api/user/blogs: get all blogs belonging to a specific user.
+
+PATCH /api/blogs/:blogId: update a blog.
 
 PATCH /api/user: update user's primary information.
 
 PATCH /api/user/password: update user's password.
 
-// GET /api/user/blogs: get all blogs belonging to a specific user.
  */
