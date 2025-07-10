@@ -1,23 +1,17 @@
 import { Router} from "express";
-import {getSpecificBlog, getUsers, createBlog, createUser, getAllBlogs} from "../controllers/exports.controller.ts"
-import authenticateUsername from "../middlewares/authenticateUsername.middleware.ts";
-import authenticateEmail from "../middlewares/authenticateEmail.middleware.ts";
-import verifyLoginPassword from "../middlewares/verifyLoginPassword.middleware.ts";
-import createUserJWebToken from "../middlewares/createUserWebToken.middleware.ts";
-import verifyUserWebToken from "../middlewares/verifyUserJWebToken.middleware.ts";
-import getUserSpecificBlogs from "../controllers/getUserSpecificBlog.controller.ts";
-import deleteSpecificBlog from "../controllers/deleteSpecificBlog.controller.ts";
-
+import {getSpecificBlog, getUsers, createBlog, createUser, getAllBlogs, getUserSpecificBlogs, deleteSpecificBlog, deleteUserToken} from "../controllers/exports.controller.ts"
+import {authenticateEmail, authenticateUsername, verifyLoginPassword, verifyUserWebToken, createUserJWebToken} from '../middlewares/exports.middleware.ts'
 const router = Router();
 
 router.post("/auth/register", authenticateUsername, authenticateEmail, createUser);
 router.post("/auth/login", verifyLoginPassword, createUserJWebToken)
 router.post("/blogs",verifyUserWebToken, createBlog);
+router.post("/auth/logout",verifyUserWebToken, deleteUserToken)
 router.get("/users", getUsers);
-router.delete("/blogs/:blogId", deleteSpecificBlog)
 router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs)
 router.get("/blogs/:id",verifyUserWebToken, getSpecificBlog);
 router.get("/blogs",verifyUserWebToken, getAllBlogs);
+router.delete("/blogs/:blogId", deleteSpecificBlog)
 export default router;
 
 
@@ -27,7 +21,7 @@ export default router;
 
 // POST /api/auth/login: login a user
 
-POST /api/auth/logout: logout a user
+//POST /api/auth/logout: logout a user
 
 // GET /api/blogs: get all blogs
 
@@ -37,7 +31,7 @@ POST /api/auth/logout: logout a user
 
 PATCH /api/blogs/:blogId: update a blog.
 
-DELETE /api/blogs/:blogId: delete a blog
+// DELETE /api/blogs/:blogId: delete a blog
 
 PATCH /api/user: update user's primary information.
 
