@@ -197,7 +197,7 @@ function HomePage() {
         </Button>
       </Stack>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
