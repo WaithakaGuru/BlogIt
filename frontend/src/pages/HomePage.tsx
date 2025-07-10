@@ -5,6 +5,7 @@ import { East } from "@mui/icons-material";
 import { purple } from "@mui/material/colors";
 import blogCategories from "../utils/blogTopics";
 import BlogTopic from "../components/BlogTopic";
+import Footer from "../components/Footer";
 
 function HomePage() {
   return (
@@ -144,7 +145,7 @@ function HomePage() {
           zIndex={1}
           maxHeight={"35rem"}
           mx={"auto"}
-          boxShadow={"inset 4rem 0 3rem #999"}
+          boxShadow={"inset 4rem 0 3rem rgba(59, 131, 246, 0.3)"}
           direction={"row"}
           position={"relative"}
         >
@@ -170,6 +171,7 @@ function HomePage() {
           align="center"
           gutterBottom
           fontSize={"1.5rem"}
+          mt={4}
         >
           If you wanna share it, BlogIt 🫵🫡
         </Typography>
@@ -194,6 +196,8 @@ function HomePage() {
           Set up a Free BlogIt Account
         </Button>
       </Stack>
+
+      <Footer/>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { East } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
-import { purple } from "@mui/material/colors";
+import { lightBlue, purple } from "@mui/material/colors";
 
 function BlogTopic({ blog }: { blog: { title: string; info: string } }) {
   return (
@@ -36,8 +36,8 @@ function BlogTopic({ blog }: { blog: { title: string; info: string } }) {
       </Typography>
       <Button
         endIcon={<East />}
-        sx={{ bgcolor: "peachpuff", m: 1 }}
-        color="warning"
+        sx={{ bgcolor: `${lightBlue[600]}`, m: 1 }}
+        color="primary"
       >
         Learn More
       </Button>
