@@ -16,7 +16,7 @@ function HomePage() {
         sx={{ mx: "auto", width: { xs: "97%", md: "88%" } }}
         direction={{ xs: "column", md: "row" }}
         gap={1}
-        mb={4}
+        m={2}
       >
         <Box minWidth={{ sm: "80%", md: "53%" }}>
           <Typography
@@ -109,12 +109,12 @@ function HomePage() {
           }}
         />
       </Stack>
-      <Stack bgcolor={"#f9f9f9"} px={{ xs: 1, md: 4 }}>
+      <Stack bgcolor={"#f9f9f9"} px={{ xs: 1, md: 4 }} mt={4} pt={4}>
         <Box>
           <Typography
             variant="h3"
             mt={{ xs: -1, md: "auto" }}
-            color={purple[700]}
+            color={purple[800]}
             fontWeight={600}
             align="center"
           >
@@ -145,7 +145,7 @@ function HomePage() {
           zIndex={1}
           maxHeight={"35rem"}
           mx={"auto"}
-          boxShadow={"inset 4rem 0 3rem rgba(59, 131, 246, 0.3)"}
+          boxShadow={"inset 4rem 0 3rem rgba(59, 131, 246, 0.2), inset -2rem 0 3rem rgba(59, 131, 246, 0.2)"}
           direction={"row"}
           position={"relative"}
         >
