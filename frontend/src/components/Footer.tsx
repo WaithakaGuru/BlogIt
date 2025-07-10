@@ -16,7 +16,7 @@ function Footer() {
       component={"footer"}
       width={"100%"}
       minHeight={"10rem"}
-      mt={4}
+      mt={8}
       sx={{
         background: `linear-gradient(rgb(108, 60, 220) 30%,rgb(3, 75, 189) )`,
       }}
