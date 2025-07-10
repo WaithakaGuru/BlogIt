@@ -190,7 +190,8 @@ function HomePage() {
             mx: "auto",
             px: 3,
             py: 1,
-            my: 2,
+            mb: 8,
+            mt:4
           }}
         >
           Set up a Free BlogIt Account
