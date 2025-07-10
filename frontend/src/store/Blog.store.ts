@@ -1,25 +1,24 @@
-import {create, type StateCreator} from 'zustand'
+import { create, type StateCreator } from "zustand";
 
 type BlogPost = {
-    title: string
-    synopsis: string
-    description: string
-    imageUrl: string
-}
+  title: string;
+  synopsis: string;
+  description: string;
+  imageUrl: string;
+};
 
 type BlogItems = {
-    blog?: BlogPost
-    name: string,
-    token: string 
-}
+  blog?: BlogPost;
+  name: string;
+  token: string;
+};
 
-
-const blogitStore: StateCreator<BlogItems> = (set)=>{
-   return{
+const blogitStore: StateCreator<BlogItems> = (set) => {
+  return {
     name: "Waithaka",
-    token: ""
-   }
-}
+    token: "",
+  };
+};
 
 const useBlog = create(blogitStore);
-export default useBlog
+export default useBlog;

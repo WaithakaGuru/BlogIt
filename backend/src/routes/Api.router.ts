@@ -1,19 +1,38 @@
-import { Router} from "express";
-import {getSpecificBlog, getUsers, createBlog, createUser, getAllBlogs, getUserSpecificBlogs, deleteSpecificBlog, deleteUserToken} from "../controllers/exports.controller.ts"
-import {authenticateEmail, authenticateUsername, verifyLoginPassword, verifyUserWebToken, createUserJWebToken} from '../middlewares/exports.middleware.ts'
+import { Router } from "express";
+import {
+  getSpecificBlog,
+  getUsers,
+  createBlog,
+  createUser,
+  getAllBlogs,
+  getUserSpecificBlogs,
+  deleteSpecificBlog,
+  deleteUserToken,
+} from "../controllers/exports.controller.ts";
+import {
+  authenticateEmail,
+  authenticateUsername,
+  verifyLoginPassword,
+  verifyUserWebToken,
+  createUserJWebToken,
+} from "../middlewares/exports.middleware.ts";
 const router = Router();
 
-router.post("/auth/register", authenticateUsername, authenticateEmail, createUser);
-router.post("/auth/login", verifyLoginPassword, createUserJWebToken)
-router.post("/blogs",verifyUserWebToken, createBlog);
-router.post("/auth/logout",verifyUserWebToken, deleteUserToken)
+router.post(
+  "/auth/register",
+  authenticateUsername,
+  authenticateEmail,
+  createUser,
+);
+router.post("/auth/login", verifyLoginPassword, createUserJWebToken);
+router.post("/blogs", verifyUserWebToken, createBlog);
+router.post("/auth/logout", verifyUserWebToken, deleteUserToken);
 router.get("/users", getUsers);
-router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs)
-router.get("/blogs/:id",verifyUserWebToken, getSpecificBlog);
-router.get("/blogs",verifyUserWebToken, getAllBlogs);
-router.delete("/blogs/:blogId", deleteSpecificBlog)
+router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs);
+router.get("/blogs/:id", verifyUserWebToken, getSpecificBlog);
+router.get("/blogs", verifyUserWebToken, getAllBlogs);
+router.delete("/blogs/:blogId", deleteSpecificBlog);
 export default router;
-
 
 /* Remaining tasks */
 /**

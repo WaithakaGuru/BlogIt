@@ -4,4 +4,10 @@ import verifyLoginPassword from "./verifyLoginPassword.middleware.ts";
 import createUserJWebToken from "./createUserWebToken.middleware.ts";
 import verifyUserWebToken from "./verifyUserJWebToken.middleware.ts";
 
-export {authenticateEmail, authenticateUsername, verifyLoginPassword, verifyUserWebToken, createUserJWebToken};
+export {
+  authenticateEmail,
+  authenticateUsername,
+  verifyLoginPassword,
+  verifyUserWebToken,
+  createUserJWebToken,
+};

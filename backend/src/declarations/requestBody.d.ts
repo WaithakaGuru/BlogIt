@@ -1,8 +1,7 @@
 declare namespace express {
-    interface Request{
-        body:{
-            userToken: string | null
-        }
-    }
+  interface Request {
+    body: {
+      userToken: string | null;
+    };
+  }
 }
-
