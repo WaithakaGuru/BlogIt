@@ -17,7 +17,7 @@ function HomePage() {
         gap={1}
         mb={4}
       >
-        <Box minWidth={{ sm: "80%", md: "50%" }}>
+        <Box minWidth={{ sm: "80%", md: "53%" }}>
           <Typography
             variant="body1"
             color="textPrimary"
@@ -94,7 +94,7 @@ function HomePage() {
           component={"img"}
           src="BlogItTransparent1.png"
           height={{ xs: "16rem", md: "25rem" }}
-          maxWidth={{ xs: "35rem", sm: "70rem", md: "34rem" }}
+          maxWidth={{ xs: "35rem", sm: "70rem", md: "33rem" }}
           mx={2}
           my={"auto"}
           boxShadow={
