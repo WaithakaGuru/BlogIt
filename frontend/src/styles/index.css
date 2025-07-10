@@ -8,3 +8,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::-webkit-scrollbar{
+  height: .5rem
+}
+
+body{
+  background: linear-gradient(to right, rgb(29, 56, 56) 20%, #5e5d5d);
+}
+

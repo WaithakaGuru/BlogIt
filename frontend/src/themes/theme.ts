@@ -1,23 +1,23 @@
 import { createTheme } from "@mui/material";
-import { green, orange } from "@mui/material/colors";
+import { orange } from "@mui/material/colors";
 
 export default createTheme({
     
     palette: {
         primary: {
-            main: green[700],
+            main: '#4f46e5',
         },
         secondary: {
             main: orange[600],
         },
         text: {
-            primary: "#222",
+            primary: "#5072fb",
             secondary: "#555",
             disabled: "#ddd",
         },
     },
     typography: {
-        fontFamily: "Montserrat",
+        fontFamily: "Outfit, Montserrat",
     },
     breakpoints: {
         values: {
