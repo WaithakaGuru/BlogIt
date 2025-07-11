@@ -42,7 +42,7 @@ function Footer() {
           <Typography
             variant="subtitle1"
             fontFamily={"Montserrat"}
-            color="#000"
+            color="textDisabled"
           >
             An open platform to learn and create your own Blogs to express ideas
             in the simples manner possible
