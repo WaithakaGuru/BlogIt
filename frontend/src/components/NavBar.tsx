@@ -20,6 +20,7 @@ function NavBar() {
         <CardMedia
           component={"img"}
           image="BlogLogo.png"
+          alt="BlogIt"
           sx={{
             maxWidth: "12rem",
             height: "4rem",
@@ -27,9 +28,9 @@ function NavBar() {
           }}
         />
         <Stack direction={"row"} gap={2} p={2}>
-          <IconButton href="/" color="secondary" sx={{display: "flex", border:"1px solid", 
-          borderRadius: 1, flexDirection: "column", fontSize:"1rem"}}>
-            <Home/> Home
+          <IconButton href="/" color="secondary" title="Go to home page"  sx={{display: "flex", border:"1px solid", 
+          borderRadius: "50%", flexDirection: "column", fontSize:"1rem", p:".6rem"}}>
+            <Home/> 
           </IconButton>
           <Button href="/login" variant="outlined" sx={{ p: 2 }}>
             LogIn

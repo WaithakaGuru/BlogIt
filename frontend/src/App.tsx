@@ -1,11 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import BlogComponent from "./components/BlogContentInput";
 import HomePage from "./pages/HomePage";
 import Restricted from "./components/Restricted";
 import LoginPage from "./pages/LoginPage";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import RegisterNewAccountPage from "./pages/RegisterNewAccountPage";
+import CreateBlogPage from "./pages/CreateBlogPage";
+import DashboardPage from "./pages/DashboardPage";
+import AllUserBlogsPage from "./pages/AllUserBlogsPage";
+import ProfileUpdatePage from "./pages/ProfileUpdatePage";
+import SingleBlog from "./components/SingleBlog";
 
 function App() {
   return(
@@ -13,16 +17,40 @@ function App() {
     <NavBar />
       <Routes>
         <Route path="/" Component={HomePage} />
+        <Route path="/login" Component={LoginPage} />
+        <Route path="/register" Component={RegisterNewAccountPage} />
         <Route
-          path="/blogs"
+          path="/dashboard"
           element={
             <Restricted>
-              <BlogComponent />
+              <DashboardPage />
             </Restricted>
           }
         />
-        <Route path="/login" Component={LoginPage} />
-        <Route path="/register" Component={RegisterNewAccountPage} />
+      
+        <Route path="dashboard/blogs" element={
+          <Restricted>
+            <AllUserBlogsPage />
+          </Restricted>
+        }/>
+
+        <Route path="dashboard/blogs/create" element={
+          <Restricted>
+            <CreateBlogPage/>
+          </Restricted>
+        }/>
+
+        <Route path="dashboard/blogs/:id"element={
+          <Restricted>
+            <SingleBlog/>
+          </Restricted>
+        }/>
+        
+        <Route path="dashboard/profile" element={
+          <Restricted>
+            <ProfileUpdatePage />
+          </Restricted>
+        }/>
       </Routes>
       <Footer/>
     </BrowserRouter>

@@ -1,11 +1,9 @@
 import "../styles/index.css";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import NavBar from "../components/NavBar";
 import { East } from "@mui/icons-material";
 import { purple } from "@mui/material/colors";
 import blogCategories from "../utils/blogTopics";
 import BlogTopic from "../components/BlogTopic";
-import Footer from "../components/Footer";
 
 function HomePage() {
   return (
@@ -138,6 +136,7 @@ function HomePage() {
           </Typography>
         </Box>
         <Stack
+          bgcolor={"#fff"}
           width={"95%"}
           overflow={"auto"}
           borderRadius={2}

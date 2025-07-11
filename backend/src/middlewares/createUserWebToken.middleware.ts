@@ -13,7 +13,8 @@ function createUserJWebToken(req: Request, res: Response, next: NextFunction) {
   }
   const { password, email, ...userTokenInfo } = userInfo;
   const userToken = jwt.sign(userTokenInfo, jwtKey);
-  res.cookie("token", userToken);
+  // res.cookie("token", userToken);
+  res.status(200).json({token: userToken});
   req.body.userToken = userToken;
   next();
 }

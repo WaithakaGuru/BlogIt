@@ -69,7 +69,7 @@ function Footer() {
               Login to your account
             </Typography>
           </Link>
-          <Link to={"/blogs"} title="Popular Blogs">
+          <Link to={"/dashboard"} title="Popular Blogs">
             <Typography variant="body1" color="textDisabled">
               Blogs{" "}
             </Typography>
