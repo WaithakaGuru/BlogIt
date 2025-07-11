@@ -5,7 +5,9 @@ import PasswordInput from "../components/PasswordInput";
 function LoginPage() {
   return (
     <>
-    <Typography variant="h3" align="center" gutterBottom> Login to your account</Typography>
+    <Typography variant="h3" align="center" my={4} gutterBottom > 
+      Login to your account
+    </Typography>
      <Stack component={"form"} spacing={2} padding={2} width={{xs: "95%", sm:"70%", md: "40%"}}
       border={"2px solid"} borderRadius={2} sx={{placeSelf: "center"}}>
        <TextField type="text" label="Enter your Username or Email" required  variant="outlined"/>
