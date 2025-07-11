@@ -59,7 +59,7 @@ function HomePage() {
             gutterBottom
             fontFamily={"Montserrat"}
             sx={{
-              fontSize: "1.2rem",
+              fontSize: {md: "1.3rem", xs: "1rem"},
               fontWeight: "bold",
               background: `linear-gradient(45deg, #8B5CF6 5% ,  #3B82F6 ,  #8B5CF6)`,
               WebkitBackgroundClip: "text",
