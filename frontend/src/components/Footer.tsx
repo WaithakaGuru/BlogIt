@@ -93,21 +93,21 @@ function Footer() {
           </Typography>
           <AvatarGroup spacing={5}>
             <Avatar>
-              <IconButton href="https://whatsapp.com" sx={{bgcolor: "#000"}}>
+              <IconButton href="https://whatsapp.com" sx={{ bgcolor: "#000" }}>
                 {" "}
                 <WhatsApp color="success" />
               </IconButton>
             </Avatar>
             <Avatar>
-              <IconButton href="https://facebook.com" sx={{bgcolor: "#333"}}>
+              <IconButton href="https://facebook.com" sx={{ bgcolor: "#333" }}>
                 {" "}
                 <Facebook color="info" />
               </IconButton>
             </Avatar>
             <Avatar>
-              <IconButton href="https://x.com" sx={{bgcolor: "#eee"}}>
+              <IconButton href="https://x.com" sx={{ bgcolor: "#eee" }}>
                 {" "}
-                <X color="action" sx={{color: "#000"}} />
+                <X color="action" sx={{ color: "#000" }} />
               </IconButton>
             </Avatar>
           </AvatarGroup>

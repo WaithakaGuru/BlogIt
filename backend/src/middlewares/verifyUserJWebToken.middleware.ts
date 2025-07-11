@@ -12,22 +12,22 @@ export default function verifyUserWebToken(
   const jwtKey = process.env.SECRET_KEY;
   const authHeader = req.headers.authorization;
 
-  if(!authHeader?.startsWith("Bearer ")){
-    return res.status(401).json({message: "Missing or malformed token"});
+  if (!authHeader?.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Missing or malformed token" });
   }
 
   const token = authHeader.split(" ")[1];
   try {
     const decodedTokenData = jwt.verify(token, jwtKey!);
     res.locals.user = decodedTokenData;
-    res.json({userInfo: decodedTokenData})
+    res.json({ userInfo: decodedTokenData });
     next();
   } catch (err: any) {
     console.log(err);
-    if (err.name === 'TokenExpiredError') 
-      return res.status(401).json({ message: 'Token has expired' });
-    if (err.name === 'JsonWebTokenError') 
-      return res.status(401).json({ message: 'Invalid token' });
+    if (err.name === "TokenExpiredError")
+      return res.status(401).json({ message: "Token has expired" });
+    if (err.name === "JsonWebTokenError")
+      return res.status(401).json({ message: "Invalid token" });
     return res.status(500).json({ message: "Token Verification fialed" });
   }
 }

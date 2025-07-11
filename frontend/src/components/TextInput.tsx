@@ -1,13 +1,34 @@
-import { TextField } from "@mui/material"
+import { TextField, type TextFieldProps } from "@mui/material";
 
-function TextInput({labelInfo, placeholderInfo, t="text", must=true}: {labelInfo: string, placeholderInfo: string, t?:string, must?: boolean}){
-
-    return(
-        <TextField color="secondary" label={labelInfo} placeholder={placeholderInfo}  type={t} required={must}
-            variant="outlined"fullWidth sx={{ input:{'&::placeholder': {color:"darkslateblue", opacity: .9 }, 
-            color: "darkslategrey"}}}
-         />
-    )
+function TextInput({
+  variant,
+  onChange,
+  name,
+  placeholder,
+  label,
+  value,
+  type,
+  ...rest
+}: TextFieldProps) {
+  return (
+    <TextField
+      color="secondary"
+      value={value}
+      label={label}
+      placeholder={placeholder}
+      type={type}
+      required={rest.required}
+      variant={variant}
+      onChange={onChange}
+      fullWidth
+      sx={{
+        input: {
+          "&::placeholder": { color: "darkslateblue", opacity: 0.9 },
+          color: "darkslategrey",
+        },
+      }}
+    />
+  );
 }
 
-export default TextInput
+export default TextInput;

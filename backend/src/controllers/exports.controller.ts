@@ -17,5 +17,5 @@ export {
   getUserSpecificBlogs,
   deleteSpecificBlog,
   deleteUserToken,
-  getUserSpecificBlog
+  getUserSpecificBlog,
 };

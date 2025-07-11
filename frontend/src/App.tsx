@@ -12,9 +12,9 @@ import ProfileUpdatePage from "./pages/ProfileUpdatePage";
 import SingleBlog from "./components/SingleBlog";
 
 function App() {
-  return(
+  return (
     <BrowserRouter>
-    <NavBar />
+      <NavBar />
       <Routes>
         <Route path="/" Component={HomePage} />
         <Route path="/login" Component={LoginPage} />
@@ -27,32 +27,44 @@ function App() {
             </Restricted>
           }
         />
-      
-        <Route path="dashboard/blogs" element={
-          <Restricted>
-            <AllUserBlogsPage />
-          </Restricted>
-        }/>
 
-        <Route path="dashboard/blogs/create" element={
-          <Restricted>
-            <CreateBlogPage/>
-          </Restricted>
-        }/>
+        <Route
+          path="dashboard/blogs"
+          element={
+            <Restricted>
+              <AllUserBlogsPage />
+            </Restricted>
+          }
+        />
 
-        <Route path="dashboard/blogs/:id"element={
-          <Restricted>
-            <SingleBlog/>
-          </Restricted>
-        }/>
-        
-        <Route path="dashboard/profile" element={
-          <Restricted>
-            <ProfileUpdatePage />
-          </Restricted>
-        }/>
+        <Route
+          path="dashboard/blogs/create"
+          element={
+            <Restricted>
+              <CreateBlogPage />
+            </Restricted>
+          }
+        />
+
+        <Route
+          path="dashboard/blogs/:id"
+          element={
+            <Restricted>
+              <SingleBlog />
+            </Restricted>
+          }
+        />
+
+        <Route
+          path="dashboard/profile"
+          element={
+            <Restricted>
+              <ProfileUpdatePage />
+            </Restricted>
+          }
+        />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }

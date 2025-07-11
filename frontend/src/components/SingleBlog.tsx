@@ -1,8 +1,5 @@
-
 function SingleBlog() {
-  return (
-    <div>SingleBlog</div>
-  )
+  return <div>SingleBlog</div>;
 }
 
-export default SingleBlog
+export default SingleBlog;

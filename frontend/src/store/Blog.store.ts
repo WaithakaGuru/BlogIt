@@ -11,12 +11,16 @@ type BlogItems = {
   blog?: BlogPost;
   name: string;
   token: string;
+  addToken: (value: string) => void;
 };
 
 const blogitStore: StateCreator<BlogItems> = (set) => {
   return {
     name: "Waithaka",
     token: "",
+    addToken(value) {
+      set({ token: value });
+    },
   };
 };
 

@@ -1,12 +1,12 @@
-import BlogComponent from "../components/BlogContentInput"
+import BlogComponent from "../components/BlogContentInput";
 
 function CreateBlogPage() {
   return (
     <>
-        <div>CreateBlogPage</div>
-        <BlogComponent/>
+      <div>CreateBlogPage</div>
+      <BlogComponent />
     </>
-  )
+  );
 }
 
-export default CreateBlogPage
+export default CreateBlogPage;

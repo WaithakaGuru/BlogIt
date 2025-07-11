@@ -59,7 +59,7 @@ function HomePage() {
             gutterBottom
             fontFamily={"Montserrat"}
             sx={{
-              fontSize: {md: "1.3rem", xs: "1rem"},
+              fontSize: { md: "1.3rem", xs: "1rem" },
               fontWeight: "bold",
               background: `linear-gradient(45deg, #8B5CF6 5% ,  #3B82F6 ,  #8B5CF6)`,
               WebkitBackgroundClip: "text",
@@ -92,8 +92,8 @@ function HomePage() {
           component={"img"}
           src="BlogItTransparent1.png"
           height={{ xs: "16rem", md: "25rem" }}
-          minWidth={{xs:"29.5rem"}}
-          maxWidth={{ xs:"35rem" , sm: "48rem", md: "33rem" }}
+          minWidth={{ xs: "29.5rem" }}
+          maxWidth={{ xs: "35rem", sm: "48rem", md: "33rem" }}
           mx={0}
           my={"auto"}
           boxShadow={
@@ -144,7 +144,9 @@ function HomePage() {
           zIndex={1}
           maxHeight={"35rem"}
           mx={"auto"}
-          boxShadow={"inset 4rem 0 3rem rgba(59, 131, 246, 0.2), inset -2rem 0 3rem rgba(59, 131, 246, 0.2)"}
+          boxShadow={
+            "inset 4rem 0 3rem rgba(59, 131, 246, 0.2), inset -2rem 0 3rem rgba(59, 131, 246, 0.2)"
+          }
           direction={"row"}
           position={"relative"}
         >
@@ -190,7 +192,7 @@ function HomePage() {
             px: 3,
             py: 1,
             mb: 8,
-            mt:4
+            mt: 4,
           }}
         >
           Set up a Free BlogIt Account
@@ -201,3 +203,16 @@ function HomePage() {
 }
 
 export default HomePage;
+
+/**
+ * common types 
+ * 
+ * | Event Handler       | Type                                   |
+| ------------------- | -------------------------------------- |
+| `onChange` (input)  | `React.ChangeEvent<HTMLInputElement>`  |
+| `onClick` (button)  | `React.MouseEvent<HTMLButtonElement>`  |
+| `onSubmit` (form)   | `React.FormEvent<HTMLFormElement>`     |
+| `onChange` (select) | `React.ChangeEvent<HTMLSelectElement>` |
+| `onFocus`           | `React.FocusEvent<HTMLInputElement>`   |
+
+ */
