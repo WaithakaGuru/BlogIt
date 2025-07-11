@@ -1,4 +1,5 @@
 import getSpecificBlog from "./getSpecificBlog.controller.ts";
+import getUserSpecificBlog from "./getUserSpecificBlog.ts";
 import createBlog from "./create-Blog.controller.ts";
 import createUser from "./createUser.controller.ts";
 import getUsers from "./getUsers.controller.ts";
@@ -16,4 +17,5 @@ export {
   getUserSpecificBlogs,
   deleteSpecificBlog,
   deleteUserToken,
+  getUserSpecificBlog
 };

@@ -6,6 +6,7 @@ import {
   createUser,
   getAllBlogs,
   getUserSpecificBlogs,
+  getUserSpecificBlog,
   deleteSpecificBlog,
   deleteUserToken,
 } from "../controllers/exports.controller.ts";
@@ -29,6 +30,7 @@ router.post("/blogs", verifyUserWebToken, createBlog);
 router.post("/auth/logout", verifyUserWebToken, deleteUserToken);
 router.get("/users", getUsers);
 router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs);
+router.get("/user/blogs/:id", verifyUserWebToken, getUserSpecificBlog);
 router.get("/blogs/:id", verifyUserWebToken, getSpecificBlog);
 router.get("/blogs", verifyUserWebToken, getAllBlogs);
 router.delete("/blogs/:blogId", deleteSpecificBlog);
