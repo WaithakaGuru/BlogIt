@@ -59,22 +59,22 @@ function Footer() {
           >
             Quick Links
           </Typography>
-          <Link to={"/login"} title="Create account">
+          <Link to={"/register"} title="Create account">
             <Typography variant="body1" color="textDisabled">
               Create a Free account
             </Typography>
           </Link>
-          <Link to={"/login"} title="Create account">
+          <Link to={"/login"} title="Login to your BlogIt account">
             <Typography variant="body1" color="textDisabled">
               Login to your account
             </Typography>
           </Link>
-          <Link to={"/login"} title="Create account">
+          <Link to={"/blogs"} title="Popular Blogs">
             <Typography variant="body1" color="textDisabled">
               Blogs{" "}
             </Typography>
           </Link>
-          <Link to={"/login"} title="Create account">
+          <Link to={"/"} title="About BlogIt">
             <Typography variant="body1" color="textDisabled">
               About BlogIt{" "}
             </Typography>
@@ -93,21 +93,21 @@ function Footer() {
           </Typography>
           <AvatarGroup spacing={5}>
             <Avatar>
-              <IconButton href="https://whatsapp.com">
+              <IconButton href="https://whatsapp.com" sx={{bgcolor: "#000"}}>
                 {" "}
                 <WhatsApp color="success" />
               </IconButton>
             </Avatar>
             <Avatar>
-              <IconButton href="https://facebook.com">
+              <IconButton href="https://facebook.com" sx={{bgcolor: "#333"}}>
                 {" "}
                 <Facebook color="info" />
               </IconButton>
             </Avatar>
             <Avatar>
-              <IconButton href="https://x.com">
+              <IconButton href="https://x.com" sx={{bgcolor: "#eee"}}>
                 {" "}
-                <X color="action" />
+                <X color="action" sx={{color: "#000"}} />
               </IconButton>
             </Avatar>
           </AvatarGroup>

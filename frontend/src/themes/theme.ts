@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material";
-import { orange } from "@mui/material/colors";
 
 export default createTheme({
   palette: {
@@ -7,7 +6,7 @@ export default createTheme({
       main: "#4f46e5",
     },
     secondary: {
-      main: orange[600],
+      main: "#8B5CF6",
     },
     text: {
       primary: "#5072fb",

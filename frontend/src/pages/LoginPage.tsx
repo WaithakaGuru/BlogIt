@@ -13,7 +13,7 @@ function LoginPage() {
        <Button type="submit" variant="contained"
         sx={{background: "linear-gradient(45deg, #3b82f6 10%, #8B5CF6 80% )"}}
        >Login</Button>
-       <Typography variant="body1" >Don't have an account? <Link to={"/signup"} title="create new account">Register Now</Link>  </Typography>
+       <Typography variant="body1" >Don't have an account? <Link to={"/register"} title="create new account">Register Now</Link>  </Typography>
      </Stack>
     </>
 )}

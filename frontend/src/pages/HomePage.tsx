@@ -10,7 +10,6 @@ import Footer from "../components/Footer";
 function HomePage() {
   return (
     <>
-      <NavBar />
       <Stack
         p={3}
         sx={{ mx: "auto", width: { xs: "97%", md: "88%" } }}
@@ -81,7 +80,7 @@ function HomePage() {
             variant="contained"
             size="large"
             endIcon={<East />}
-            href="/login"
+            href="/register"
             sx={{
               zIndex: 1,
               my: 2,
@@ -178,7 +177,7 @@ function HomePage() {
         <Button
           variant="contained"
           endIcon={<East />}
-          href="login"
+          href="register"
           sx={{
             textTransform: "none",
             fontFamily: "Montserrat",
@@ -197,8 +196,6 @@ function HomePage() {
           Set up a Free BlogIt Account
         </Button>
       </Stack>
-
-      <Footer />
     </>
   );
 }

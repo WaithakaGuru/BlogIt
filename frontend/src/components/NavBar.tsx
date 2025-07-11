@@ -1,4 +1,5 @@
-import { Box, Button, CardMedia, Stack } from "@mui/material";
+import { Home } from "@mui/icons-material";
+import { Box, Button, CardMedia, IconButton, Stack } from "@mui/material";
 
 function NavBar() {
   return (
@@ -26,11 +27,15 @@ function NavBar() {
           }}
         />
         <Stack direction={"row"} gap={2} p={2}>
+          <IconButton href="/" color="secondary" sx={{display: "flex", border:"1px solid", 
+          borderRadius: 1, flexDirection: "column", fontSize:"1rem"}}>
+            <Home/> Home
+          </IconButton>
           <Button href="/login" variant="outlined" sx={{ p: 2 }}>
             LogIn
           </Button>
           <Button
-            href="/login"
+            href="/register"
             variant="contained"
             sx={{ background: "linear-gradient(to right, #3B82F6, #8B5CF6)" }}
           >

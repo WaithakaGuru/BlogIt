@@ -5,6 +5,7 @@ import Restricted from "./components/Restricted";
 import LoginPage from "./pages/LoginPage";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import RegisterNewAccountPage from "./pages/RegisterNewAccountPage";
 
 function App() {
   return(
@@ -21,6 +22,7 @@ function App() {
           }
         />
         <Route path="/login" Component={LoginPage} />
+        <Route path="/register" Component={RegisterNewAccountPage} />
       </Routes>
       <Footer/>
     </BrowserRouter>
