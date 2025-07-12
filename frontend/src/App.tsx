@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
 import Restricted from "./components/Restricted";
 import LoginPage from "./pages/LoginPage";
@@ -11,10 +12,13 @@ import AllUserBlogsPage from "./pages/AllUserBlogsPage";
 import ProfileUpdatePage from "./pages/ProfileUpdatePage";
 import SingleBlog from "./components/SingleBlog";
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <BrowserRouter>
       <NavBar />
+    <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" Component={HomePage} />
         <Route path="/login" Component={LoginPage} />
@@ -64,6 +68,7 @@ function App() {
           }
         />
       </Routes>
+    </QueryClientProvider>
       <Footer />
     </BrowserRouter>
   );

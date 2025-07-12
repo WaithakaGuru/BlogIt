@@ -1,7 +1,7 @@
 import { Alert, Button, Stack, TextField, Typography } from "@mui/material";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
-import LogUserIn from "../service/UserLogin";
+import useLogUserIn from "../service/UserLogin";
 import { useState } from "react";
 import useBlog from "../store/Blog.store";
 import { isAxiosError } from "axios";
@@ -9,7 +9,10 @@ import { isAxiosError } from "axios";
 function LoginPage() {
   const [identifier, setIdentifier] = useState("");
   const [enteredPassword, setPass] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
+  const { addToken } = useBlog();
+  const nav = useNavigate()
+  const {mutateAsync: login} = useLogUserIn()
 
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
@@ -19,21 +22,22 @@ function LoginPage() {
     setPass(e.target.value);
   }
 
-  async function handleLogIn(e: React.MouseEvent<HTMLButtonElement>) {
+  async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
+    setError("");
     e.preventDefault();
-    setError(null);
     try {
-      const loggedIn = await LogUserIn({ identifier, enteredPassword });
-      // if(loggedIn.isSuccess){
-      const userJWToken = loggedIn.data.userToken;
-      const { addToken } = useBlog();
-      addToken(userJWToken);
-      console.log(userJWToken);
-      <Navigate to={"/dashboard"} />;
-      // }
+      const loggedIn = await login({ identifier, enteredPassword });
+      if(loggedIn){
+        const userJWToken = loggedIn.token;
+        addToken(userJWToken);
+        nav("/dashboard")
+      }
     } catch (err) {
       if (isAxiosError(err)) {
-        setError(err.response?.data.message);
+        setError(err.response?.data.message || "Unknown error");
+      } else {
+        console.log(err);
+        setError(`Something went wrong.`);
       }
     }
   }
@@ -45,6 +49,7 @@ function LoginPage() {
       </Typography>
       <Stack
         component={"form"}
+        onSubmit={handleLogIn}
         spacing={2}
         padding={2}
         width={{ xs: "95%", sm: "70%", md: "40%" }}
@@ -70,6 +75,7 @@ function LoginPage() {
           variant="outlined"
         />
         <PasswordInput
+          required={true}
           label="Enter your password"
           value={enteredPassword}
           onChange={handleSetPass}
@@ -77,7 +83,6 @@ function LoginPage() {
         <Button
           type="submit"
           variant="contained"
-          onClick={handleLogIn}
           sx={{
             background: "linear-gradient(45deg, #3b82f6 10%, #8B5CF6 80% )",
           }}

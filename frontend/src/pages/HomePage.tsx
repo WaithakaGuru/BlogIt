@@ -144,8 +144,11 @@ function HomePage() {
           zIndex={1}
           maxHeight={"35rem"}
           mx={"auto"}
-          boxShadow={
-            "inset 4rem 0 3rem rgba(59, 131, 246, 0.2), inset -2rem 0 3rem rgba(59, 131, 246, 0.2)"
+          boxShadow={{
+            xs: 
+            "inset 4rem 0 1rem rgba(59, 131, 246, 0.2), inset -2rem 0 3rem rgba(59, 131, 246, 0.2)",
+            md: "inset 4rem 0 4rem rgba(59, 131, 246, 0.2), inset -2rem 0 3rem rgba(59, 131, 246, 0.2)"
+          }
           }
           direction={"row"}
           position={"relative"}

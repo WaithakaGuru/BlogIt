@@ -1,18 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import axInstance from "../utils/AxInstance";
 
-const LogUserIn = (logInData: {}) => {
-  const info = useMutation({
+const useLogUserIn = () => {
+  return useMutation({
     mutationKey: ["LOG_USER_IN"],
-    mutationFn: async () => {
-      const loggedIn = await axInstance.post("/auth/login", logInData);
+    mutationFn: async (loginData: {identifier: string, enteredPassword: string}) => {
+      const loggedIn = await axInstance.post("/auth/login", loginData);
       if (loggedIn) {
         const authToken = loggedIn.data;
-        return authToken;
+        return authToken
       }
     },
     retry: 2,
   });
-  return info;
 };
-export default LogUserIn;
+export default useLogUserIn;

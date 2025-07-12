@@ -10,8 +10,8 @@ type BlogPost = {
 type BlogItems = {
   blog?: BlogPost;
   name: string;
-  token: string;
-  addToken: (value: string) => void;
+  token: string | null;
+  addToken: (value: string | null) => void;
 };
 
 const blogitStore: StateCreator<BlogItems> = (set) => {

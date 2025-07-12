@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-function PasswordInput({ label, value, onChange }: TextFieldProps) {
+function PasswordInput({ label, value, onChange, required }: TextFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -19,6 +19,7 @@ function PasswordInput({ label, value, onChange }: TextFieldProps) {
       label={label}
       variant="outlined"
       value={value}
+      required={required}
       onChange={onChange}
       InputProps={{
         endAdornment: (
