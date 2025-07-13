@@ -12,7 +12,7 @@ function NavBar() {
   const path  = useLocation().pathname
   const {mutateAsync: logOutUser} = useLogOutUser();
   const [error, setError] = useState("");
-  const {data: userInfo} = useGetCurrentUserInfo()
+  const {data: userInfo} = useGetCurrentUserInfo(isLoggedIn!)
 
   async function handleLogOut () {
     setIsLoggedIn(0);

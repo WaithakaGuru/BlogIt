@@ -66,7 +66,7 @@ const useGetUserSpecificBlog = (id: string) => {
   });
 }
 
-const useGetCurrentUserInfo = () =>{
+const useGetCurrentUserInfo = (isLoggedIn: boolean = false) =>{
   const {token} = useBlog();
   return useQuery({
     queryKey: ["GET_CURRENT_USER_DETAILS"],
@@ -76,7 +76,8 @@ const useGetCurrentUserInfo = () =>{
      })
      return  currentUserInfo;
     },
-    retry: 1
+    retry: 1,
+    enabled: isLoggedIn
   })
 }
 

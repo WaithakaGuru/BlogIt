@@ -7,11 +7,12 @@ function useRegisterNewUser () {
     return useMutation({
         mutationKey: ["RGISTER_NEW_USER"],
         mutationFn: async (data: any) => {
-            axInstance.post("/auth/register", data, {
+            const newUser = axInstance.post("/auth/register", data, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
+            return newUser;
         }
     })
 }
