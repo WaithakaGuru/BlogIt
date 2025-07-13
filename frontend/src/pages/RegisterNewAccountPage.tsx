@@ -5,7 +5,7 @@ import { useReducer, useState } from "react";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
 import { useRegisterNewUser } from "../service/PostRequests";
 import { isAxiosError } from "axios";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type ActionType = {
   type: string
@@ -47,8 +47,8 @@ const initialState = {
 function RegisterNewAccountPage() {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducerFunc, initialState)
-
   const [error, setError] = useState("");
+  const {mutateAsync: reigsterUser} =  useRegisterNewUser();
 
   function handleFirstName(e: React.ChangeEvent<HTMLInputElement>){
     dispatch({type: "HANDLE_INPUT", payload:{element: "firstName",  value :e.target.value}})
@@ -78,7 +78,6 @@ function RegisterNewAccountPage() {
       if(!(state.password === state.confirmPassword)) {
         setError("Password and confirm password must be the same")
       }
-      const {mutateAsync: reigsterUser} =  useRegisterNewUser();
       const {confirmPassword, ...newUserInfo} = state
       const newUser = await reigsterUser(newUserInfo);
       if(newUser) {
