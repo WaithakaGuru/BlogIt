@@ -9,6 +9,7 @@ import {
   getUserSpecificBlog,
   deleteSpecificBlog,
   deleteUserToken,
+  getCurrentUserDetails,
 } from "../controllers/exports.controller.ts";
 import {
   authenticateEmail,
@@ -29,6 +30,7 @@ router.post("/auth/login", verifyLoginPassword, createUserJWebToken);
 router.post("/blogs", verifyUserWebToken, createBlog);
 router.post("/auth/logout", verifyUserWebToken, deleteUserToken);
 router.get("/users", getUsers);
+router.get("/user", getCurrentUserDetails);
 router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs);
 router.get("/user/blogs/:id", verifyUserWebToken, getUserSpecificBlog);
 router.get("/blogs/:id", verifyUserWebToken, getSpecificBlog);

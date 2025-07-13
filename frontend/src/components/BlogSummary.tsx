@@ -24,14 +24,14 @@ function BlogSummary(blog:BlogInfoType) {
         sx={{maxHeight: "55%"}} 
         />
         <Typography variant="h6" m={0} px={2} gutterBottom fontFamily={"cursive"}>
-            <Link to={blog.id}>
+            <Link to={`blogs/${blog.id}`}>
                 {blog.title}
             </Link>
         </Typography>
         <Typography variant="body1" px={2} my={1} color="textSecondary">
             {blog.synopsis}
         </Typography>
-        <Typography variant="body1" px={2} mt={1} alignItems={"center"} 
+        <Typography variant="body1" px={2} mt={1} alignItems={"center"} gutterBottom
             display={"flex"} fontFamily={"cursive"} color='secondary'
         >
             <Avatar component={"b"} sx={{color:"", bgcolor: "#8B5CF6", fontFamily:"cursive",
@@ -41,11 +41,11 @@ function BlogSummary(blog:BlogInfoType) {
             </Avatar> 
             {blog.blogAuthor.userName}
         </Typography>
-        <Stack direction={{xs: "column", sm:"row"}} justifyContent={"space-between"} px={1}>
+        <Stack direction={{xs: "column", sm:"row"}} spacing={1} gap={1} justifyContent={"center"} px={1}>
             <Typography variant="body2" color="secondary" 
             display={"flex"} alignItems={"center"}
             >
-            <Email/> {blog.blogAuthor.email}
+            <Email /> {blog.blogAuthor.email}
             </Typography>
             <Typography variant="caption" fontFamily={"cursive"}
             fontWeight={500} fontSize={".9rem"} color="secondary" 
