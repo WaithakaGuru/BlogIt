@@ -1,33 +1,32 @@
-import { Box, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { Box, TextField, Typography, type TextFieldProps } from "@mui/material";
 import Markdown from "react-markdown";
 
-import useBlog from "../store/Blog.store";
+type BlogComponentPropsType = TextFieldProps & {name: string, value: string}
 
-function BlogComponent() {
-  const [markdown, setMarkdown] = useState("");
+function BlogComponent({multiline=false, minRows=2, value, required=true, onChange, name}: BlogComponentPropsType) {
   return (
     <Box p={2}>
-      <Typography variant="h6" gutterBottom>
-        Markdown Input
+      <Typography variant="h6" gutterBottom color="secondary">
+        {name} Input
       </Typography>
 
       <TextField
-        label="Write in Markdown"
-        multiline
-        minRows={6}
+        label={`Write your BLog ${name} here in Markdown`}        
+        multiline={multiline}
+        minRows={minRows}
         fullWidth
-        value={markdown}
-        onChange={(e) => setMarkdown(e.target.value)}
+        value={value}
+        required={required}
+        onChange={onChange}
       />
 
-      <Box mt={4}>
-        <Typography variant="h6" gutterBottom>
-          Preview
+      <Box mt={2}>
+        <Typography variant="h6" gutterBottom color="secondary">
+         Blog {name} Preview
         </Typography>
 
         <Box p={2} border={1} borderColor="grey.300" borderRadius={2}>
-          <Markdown>{markdown}</Markdown>
+          <Markdown>{value}</Markdown>
         </Box>
       </Box>
     </Box>

@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 function useRegisterNewUser () {
     const {token} = useBlog();
     return useMutation({
-        mutationKey: ["RGISTER_NEW_USER"],
+        mutationKey: ["REGISTER_NEW_USER"],
         mutationFn: async (data: any) => {
             const newUser = axInstance.post("/auth/register", data, {
                 headers: {
@@ -32,4 +32,17 @@ function useLogOutUser () {
     })
 }
 
-export {useRegisterNewUser, useLogOutUser}
+function useCreateNewBlog () {
+    const {token} = useBlog();
+    return useMutation({
+        mutationKey: ["CREATE_NEW_BLOG"],
+        mutationFn: async (data) => {
+            const newBlog = await axInstance.post("/blogs", data, {
+                headers: {Authorization : `Bearer ${token}`}
+            })
+            return newBlog
+        }
+    })
+}
+
+export {useRegisterNewUser, useLogOutUser, useCreateNewBlog}
