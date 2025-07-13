@@ -5,7 +5,7 @@ import {useLocation, useNavigate } from "react-router-dom";
 
 function NavBar() {
   const {isLoggedIn, setIsLoggedIn} = useBlog();
-  const d = useLocation()
+  const path  = useLocation().pathname
   const navigate = useNavigate()
 
   function handleLogOut () {
@@ -29,7 +29,7 @@ function NavBar() {
         }}
       >
         <Button startIcon={<Dashboard/>} title="BlogIt User DashBoard" 
-        href="/dashboard" variant={d.pathname === "/dashboard"? "contained": "outlined"}  
+        href="/dashboard" variant={path === "/dashboard"? "contained": "outlined"}  
          sx={{maxHeight: "fit-content", px:2, py: ".85rem", placeSelf: "center"}}> 
           <Typography display={{xs: "none", sm:"flex"}}>
             BlogIT
@@ -43,13 +43,13 @@ function NavBar() {
         <Stack direction={"row"} gap={2} p={2}>
            <Button
             href="/"
-            variant={d.pathname === "/"? "contained"  : "outlined"}
+            variant={path === "/"? "contained"  : "outlined"}
             title="Go to home page"
             sx={{m:0, p:0}}
           >
             <Home /> 
           </Button>
-          <Button startIcon={<Notes/>} variant={d.pathname === "/dashboard/blogs"? "contained": "outlined"} title="My Blogs"
+          <Button startIcon={<Notes/>} variant={path === "/dashboard/blogs"? "contained": "outlined"} title="My Blogs"
             href="/dashboard/blogs"
           >
             <Typography display={{xs: "none", sm:"flex"}}>
@@ -57,7 +57,7 @@ function NavBar() {
             </Typography>
           </Button>
 
-          <Button startIcon={<Person/>} variant={d.pathname === "/dashboard/profile"? "contained": "outlined"} href="/dashboard/profile"
+          <Button startIcon={<Person/>} variant={path === "/dashboard/profile"? "contained": "outlined"} href="/dashboard/profile"
           title="My profile" sx={{px:1}}>
             <Typography display={{xs: "none", sm:"flex"}}>
              My Profile
@@ -109,7 +109,7 @@ function NavBar() {
             href="/"
             color="secondary"
             title="Go to home page"
-            variant={d.pathname === "/" ? "contained" : "outlined"}
+            variant={path === "/" ? "contained" : "outlined"}
           >
             <Home /> 
             <Typography display={{xs: "none", sm: "flex"}}>
@@ -120,17 +120,17 @@ function NavBar() {
           <Button
             href="/register"
             title="Register New Account"
-            sx={{ background: "linear-gradient(to right, #3B82F6, #8B5CF6)" }}
-            variant={d.pathname === "/register" ? "contained" : "outlined"}
+            sx={{background: path === "/register" ? "linear-gradient(to right, #3B82F6, #8B5CF6)" : ""}}
+            variant={path === "/register" ? "contained" : "outlined"}
           >
             <AppRegistration />
-           <Typography display={{xs: "none", sm: "flex"}}> 
+           <Typography display={{xs: "none", sm: "flex"}} fontSize={".6rem"}> 
               Sign up
             </Typography>
           </Button>
 
           <Button startIcon={<Login/>} href="/login" 
-            variant={d.pathname === "/login" ? "contained" : "outlined"}
+            variant={path === "/login" ? "contained" : "outlined"}
             sx={{ p: 2 }} title="Log In"
           >
             <Typography display={{xs: "none", sm: "flex"}}>
