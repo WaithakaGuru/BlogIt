@@ -30,7 +30,7 @@ function NavBar() {
       >
         <Button startIcon={<Dashboard/>} title="BlogIt User DashBoard" 
         href="/dashboard" variant={path === "/dashboard"? "contained": "outlined"}  
-         sx={{maxHeight: "fit-content", px:2, py: ".85rem", placeSelf: "center"}}> 
+         sx={{maxHeight: "fit-content", px:2, mx:1, py: ".85rem", placeSelf: "center"}}> 
           <Typography display={{xs: "none", sm:"flex"}}>
             BlogIT
           </Typography>
@@ -124,7 +124,7 @@ function NavBar() {
             variant={path === "/register" ? "contained" : "outlined"}
           >
             <AppRegistration />
-           <Typography display={{xs: "none", sm: "flex"}} fontSize={".6rem"}> 
+           <Typography display={{xs: "none", sm: "flex"}} fontSize={".9rem"}> 
               Sign up
             </Typography>
           </Button>
