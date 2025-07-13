@@ -2,9 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import axInstance from "../utils/AxInstance";
 import useBlog from "../store/Blog.store";
 
-const { token } = useBlog();
-
-const getAllBlogs = async () => {
+const useGetAllBlogs = async () => {
+  const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_ALL_BLOGS"],
     queryFn: async () => {
@@ -19,7 +18,8 @@ const getAllBlogs = async () => {
   });
 }
 
-const getUserBlogs = async () => {
+const useGetUserBlogs = async () => {
+  const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_USER_BLOGS"],
     queryFn: async () => {
@@ -34,7 +34,8 @@ const getUserBlogs = async () => {
   });
 };
 
-const getSpecificBlog = async (id: string) => {
+const useGetSpecificBlog = async (id: string) => {
+  const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_USER_SPECIFIC_BLOG", id],
     queryFn: async () => {
@@ -47,7 +48,8 @@ const getSpecificBlog = async (id: string) => {
   });
 }
 
-const getUserSpecificBlog = async (id: string) => {
+const useGetUserSpecificBlog = async (id: string) => {
+  const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_SPECIFIC_BLOG"],
     queryFn: async () => {
@@ -60,4 +62,4 @@ const getUserSpecificBlog = async (id: string) => {
   });
 }
 
-export { getAllBlogs, getUserBlogs, getUserSpecificBlog, getSpecificBlog };
+export { useGetAllBlogs, useGetSpecificBlog, useGetUserSpecificBlog, useGetUserBlogs };
