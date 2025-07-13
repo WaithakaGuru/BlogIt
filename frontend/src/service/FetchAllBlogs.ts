@@ -5,7 +5,7 @@ import useBlog from "../store/Blog.store";
 const { token } = useBlog();
 
 const getAllBlogs = async () => {
-  const allBlogs = useQuery({
+  return useQuery({
     queryKey: ["GET_ALL_BLOGS"],
     queryFn: async () => {
       const blogs = await axInstance.get("/blogs", {
@@ -17,11 +17,10 @@ const getAllBlogs = async () => {
     },
     retry: 2,
   });
-  return allBlogs;
-};
+}
 
 const getUserBlogs = async () => {
-  const userBlogs = useQuery({
+  return useQuery({
     queryKey: ["GET_USER_BLOGS"],
     queryFn: async () => {
       const blogs = await axInstance.get("/user/blogs", {
@@ -33,11 +32,10 @@ const getUserBlogs = async () => {
     },
     retry: 2,
   });
-  return userBlogs;
 };
 
 const getSpecificBlog = async (id: string) => {
-  const userSpecificBlog = useQuery({
+  return useQuery({
     queryKey: ["GET_USER_SPECIFIC_BLOG", id],
     queryFn: async () => {
       await axInstance.get(`/blogs/${id}`, {
@@ -47,11 +45,10 @@ const getSpecificBlog = async (id: string) => {
       });
     },
   });
-  return userSpecificBlog;
-};
+}
 
 const getUserSpecificBlog = async (id: string) => {
-  const specificBlog = useQuery({
+  return useQuery({
     queryKey: ["GET_SPECIFIC_BLOG"],
     queryFn: async () => {
       axInstance.get(`/user/blogs/${id}`, {
@@ -61,7 +58,6 @@ const getUserSpecificBlog = async (id: string) => {
       });
     },
   });
-  return specificBlog;
-};
+}
 
 export { getAllBlogs, getUserBlogs, getUserSpecificBlog, getSpecificBlog };
