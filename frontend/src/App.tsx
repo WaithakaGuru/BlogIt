@@ -18,57 +18,57 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-    <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route path="/" Component={HomePage} />
-        <Route path="/login" Component={LoginPage} />
-        <Route path="/register" Component={RegisterNewAccountPage} />
-        <Route
-          path="/dashboard"
-          element={
-            <Restricted>
-              <DashboardPage />
-            </Restricted>
-          }
-        />
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/" Component={HomePage} />
+          <Route path="/login" Component={LoginPage} />
+          <Route path="/register" Component={RegisterNewAccountPage} />
+          <Route
+            path="/dashboard"
+            element={
+              <Restricted>
+                <DashboardPage />
+              </Restricted>
+            }
+          />
 
-        <Route
-          path="dashboard/blogs"
-          element={
-            <Restricted>
-              <AllUserBlogsPage />
-            </Restricted>
-          }
-        />
+          <Route
+            path="dashboard/blogs"
+            element={
+              <Restricted>
+                <AllUserBlogsPage />
+              </Restricted>
+            }
+          />
 
-        <Route
-          path="dashboard/blogs/create"
-          element={
-            <Restricted>
-              <CreateBlogPage />
-            </Restricted>
-          }
-        />
+          <Route
+            path="dashboard/blogs/create"
+            element={
+              <Restricted>
+                <CreateBlogPage />
+              </Restricted>
+            }
+          />
 
-        <Route
-          path="dashboard/blogs/:id"
-          element={
-            <Restricted>
-              <SingleBlog />
-            </Restricted>
-          }
-        />
+          <Route
+            path="dashboard/blogs/:id"
+            element={
+              <Restricted>
+                <SingleBlog />
+              </Restricted>
+            }
+          />
 
-        <Route
-          path="dashboard/profile"
-          element={
-            <Restricted>
-              <ProfileUpdatePage />
-            </Restricted>
-          }
-        />
-      </Routes>
-    </QueryClientProvider>
+          <Route
+            path="dashboard/profile"
+            element={
+              <Restricted>
+                <ProfileUpdatePage />
+              </Restricted>
+            }
+          />
+        </Routes>
+      </QueryClientProvider>
       <Footer />
     </BrowserRouter>
   );

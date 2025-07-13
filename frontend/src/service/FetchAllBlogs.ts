@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axInstance from "../utils/AxInstance";
 import useBlog from "../store/Blog.store";
 
-const useGetAllBlogs = async () => {
+const useGetAllBlogs = () => {
   const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_ALL_BLOGS"],
@@ -12,13 +12,13 @@ const useGetAllBlogs = async () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      return blogs && blogs.data;
+      return blogs.data;
     },
     retry: 2,
   });
 }
 
-const useGetUserBlogs = async () => {
+const useGetUserBlogs = () => {
   const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_USER_BLOGS"],
@@ -34,7 +34,7 @@ const useGetUserBlogs = async () => {
   });
 };
 
-const useGetSpecificBlog = async (id: string) => {
+const useGetSpecificBlog = (id: string) => {
   const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_USER_SPECIFIC_BLOG", id],
@@ -48,7 +48,7 @@ const useGetSpecificBlog = async (id: string) => {
   });
 }
 
-const useGetUserSpecificBlog = async (id: string) => {
+const useGetUserSpecificBlog = (id: string) => {
   const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_SPECIFIC_BLOG"],

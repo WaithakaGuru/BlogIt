@@ -12,8 +12,7 @@ function createUserJWebToken(req: Request, res: Response, next: NextFunction) {
     return;
   }
   const { password, email, ...userTokenInfo } = userInfo;
-  const userToken = jwt.sign(userTokenInfo, jwtKey);
-  // res.cookie("token", userToken);
+  const userToken = jwt.sign(userTokenInfo, jwtKey, {expiresIn:60000});
   res.status(200).json({ token: userToken });
   req.body.userToken = userToken;
   next();
