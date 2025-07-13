@@ -1,7 +1,12 @@
 import { NoteAdd, Notes} from "@mui/icons-material";
-import { Button, Stack, Typography, Paper, Box} from "@mui/material";
+import { Button, Stack, Typography, Paper} from "@mui/material";
+import BlogSummary from "../components/BlogSummary";
+import { useGetUserBlogs } from "../service/FetchAllBlogs";
 
 function AllUserBlogsPage() {
+  const {data: allUserBlogs} = useGetUserBlogs();
+  const data = allUserBlogs
+  
   return (
   <>
     <Paper
@@ -36,7 +41,13 @@ function AllUserBlogsPage() {
         </Typography>
       </Stack>
     </Paper>
-    
+    <Stack p={3} bgcolor={"#f1f1f1"} m={1} direction={{xs: "column", md: "row"}} spacing={2}>
+      {
+        data?.map((blog:any)=> (
+          <BlogSummary key={blog.id} {...blog}/>
+        ))
+      }
+    </Stack>
   </>
   )
 }

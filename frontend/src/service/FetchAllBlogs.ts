@@ -28,7 +28,7 @@ const useGetUserBlogs = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      return blogs && blogs.data;
+      return blogs.data;
     },
     retry: 2,
   });

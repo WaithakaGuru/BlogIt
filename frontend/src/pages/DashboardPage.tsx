@@ -86,10 +86,10 @@ function DashboardPage() {
     </Stack>
 
 
-    <Stack p={3} bgcolor={"#f1f1f1"} m={1} >
       <Typography variant="h4" gutterBottom pb={2} align="left" color="secondary">
         Recent Popular Blogs
       </Typography>
+    <Stack p={3} bgcolor={"#f1f1f1"} m={1} direction={{xs: "column", md: "row"}} spacing={2}>
       {
         data?.map((blog:any)=> (
           <BlogSummary key={blog.id} {...blog}/>

@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 
 type BlogAuthorType = {
     userName: string,
-    email: string
+    email: string, 
+    id?: string
 }
 
 type BlogInfoType = {
@@ -19,7 +20,8 @@ type BlogInfoType = {
 
 function BlogSummary(blog:BlogInfoType) { 
   return (
-    <Card  sx={{maxWidth: "25rem", height: "23rem", position: "relative", minWidth:{xs: "100%", sm: "auto"}}}>
+    <Card  sx={{maxWidth: "25rem", height: "24.5rem", position: "relative", 
+    minWidth:{xs: "100%", sm: "auto"}, m: ".2rem", flexWrap:"wrap"}}>
         <CardMedia component={"img"} image={blog.featuredImageURL} 
         sx={{maxHeight: "55%"}} 
         />
@@ -28,10 +30,11 @@ function BlogSummary(blog:BlogInfoType) {
                 {blog.title}
             </Link>
         </Typography>
-        <Typography variant="body1" px={2} my={1} color="textSecondary">
+        <Typography variant="body1" px={2} my={1} color="textSecondary" 
+        maxHeight={"4rem"} overflow={"auto"}>
             {blog.synopsis}
         </Typography>
-        <Typography variant="body1" px={2} mt={1} alignItems={"center"} gutterBottom
+        <Typography variant="body1" px={2} alignItems={"center"} gutterBottom
             display={"flex"} fontFamily={"cursive"} color='secondary'
         >
             <Avatar component={"b"} sx={{color:"", bgcolor: "#8B5CF6", fontFamily:"cursive",
