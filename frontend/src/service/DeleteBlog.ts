@@ -16,4 +16,4 @@ const useDeleteBlog = async (blogId: string) => {
     },
   });
 };
-export default deleteBlog;
+export default useDeleteBlog;

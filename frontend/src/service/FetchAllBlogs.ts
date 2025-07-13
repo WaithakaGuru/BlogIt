@@ -39,12 +39,14 @@ const useGetSpecificBlog = (id: string) => {
   return useQuery({
     queryKey: ["GET_USER_SPECIFIC_BLOG", id],
     queryFn: async () => {
-      await axInstance.get(`/blogs/${id}`, {
+     const blog =  await axInstance.get(`/blogs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      return blog;
     },
+    retry: 2
   });
 }
 
@@ -53,13 +55,29 @@ const useGetUserSpecificBlog = (id: string) => {
   return useQuery({
     queryKey: ["GET_SPECIFIC_BLOG"],
     queryFn: async () => {
-      axInstance.get(`/user/blogs/${id}`, {
+      const specificBlog = await axInstance.get(`/user/blogs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      return specificBlog
     },
+    retry: 1
   });
 }
 
-export { useGetAllBlogs, useGetSpecificBlog, useGetUserSpecificBlog, useGetUserBlogs };
+const useGetCurrentUserInfo = () =>{
+  const {token} = useBlog();
+  return useQuery({
+    queryKey: ["GET_CURRENT_USER_DETAILS"],
+    queryFn: async () => {
+     const currentUserInfo = await  axInstance.get("/user", {
+       headers: {Authorization: `Bearer ${token}`}
+     })
+     return  currentUserInfo;
+    },
+    retry: 1
+  })
+}
+
+export { useGetAllBlogs, useGetSpecificBlog, useGetUserSpecificBlog, useGetUserBlogs, useGetCurrentUserInfo  };

@@ -21,11 +21,12 @@ function useLogOutUser () {
     return useMutation({
         mutationKey: ["LOGOUT_USER"],
         mutationFn: async () => {
-            axInstance.post("/auth/logout", {}, {
+           const logout =  axInstance.post("/auth/logout", {}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
+            return logout
         }
     })
 }

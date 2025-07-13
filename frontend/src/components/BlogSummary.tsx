@@ -19,7 +19,7 @@ type BlogInfoType = {
 
 function BlogSummary(blog:BlogInfoType) { 
   return (
-    <Card  sx={{maxWidth: "25rem", height: "23rem", position: "relative"}}>
+    <Card  sx={{maxWidth: "25rem", height: "23rem", position: "relative", minWidth:{xs: "100%", sm: "auto"}}}>
         <CardMedia component={"img"} image={blog.featuredImageURL} 
         sx={{maxHeight: "55%"}} 
         />

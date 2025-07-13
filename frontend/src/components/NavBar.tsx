@@ -4,20 +4,25 @@ import useBlog from "../store/Blog.store";
 import {useLocation} from "react-router-dom";
 import { useLogOutUser } from "../service/PostRequests";
 import { isAxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGetCurrentUserInfo } from "../service/FetchAllBlogs";
 
 function NavBar() {
   const {isLoggedIn, setIsLoggedIn, addToken} = useBlog();
   const path  = useLocation().pathname
   const {mutateAsync: logOutUser} = useLogOutUser();
   const [error, setError] = useState("");
-
+  const {data: userInfo} = useGetCurrentUserInfo()
+  
+  useEffect(()=> {
+    const info = userInfo?.data?.userInfo;  
+  }, [userInfo])
 
   async function handleLogOut () {
     setIsLoggedIn(0);
     try{
       const logOut = await logOutUser();
-      addToken("");
+      addToken(logOut.data.token);
     } catch(err){
       if (isAxiosError(err)) {
         setError(err.response?.data.message || "Unknown error");
@@ -52,8 +57,8 @@ function NavBar() {
           </Typography>
         </Button>
 
-        <Typography variant="subtitle1" fontWeight={500} color="secondary" px={2} my={"auto"} align="center">
-          Hello Johnson
+        <Typography variant="subtitle1" fontWeight={700} fontSize={"1.2rem"} lineHeight={".6cm"} color="secondary" px={2} my={"auto"} align="center">
+          Hello {userInfo?.data.userInfo.firstName}
         </Typography>
 
         <Stack direction={"row"} gap={2} p={2}>
@@ -84,9 +89,9 @@ function NavBar() {
             color="error" 
             title="Log Out"
             onClick={handleLogOut}
-            sx={{ px: 1, maxWidth: "fit-content" }}
+            sx={{ px: 1, maxWidth:{xs: "1rem", md:"5rem"} , ml: {xs: "-.8rem", md: "auto"}}}
           >
-            <Typography display={{xs: "none", sm:"flex"}}>
+            <Typography display={{xs: "none", sm:"flex"}} fontSize={".7rem"}>
               LogOut
             </Typography>
           </Button>

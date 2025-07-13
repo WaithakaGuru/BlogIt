@@ -9,7 +9,6 @@ type BlogPost = {
 
 type BlogItems = {
   blog?: BlogPost;
-  name: string;
   token: string | null;
   isLoggedIn: boolean | null;
 
@@ -20,7 +19,6 @@ type BlogItems = {
 
 const blogitStore: StateCreator<BlogItems> = (set) => {
   return {
-    name: "Waithaka",
     token: localStorage.getItem("token"),
     isLoggedIn: Boolean(localStorage.getItem("loggedIn")),
     addToken(value) {
@@ -35,7 +33,7 @@ const blogitStore: StateCreator<BlogItems> = (set) => {
         localStorage.removeItem("loggedIn")
         set({isLoggedIn: false})
       }
-    }
+    },
   };
 };
 
