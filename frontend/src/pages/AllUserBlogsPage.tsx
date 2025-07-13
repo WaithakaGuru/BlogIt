@@ -82,7 +82,7 @@ function AllUserBlogsPage() {
             }}
             key={blog.id}
           >
-            <Button endIcon={<EditNote/>} color="secondary" size="large"
+            <Button endIcon={<EditNote/>} color="secondary" size="large" href={`/dashboard/blogs/create/${blog.id}`} title="Edit this Blog"
              sx={{textTransform: "none", position: "absolute", right: 0, bottom: "45%"}} variant="contained">
              Edit
             </Button>

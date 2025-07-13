@@ -60,7 +60,7 @@ const useGetUserSpecificBlog = (id: string) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      return specificBlog;
+      return specificBlog.data;
     },
     retry: 1,
   });
