@@ -1,16 +1,32 @@
 import { AppRegistration, Dashboard, Home, Login, Logout, Notes, Person} from "@mui/icons-material";
-import { Box, Button, CardMedia, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, CardMedia, Stack, Typography } from "@mui/material";
 import useBlog from "../store/Blog.store";
-import {useLocation, useNavigate } from "react-router-dom";
+import {useLocation} from "react-router-dom";
+import { useLogOutUser } from "../service/PostRequests";
+import { isAxiosError } from "axios";
+import { useState } from "react";
 
 function NavBar() {
-  const {isLoggedIn, setIsLoggedIn} = useBlog();
+  const {isLoggedIn, setIsLoggedIn, addToken} = useBlog();
   const path  = useLocation().pathname
-  const navigate = useNavigate()
+  const {mutateAsync: logOutUser} = useLogOutUser();
+  const [error, setError] = useState("");
 
-  function handleLogOut () {
+
+  async function handleLogOut () {
     setIsLoggedIn(0);
-    navigate("/", {replace: true})
+    try{
+      const logOut = await logOutUser();
+      addToken("");
+    } catch(err){
+      if (isAxiosError(err)) {
+        setError(err.response?.data.message || "Unknown error");
+      } else {
+        console.log(err);
+        setError(`Something went wrong.`);
+      }
+    }
+    
   }
 
   return <>
@@ -142,6 +158,9 @@ function NavBar() {
       </Box>
      ) 
     }
+    {error && (
+      <Alert severity="error" variant="outlined" >{error}</Alert>
+    )}
   </>
 }
 export default NavBar;

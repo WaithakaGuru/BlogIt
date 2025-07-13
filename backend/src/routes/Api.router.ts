@@ -27,6 +27,7 @@ router.post(
   createUser,
 );
 router.post("/auth/login", verifyLoginPassword, createUserJWebToken);
+router.post("/auth/register", authenticateUsername, authenticateEmail, createUser);
 router.post("/blogs", verifyUserWebToken, createBlog);
 router.post("/auth/logout", verifyUserWebToken, deleteUserToken);
 router.get("/users", getUsers);

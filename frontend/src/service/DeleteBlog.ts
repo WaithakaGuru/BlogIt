@@ -2,7 +2,7 @@ import useBlog from "../store/Blog.store";
 import { useMutation } from "@tanstack/react-query";
 import axInstance from "../utils/AxInstance";
 
-const deleteBlog = async (blogId: string) => {
+const useDeleteBlog = async (blogId: string) => {
   const { token } = useBlog();
   return useMutation({
     mutationKey: ["DELETE_BLOG", blogId],

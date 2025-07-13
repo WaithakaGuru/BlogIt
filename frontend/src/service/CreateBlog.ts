@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axInstance from "../utils/AxInstance";
 import useBlog from "../store/Blog.store";
 
-const createBlog = () => {
+const useCreateBlog = () => {
   const { token } = useBlog();
   return useMutation({
     mutationKey: ["CREATE_BLOG"],
@@ -18,4 +18,4 @@ const createBlog = () => {
   });
 };
 
-export default createBlog;
+export default useCreateBlog;
