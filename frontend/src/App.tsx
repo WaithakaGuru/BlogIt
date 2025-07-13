@@ -11,7 +11,7 @@ import UpdateBlogPage from "./pages/UpdateBlogPage"
 import DashboardPage from "./pages/DashboardPage";
 import AllUserBlogsPage from "./pages/AllUserBlogsPage";
 import ProfileUpdatePage from "./pages/ProfileUpdatePage";
-import SingleBlog from "./components/SingleBlog";
+import SingleUserBlogPage from "./pages/SingleUserBlogPage";
 
 const queryClient = new QueryClient();
 
@@ -63,7 +63,7 @@ function App() {
             path="dashboard/blogs/:id"
             element={
               <Restricted>
-                <SingleBlog />
+                <SingleUserBlogPage />
               </Restricted>
             }
           />
