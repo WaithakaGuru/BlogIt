@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <NavBar />  
+        <NavBar />
         <Routes>
           <Route path="/" Component={HomePage} />
           <Route path="/login" Component={LoginPage} />

@@ -2,47 +2,51 @@ import useBlog from "../store/Blog.store";
 import axInstance from "../utils/AxInstance";
 import { useMutation } from "@tanstack/react-query";
 
-function useRegisterNewUser () {
-    const {token} = useBlog();
-    return useMutation({
-        mutationKey: ["REGISTER_NEW_USER"],
-        mutationFn: async (data: any) => {
-            const newUser = axInstance.post("/auth/register", data, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            return newUser;
-        }
-    })
+function useRegisterNewUser() {
+  const { token } = useBlog();
+  return useMutation({
+    mutationKey: ["REGISTER_NEW_USER"],
+    mutationFn: async (data: any) => {
+      const newUser = axInstance.post("/auth/register", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return newUser;
+    },
+  });
 }
 
-function useLogOutUser () {
-    const {token} = useBlog();
-    return useMutation({
-        mutationKey: ["LOGOUT_USER"],
-        mutationFn: async () => {
-           const logout =  axInstance.post("/auth/logout", {}, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            return logout
-        }
-    })
+function useLogOutUser() {
+  const { token } = useBlog();
+  return useMutation({
+    mutationKey: ["LOGOUT_USER"],
+    mutationFn: async () => {
+      const logout = axInstance.post(
+        "/auth/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      return logout;
+    },
+  });
 }
 
-function useCreateNewBlog () {
-    const {token} = useBlog();
-    return useMutation({
-        mutationKey: ["CREATE_NEW_BLOG"],
-        mutationFn: async (data) => {
-            const newBlog = await axInstance.post("/blogs", data, {
-                headers: {Authorization : `Bearer ${token}`}
-            })
-            return newBlog
-        }
-    })
+function useCreateNewBlog() {
+  const { token } = useBlog();
+  return useMutation({
+    mutationKey: ["CREATE_NEW_BLOG"],
+    mutationFn: async (data) => {
+      const newBlog = await axInstance.post("/blogs", data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return newBlog;
+    },
+  });
 }
 
-export {useRegisterNewUser, useLogOutUser, useCreateNewBlog}
+export { useRegisterNewUser, useLogOutUser, useCreateNewBlog };

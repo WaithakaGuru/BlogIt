@@ -1,64 +1,105 @@
-import { Card, Typography, CardMedia, Avatar, Stack } from '@mui/material'
-import { Email } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import { Card, Typography, CardMedia, Avatar, Stack } from "@mui/material";
+import { Email } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 type BlogAuthorType = {
-    userName: string,
-    email: string, 
-    id?: string
-}
+  userName: string;
+  email: string;
+  id?: string;
+};
 
 type BlogInfoType = {
-    blogAuthor: BlogAuthorType,
-    synopsis: string,
-    featuredImageURL: string,
-    creationDate: string,
-    title: string
-    id: string
-}
+  blogAuthor: BlogAuthorType;
+  synopsis: string;
+  featuredImageURL: string;
+  creationDate: string;
+  title: string;
+  id: string;
+};
 
-
-function BlogSummary(blog:BlogInfoType) { 
+function BlogSummary(blog: BlogInfoType) {
   return (
-    <Card  sx={{maxWidth: "25rem", height: "24.5rem", position: "relative", 
-    minWidth:{xs: "100%", sm: "auto"}, m: ".2rem", flexWrap:"wrap"}}>
-        <CardMedia component={"img"} image={blog.featuredImageURL} 
-        sx={{maxHeight: "55%"}} 
-        />
-        <Typography variant="h6" m={0} px={2} gutterBottom fontFamily={"cursive"}>
-            <Link to={`blogs/${blog.id}`}>
-                {blog.title}
-            </Link>
-        </Typography>
-        <Typography variant="body1" px={2} my={1} color="textSecondary" 
-        maxHeight={"4rem"} overflow={"auto"}>
-            {blog.synopsis}
-        </Typography>
-        <Typography variant="body1" px={2} alignItems={"center"} gutterBottom
-            display={"flex"} fontFamily={"cursive"} color='secondary'
+    <Card
+      sx={{
+        maxWidth: "25rem",
+        height: "24.5rem",
+        position: "relative",
+        minWidth: { xs: "100%", sm: "auto" },
+        m: ".2rem",
+        flexWrap: "wrap",
+      }}
+    >
+      <CardMedia
+        component={"img"}
+        image={blog.featuredImageURL}
+        sx={{ maxHeight: "55%" }}
+      />
+      <Typography variant="h6" m={0} px={2} gutterBottom fontFamily={"cursive"}>
+        <Link to={`blogs/${blog.id}`}>{blog.title}</Link>
+      </Typography>
+      <Typography
+        variant="body1"
+        px={2}
+        my={1}
+        color="textSecondary"
+        maxHeight={"4rem"}
+        overflow={"auto"}
+      >
+        {blog.synopsis}
+      </Typography>
+      <Typography
+        variant="body1"
+        px={2}
+        alignItems={"center"}
+        gutterBottom
+        display={"flex"}
+        fontFamily={"cursive"}
+        color="secondary"
+      >
+        <Avatar
+          component={"b"}
+          sx={{
+            color: "",
+            bgcolor: "#8B5CF6",
+            fontFamily: "cursive",
+            mr: 1,
+            height: "2rem",
+            width: "2rem",
+          }}
         >
-            <Avatar component={"b"} sx={{color:"", bgcolor: "#8B5CF6", fontFamily:"cursive",
-            mr:1, height: "2rem", width: "2rem"}}
-            >
-            {blog.blogAuthor.userName[0]}
-            </Avatar> 
-            {blog.blogAuthor.userName}
+          {blog.blogAuthor.userName[0]}
+        </Avatar>
+        {blog.blogAuthor.userName}
+      </Typography>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={1}
+        gap={1}
+        justifyContent={"center"}
+        px={1}
+      >
+        <Typography
+          variant="body2"
+          color="secondary"
+          display={"flex"}
+          alignItems={"center"}
+        >
+          <Email /> {blog.blogAuthor.email}
         </Typography>
-        <Stack direction={{xs: "column", sm:"row"}} spacing={1} gap={1} justifyContent={"center"} px={1}>
-            <Typography variant="body2" color="secondary" 
-            display={"flex"} alignItems={"center"}
-            >
-            <Email /> {blog.blogAuthor.email}
-            </Typography>
-            <Typography variant="caption" fontFamily={"cursive"}
-            fontWeight={500} fontSize={".9rem"} color="secondary" 
-            gutterBottom my={1}
-            >
-            Created on: {blog.creationDate.split("T")[0]}
-            </Typography>
-        </Stack>
+        <Typography
+          variant="caption"
+          fontFamily={"cursive"}
+          fontWeight={500}
+          fontSize={".9rem"}
+          color="secondary"
+          gutterBottom
+          my={1}
+        >
+          Created on: {blog.creationDate.split("T")[0]}
+        </Typography>
+      </Stack>
     </Card>
-  )
+  );
 }
 
-export default BlogSummary
+export default BlogSummary;

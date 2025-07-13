@@ -16,7 +16,7 @@ const useGetAllBlogs = () => {
     },
     retry: 2,
   });
-}
+};
 
 const useGetUserBlogs = () => {
   const { token } = useBlog();
@@ -39,16 +39,16 @@ const useGetSpecificBlog = (id: string) => {
   return useQuery({
     queryKey: ["GET_USER_SPECIFIC_BLOG", id],
     queryFn: async () => {
-     const blog =  await axInstance.get(`/blogs/${id}`, {
+      const blog = await axInstance.get(`/blogs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       return blog;
     },
-    retry: 2
+    retry: 2,
   });
-}
+};
 
 const useGetUserSpecificBlog = (id: string) => {
   const { token } = useBlog();
@@ -60,25 +60,31 @@ const useGetUserSpecificBlog = (id: string) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      return specificBlog
+      return specificBlog;
     },
-    retry: 1
+    retry: 1,
   });
-}
+};
 
-const useGetCurrentUserInfo = (isLoggedIn: boolean = false) =>{
-  const {token} = useBlog();
+const useGetCurrentUserInfo = (isLoggedIn: boolean = false) => {
+  const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_CURRENT_USER_DETAILS"],
     queryFn: async () => {
-     const currentUserInfo = await  axInstance.get("/user", {
-       headers: {Authorization: `Bearer ${token}`}
-     })
-     return  currentUserInfo;
+      const currentUserInfo = await axInstance.get("/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return currentUserInfo;
     },
     retry: 1,
-    enabled: isLoggedIn
-  })
-}
+    enabled: isLoggedIn,
+  });
+};
 
-export { useGetAllBlogs, useGetSpecificBlog, useGetUserSpecificBlog, useGetUserBlogs, useGetCurrentUserInfo  };
+export {
+  useGetAllBlogs,
+  useGetSpecificBlog,
+  useGetUserSpecificBlog,
+  useGetUserBlogs,
+  useGetCurrentUserInfo,
+};

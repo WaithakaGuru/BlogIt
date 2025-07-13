@@ -7,14 +7,12 @@ const useCreateBlog = () => {
   return useMutation({
     mutationKey: ["CREATE_BLOG"],
     mutationFn: async (postData: any) => {
-     const newBlog =  axInstance.post("/blogs", 
-        postData,
-        {
+      const newBlog = axInstance.post("/blogs", postData, {
         headers: {
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
-      return newBlog
+      return newBlog;
     },
     retry: 2,
   });

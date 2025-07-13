@@ -8,85 +8,103 @@ import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 
 type ActionType = {
-  type: string
-  payload: {element: string, value: string}
-}
+  type: string;
+  payload: { element: string; value: string };
+};
 
 type RegisterFormType = {
-  firstName: string,
-  lastName: string,
-  userName: string,
-  email: string,
-  password: string,
-  confirmPassword: string
-}
+  firstName: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
-function reducerFunc (prevState: RegisterFormType, action: ActionType) {
-  switch(action.type){
-    case "HANDLE_INPUT": 
-     const updateField = action.payload.element;
-     return {
-      ...prevState,  [updateField]: action.payload.value
-     }
+function reducerFunc(prevState: RegisterFormType, action: ActionType) {
+  switch (action.type) {
+    case "HANDLE_INPUT":
+      const updateField = action.payload.element;
+      return {
+        ...prevState,
+        [updateField]: action.payload.value,
+      };
 
-    default: 
-     return prevState
+    default:
+      return prevState;
   }
 }
 
 const initialState = {
-  firstName : "",
-  lastName : "",
-  userName : "",
-  email : "",
-  password : "",
-  confirmPassword : "",
-}
-
+  firstName: "",
+  lastName: "",
+  userName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 function RegisterNewAccountPage() {
   const navigate = useNavigate();
-  const [state, dispatch] = useReducer(reducerFunc, initialState)
+  const [state, dispatch] = useReducer(reducerFunc, initialState);
   const [error, setError] = useState("");
-  const {mutateAsync: reigsterUser} =  useRegisterNewUser();
+  const { mutateAsync: reigsterUser } = useRegisterNewUser();
 
-  function handleFirstName(e: React.ChangeEvent<HTMLInputElement>){
-    dispatch({type: "HANDLE_INPUT", payload:{element: "firstName",  value :e.target.value}})
+  function handleFirstName(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { element: "firstName", value: e.target.value },
+    });
   }
-  function handleLastName(e: React.ChangeEvent<HTMLInputElement>){
-    dispatch({type: "HANDLE_INPUT", payload:{element: "lastName",  value :e.target.value}})
+  function handleLastName(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { element: "lastName", value: e.target.value },
+    });
   }
-  function handleUserName(e: React.ChangeEvent<HTMLInputElement>){
-    dispatch({type: "HANDLE_INPUT", payload:{element: "userName",  value :e.target.value}})
+  function handleUserName(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { element: "userName", value: e.target.value },
+    });
   }
-  function handleEmail(e: React.ChangeEvent<HTMLInputElement>){
-    dispatch({type: "HANDLE_INPUT", payload:{element: "email",  value :e.target.value}})
+  function handleEmail(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { element: "email", value: e.target.value },
+    });
   }
-  function handlePassword(e: React.ChangeEvent<HTMLInputElement>){
-    dispatch({type: "HANDLE_INPUT", payload:{element: "password",  value :e.target.value}})
+  function handlePassword(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { element: "password", value: e.target.value },
+    });
   }
-  function handleConfirmPassword(e: React.ChangeEvent<HTMLInputElement>){
-    dispatch({type: "HANDLE_INPUT", payload:{element: "confirmPassword",  value :e.target.value}})
+  function handleConfirmPassword(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { element: "confirmPassword", value: e.target.value },
+    });
   }
-  
-  async function handleRegisterNewUser (e: React.FormEvent<HTMLFormElement>) {
+
+  async function handleRegisterNewUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    try{
-      if(checkPasswordStrength(state.password) === -1){
-        setError("Please Choose a Stronger Password")
+    try {
+      if (checkPasswordStrength(state.password) === -1) {
+        setError("Please Choose a Stronger Password");
       }
-      if(!(state.password === state.confirmPassword)) {
-        setError("Password and confirm password must be the same")
+      if (!(state.password === state.confirmPassword)) {
+        setError("Password and confirm password must be the same");
       }
-      const {confirmPassword, ...newUserInfo} = state
+      const { confirmPassword, ...newUserInfo } = state;
       const newUser = await reigsterUser(newUserInfo);
-      if(newUser) {
-        navigate("/login", {replace: true})
+      if (newUser) {
+        navigate("/login", { replace: true });
       }
-    }catch(err) {
+    } catch (err) {
       console.log(err);
-      if(isAxiosError(err)){
-        setError(err.response?.data.message)
+      if (isAxiosError(err)) {
+        setError(err.response?.data.message);
       }
     }
   }
@@ -110,17 +128,39 @@ function RegisterNewAccountPage() {
           Set your free BlogIt account in a few quick steps
         </Typography>
 
-        {error && (<Alert severity="error" variant="outlined"
-         sx={{color: "red", fontWeight: 600, fontSize: "1rem"}} 
-        >
+        {error && (
+          <Alert
+            severity="error"
+            variant="outlined"
+            sx={{ color: "red", fontWeight: 600, fontSize: "1rem" }}
+          >
             {error}
-        </Alert>)}
+          </Alert>
+        )}
 
         <Stack direction={"row"} spacing={2}>
-          <TextInput label="First name" placeholder="Enter you: First name" value={state.firstName} onChange={handleFirstName} required/>
-          <TextInput label="Last name" placeholder="Enter you: Last name" value={state.lastName}  onChange={handleLastName} required/>
+          <TextInput
+            label="First name"
+            placeholder="Enter you: First name"
+            value={state.firstName}
+            onChange={handleFirstName}
+            required
+          />
+          <TextInput
+            label="Last name"
+            placeholder="Enter you: Last name"
+            value={state.lastName}
+            onChange={handleLastName}
+            required
+          />
         </Stack>
-        <TextInput label="Username" placeholder="Enter a Unique: Username" value={state.userName} onChange={handleUserName} required/>
+        <TextInput
+          label="Username"
+          placeholder="Enter a Unique: Username"
+          value={state.userName}
+          onChange={handleUserName}
+          required
+        />
         <TextInput
           label="Email Address"
           placeholder="Enter a Valid: Email"
@@ -129,8 +169,18 @@ function RegisterNewAccountPage() {
           onChange={handleEmail}
           value={state.email}
         />
-        <PasswordInput label="Set a strong password" required value={state.password} onChange={handlePassword}/>
-        <PasswordInput label="Confirm Password" required value={state.confirmPassword} onChange={handleConfirmPassword}/>
+        <PasswordInput
+          label="Set a strong password"
+          required
+          value={state.password}
+          onChange={handlePassword}
+        />
+        <PasswordInput
+          label="Confirm Password"
+          required
+          value={state.confirmPassword}
+          onChange={handleConfirmPassword}
+        />
         <Button
           type="submit"
           variant="contained"

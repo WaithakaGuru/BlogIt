@@ -1,37 +1,38 @@
-import { Alert, Stack, Typography, Button, Paper} from "@mui/material";
+import { Alert, Stack, Typography, Button, Paper } from "@mui/material";
 import { EditNote } from "@mui/icons-material";
-import BlogComponent from "../components/BlogContentInput"; 
+import BlogComponent from "../components/BlogContentInput";
 import { useReducer, useState } from "react";
 import useCreateBlog from "../service/CreateBlog";
 import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGetCurrentUserInfo } from "../service/FetchAllBlogs";
 
-type BlogActionType ={ 
-  type: string,
+type BlogActionType = {
+  type: string;
   payload: {
-    value: string,
-    inputField: string
-  }
-}
+    value: string;
+    inputField: string;
+  };
+};
 
 type BlogStateType = {
-  title: string,
-  synopsis: string, 
-  content: string, 
-  featuredImageURL: string,
-}
+  title: string;
+  synopsis: string;
+  content: string;
+  featuredImageURL: string;
+};
 
-function createBlogReducer (prevState: BlogStateType, action: BlogActionType) {
-  switch(action.type){
+function createBlogReducer(prevState: BlogStateType, action: BlogActionType) {
+  switch (action.type) {
     case "HANDLE_INPUT":
       const inputField = action.payload.inputField;
       return {
-        ...prevState, [inputField]: action.payload.value
-      }
+        ...prevState,
+        [inputField]: action.payload.value,
+      };
 
-    default: 
-    return prevState
+    default:
+      return prevState;
   }
 }
 
@@ -39,61 +40,75 @@ const initialState = {
   title: "",
   synopsis: "",
   content: "",
-  featuredImageURL: ""
-}
-
+  featuredImageURL: "",
+};
 
 function CreateBlogPage() {
   const [state, dispatch] = useReducer(createBlogReducer, initialState);
-  const {mutateAsync: createBlog} = useCreateBlog();
+  const { mutateAsync: createBlog } = useCreateBlog();
   const [error, setError] = useState();
   const navigate = useNavigate();
-  const {data: userInfo} = useGetCurrentUserInfo();
+  const { data: userInfo } = useGetCurrentUserInfo();
 
-  
   function handleFeaturedImage(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({type: "HANDLE_INPUT", payload: {inputField: "featuredImageURL", value: e.target.value}})
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { inputField: "featuredImageURL", value: e.target.value },
+    });
   }
-  function handleTitle (e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({type: "HANDLE_INPUT", payload: {inputField: "title", value: e.target.value}})
+  function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { inputField: "title", value: e.target.value },
+    });
   }
-  function handleSynopsis (e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({type: "HANDLE_INPUT", payload: {inputField: "synopsis", value: e.target.value}})
+  function handleSynopsis(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { inputField: "synopsis", value: e.target.value },
+    });
   }
-  function handleContent (e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({type: "HANDLE_INPUT", payload: {inputField: "content", value: e.target.value}})
+  function handleContent(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { inputField: "content", value: e.target.value },
+    });
   }
-  
-  async function handleCreateNewBlog() {
-    const userId = userInfo?.data.userInfo.id;   
-    try{
-      const newBlog = await createBlog({...state, userId});
-      console.log(newBlog);
-      if(newBlog) {
-        navigate("/")
-      }
 
-    }catch(err){
+  async function handleCreateNewBlog() {
+    const userId = userInfo?.data.userInfo.id;
+    try {
+      const newBlog = await createBlog({ ...state, userId });
+      console.log(newBlog);
+      if (newBlog) {
+        navigate("/");
+      }
+    } catch (err) {
       console.log(err);
-      if(isAxiosError(err)){
+      if (isAxiosError(err)) {
         setError(err.response?.data.message);
       }
     }
   }
 
   return (
-    <Stack maxWidth={{xs:"100%", md:"80%"}} 
-    p={2} mx={"auto"} my={2} bgcolor={"#f9f9f9"}>
+    <Stack
+      maxWidth={{ xs: "100%", md: "80%" }}
+      p={2}
+      mx={"auto"}
+      my={2}
+      bgcolor={"#f9f9f9"}
+    >
       <Paper
-      elevation={3}
-      sx={{
-        p: 4,
-        borderRadius: 4,
-        bgcolor: "#f9f9f9",
-        width: {xs: "100%", sm: "80%"},
-        margin: "0 auto",
-        mt: 4,
-      }}
+        elevation={3}
+        sx={{
+          p: 4,
+          borderRadius: 4,
+          bgcolor: "#f9f9f9",
+          width: { xs: "100%", sm: "80%" },
+          margin: "0 auto",
+          mt: 4,
+        }}
       >
         <Stack spacing={3}>
           <Stack direction="row" alignItems="center" gap={1}>
@@ -104,19 +119,52 @@ function CreateBlogPage() {
           </Stack>
 
           <Typography variant="body1" color="text.secondary">
-            Share your thoughts with the world — start by giving your blog a title
-            and then dive into your content.
+            Share your thoughts with the world — start by giving your blog a
+            title and then dive into your content.
           </Typography>
         </Stack>
       </Paper>
-      <Stack component={"form"} onSubmit={handleCreateNewBlog} width={{xs: "100%", sm: "80%"}} 
-      my={2} mx={"auto"} p={2} bgcolor={"#fff"} boxShadow={"0 0 3px #5072fb"} borderRadius={2}>
-        {error && (<Alert severity="error">{error}</Alert>)}
-        <BlogComponent  name="Featured Blog Image URL" value={state.featuredImageURL} onChange={handleFeaturedImage}/>
-        <BlogComponent  name="Title" value={state.title} onChange={handleTitle}/>
-        <BlogComponent  multiline={true} name="Synopsis" value={state.synopsis} onChange={handleSynopsis}/>
-        <BlogComponent minRows={8} multiline={true} name="Content" value={state.content} onChange={handleContent}/>
-        <Button variant="contained" color="secondary" size="large" type="submit">
+      <Stack
+        component={"form"}
+        onSubmit={handleCreateNewBlog}
+        width={{ xs: "100%", sm: "80%" }}
+        my={2}
+        mx={"auto"}
+        p={2}
+        bgcolor={"#fff"}
+        boxShadow={"0 0 3px #5072fb"}
+        borderRadius={2}
+      >
+        {error && <Alert severity="error">{error}</Alert>}
+        <BlogComponent
+          name="Featured Blog Image URL"
+          value={state.featuredImageURL}
+          onChange={handleFeaturedImage}
+        />
+        <BlogComponent
+          name="Title"
+          value={state.title}
+          onChange={handleTitle}
+        />
+        <BlogComponent
+          multiline={true}
+          name="Synopsis"
+          value={state.synopsis}
+          onChange={handleSynopsis}
+        />
+        <BlogComponent
+          minRows={8}
+          multiline={true}
+          name="Content"
+          value={state.content}
+          onChange={handleContent}
+        />
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          type="submit"
+        >
           Publish Blog
         </Button>
       </Stack>

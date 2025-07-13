@@ -22,16 +22,16 @@ const blogitStore: StateCreator<BlogItems> = (set) => {
     token: localStorage.getItem("token"),
     isLoggedIn: Boolean(localStorage.getItem("loggedIn")),
     addToken(value) {
-      localStorage.setItem("token", value)
+      localStorage.setItem("token", value);
       set({ token: value });
     },
-    setIsLoggedIn(code){
-      if(code===1) {
+    setIsLoggedIn(code) {
+      if (code === 1) {
         localStorage.setItem("loggedIn", "true");
-         set({isLoggedIn: true})
-      } else{
-        localStorage.removeItem("loggedIn")
-        set({isLoggedIn: false})
+        set({ isLoggedIn: true });
+      } else {
+        localStorage.removeItem("loggedIn");
+        set({ isLoggedIn: false });
       }
     },
   };

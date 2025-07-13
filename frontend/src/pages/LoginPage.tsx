@@ -11,8 +11,8 @@ function LoginPage() {
   const [enteredPassword, setPass] = useState("");
   const [error, setError] = useState("");
   const { addToken, setIsLoggedIn } = useBlog();
-  const nav = useNavigate()
-  const {mutateAsync: login} = useLogUserIn()
+  const nav = useNavigate();
+  const { mutateAsync: login } = useLogUserIn();
 
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
@@ -27,11 +27,11 @@ function LoginPage() {
     e.preventDefault();
     try {
       const loggedIn = await login({ identifier, enteredPassword });
-      if(loggedIn){
+      if (loggedIn) {
         const userJWToken = loggedIn.token;
         addToken(userJWToken);
         setIsLoggedIn(1);
-        nav("/dashboard", {replace: true})
+        nav("/dashboard", { replace: true });
       }
     } catch (err) {
       if (isAxiosError(err)) {
