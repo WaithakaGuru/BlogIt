@@ -4,7 +4,7 @@ import useBlog from "../store/Blog.store";
 import {useLocation} from "react-router-dom";
 import { useLogOutUser } from "../service/PostRequests";
 import { isAxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetCurrentUserInfo } from "../service/FetchAllBlogs";
 
 function NavBar() {
@@ -13,10 +13,6 @@ function NavBar() {
   const {mutateAsync: logOutUser} = useLogOutUser();
   const [error, setError] = useState("");
   const {data: userInfo} = useGetCurrentUserInfo()
-  
-  useEffect(()=> {
-    const info = userInfo?.data?.userInfo;  
-  }, [userInfo])
 
   async function handleLogOut () {
     setIsLoggedIn(0);
