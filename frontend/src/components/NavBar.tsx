@@ -1,14 +1,20 @@
 import { AppRegistration, Dashboard, Home, Login, Logout, Notes, Person} from "@mui/icons-material";
 import { Box, Button, CardMedia, Stack, Typography } from "@mui/material";
 import useBlog from "../store/Blog.store";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
 
 function NavBar() {
-  const {isLoggedIn} = useBlog();
+  const {isLoggedIn, setIsLoggedIn} = useBlog();
   const d = useLocation()
-  console.log(d);
+  const navigate = useNavigate()
+
+  function handleLogOut () {
+    setIsLoggedIn(0);
+    navigate("/", {replace: true})
+  }
+
   return <>
-    {!isLoggedIn ? (
+    {isLoggedIn ? (
       <Box
         component={"nav"}
         sx={{
@@ -58,7 +64,10 @@ function NavBar() {
             </Typography>
           </Button> 
 
-          <Button endIcon={<Logout/>} href="" variant="outlined" color="error" title="Log Out"
+          <Button endIcon={<Logout/>} variant="contained" 
+            color="error" 
+            title="Log Out"
+            onClick={handleLogOut}
             sx={{ px: 1, maxWidth: "fit-content" }}
           >
             <Typography display={{xs: "none", sm:"flex"}}>
@@ -100,7 +109,7 @@ function NavBar() {
             href="/"
             color="secondary"
             title="Go to home page"
-            variant="outlined"
+            variant={d.pathname === "/" ? "contained" : "outlined"}
           >
             <Home /> 
             <Typography display={{xs: "none", sm: "flex"}}>
@@ -110,9 +119,9 @@ function NavBar() {
 
           <Button
             href="/register"
-            variant="contained"
             title="Register New Account"
             sx={{ background: "linear-gradient(to right, #3B82F6, #8B5CF6)" }}
+            variant={d.pathname === "/register" ? "contained" : "outlined"}
           >
             <AppRegistration />
            <Typography display={{xs: "none", sm: "flex"}}> 
@@ -120,7 +129,8 @@ function NavBar() {
             </Typography>
           </Button>
 
-          <Button startIcon={<Login/>} href="/login" variant="outlined"
+          <Button startIcon={<Login/>} href="/login" 
+            variant={d.pathname === "/login" ? "contained" : "outlined"}
             sx={{ p: 2 }} title="Log In"
           >
             <Typography display={{xs: "none", sm: "flex"}}>
