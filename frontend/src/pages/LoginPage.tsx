@@ -10,7 +10,7 @@ function LoginPage() {
   const [identifier, setIdentifier] = useState("");
   const [enteredPassword, setPass] = useState("");
   const [error, setError] = useState("");
-  const { addToken } = useBlog();
+  const { addToken, setIsLoggedIn } = useBlog();
   const nav = useNavigate()
   const {mutateAsync: login} = useLogUserIn()
 
@@ -30,6 +30,7 @@ function LoginPage() {
       if(loggedIn){
         const userJWToken = loggedIn.token;
         addToken(userJWToken);
+        setIsLoggedIn();
         nav("/dashboard")
       }
     } catch (err) {

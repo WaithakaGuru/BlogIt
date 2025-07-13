@@ -2,11 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import axInstance from "../utils/AxInstance";
 import useBlog from "../store/Blog.store";
 
-const createBlog = async (postData: any) => {
+const createBlog = async () => {
   const { token } = useBlog();
-  const newBlog = useMutation({
+  return useMutation({
     mutationKey: ["CREATE_BLOG"],
-    mutationFn: async () => {
+    mutationFn: async (postData: any) => {
       axInstance.post("/blogs", {
         postData,
         headers: {
@@ -16,7 +16,6 @@ const createBlog = async (postData: any) => {
     },
     retry: 2,
   });
-  return newBlog;
 };
 
 export default createBlog;

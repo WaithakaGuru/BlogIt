@@ -4,9 +4,9 @@ import axInstance from "../utils/AxInstance";
 
 const deleteBlog = async (blogId: string) => {
   const { token } = useBlog();
-  const deletedBlog = useMutation({
+  return useMutation({
     mutationKey: ["DELETE_BLOG", blogId],
-    mutationFn: async () => {
+    mutationFn: async (blogId: string) => {
       await axInstance.patch(`/blogs/${blogId}`, {
         data: true,
         headers: {
@@ -15,6 +15,5 @@ const deleteBlog = async (blogId: string) => {
       });
     },
   });
-  return deletedBlog;
 };
 export default deleteBlog;
