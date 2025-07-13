@@ -12,20 +12,23 @@ type BlogItems = {
   name: string;
   token: string | null;
   isLoggedIn: boolean
-  setIsLoggedIn: () => void;
-  addToken: (value: string | null) => void;
+
+  /* status code usage - 1 -> loggedIn user; 0 -> user not logged in */
+  setIsLoggedIn: (code: number) => void;
+  addToken: (value: string) => void;
 };
 
 const blogitStore: StateCreator<BlogItems> = (set) => {
   return {
     name: "Waithaka",
-    token: "",
+    token: localStorage.getItem("token"),
     isLoggedIn: false,
     addToken(value) {
+      localStorage.setItem("token", value)
       set({ token: value });
     },
-    setIsLoggedIn(){
-      if(this.token !== null) {set({isLoggedIn: true})}
+    setIsLoggedIn(code){
+      code===1? set({isLoggedIn: true}) : set({isLoggedIn: false})
     }
   };
 };

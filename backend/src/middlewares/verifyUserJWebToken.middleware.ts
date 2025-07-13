@@ -7,7 +7,8 @@ configDotenv();
 export default function verifyUserWebToken(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction, 
+  withData? :boolean
 ) {
   const jwtKey = process.env.SECRET_KEY;
   const authHeader = req.headers.authorization;
@@ -20,7 +21,7 @@ export default function verifyUserWebToken(
   try {
     const decodedTokenData = jwt.verify(token, jwtKey!);
     res.locals.user = decodedTokenData;
-    res.json({ userInfo: decodedTokenData });
+    withData&& res.json({ userInfo: decodedTokenData });
     next();
   } catch (err: any) {
     console.log(err);

@@ -30,8 +30,8 @@ function LoginPage() {
       if(loggedIn){
         const userJWToken = loggedIn.token;
         addToken(userJWToken);
-        setIsLoggedIn();
-        nav("/dashboard")
+        setIsLoggedIn(1);
+        nav("/dashboard", {replace: true})
       }
     } catch (err) {
       if (isAxiosError(err)) {
