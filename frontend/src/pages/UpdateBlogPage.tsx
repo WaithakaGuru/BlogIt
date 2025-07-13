@@ -4,7 +4,7 @@ import BlogComponent from "../components/BlogContentInput";
 import { useReducer, useState } from "react";
 import { isAxiosError } from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetCurrentUserInfo, useGetUserSpecificBlog } from "../service/FetchAllBlogs";
+import { useGetUserSpecificBlog } from "../service/FetchAllBlogs";
 import Markdown from "react-markdown";
 import useUpdateBlog from "../service/UpdateBlog";
 

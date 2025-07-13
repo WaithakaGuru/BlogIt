@@ -8,6 +8,7 @@ import getUserSpecificBlogs from "./getUserSpecificBlog.controller.ts";
 import deleteSpecificBlog from "./deleteSpecificBlog.controller.ts";
 import deleteUserToken from "./deleteUserToken.controller.ts";
 import getCurrentUserDetails from "./getCurrentUserDetails.controller.ts";
+import updateBlog from "./updateBlog.controller.ts";
 
 export {
   getSpecificBlog,
@@ -20,4 +21,5 @@ export {
   deleteUserToken,
   getUserSpecificBlog,
   getCurrentUserDetails,
+  updateBlog
 };

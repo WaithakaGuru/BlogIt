@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import client from "../utils/PrismaUtils.ts";
 
 export default async function getUserSpecificBlogs(
-  req: Request,
+  _req: Request,
   res: Response,
 ) {
   const { id } = res.locals.user;
   try {
     const userBlogs = await client.posts.findMany({
-      where: { userId: id },
+      where: { AND: [{userId: id }, {isDeleted: false}]},
       orderBy: { lastUpdated: "desc" },
       include: {
         blogAuthor: { select: { id: true, email: true, userName: true } },

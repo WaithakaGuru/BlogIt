@@ -10,6 +10,7 @@ import {
   deleteSpecificBlog,
   deleteUserToken,
   getCurrentUserDetails,
+  updateBlog
 } from "../controllers/exports.controller.ts";
 import {
   authenticateEmail,
@@ -41,6 +42,7 @@ router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs);
 router.get("/user/blogs/:id", verifyUserWebToken, getUserSpecificBlog);
 router.get("/blogs/:id", verifyUserWebToken, getSpecificBlog);
 router.get("/blogs", verifyUserWebToken, getAllBlogs);
+router.patch("/blogs/:id", verifyUserWebToken, updateBlog);
 router.delete("/blogs/:blogId", deleteSpecificBlog);
 export default router;
 
