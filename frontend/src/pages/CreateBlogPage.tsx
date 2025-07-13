@@ -1,7 +1,11 @@
-import { Alert, Stack, Typography, Button, Paper, TextField} from "@mui/material";
+import { Alert, Stack, Typography, Button, Paper} from "@mui/material";
 import { EditNote } from "@mui/icons-material";
 import BlogComponent from "../components/BlogContentInput"; 
 import { useReducer, useState } from "react";
+import useCreateBlog from "../service/CreateBlog";
+import { isAxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
+import { useGetCurrentUserInfo } from "../service/FetchAllBlogs";
 
 type BlogActionType ={ 
   type: string,
@@ -38,18 +42,15 @@ const initialState = {
   featuredImageURL: ""
 }
 
-async function handleCreateNewBlog() {
-  try{
-
-  }catch(err){
-
-  }
-}
 
 function CreateBlogPage() {
   const [state, dispatch] = useReducer(createBlogReducer, initialState);
+  const {mutateAsync: createBlog} = useCreateBlog();
   const [error, setError] = useState();
+  const navigate = useNavigate();
+  const {data: userInfo} = useGetCurrentUserInfo();
 
+  
   function handleFeaturedImage(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch({type: "HANDLE_INPUT", payload: {inputField: "featuredImageURL", value: e.target.value}})
   }
@@ -61,6 +62,23 @@ function CreateBlogPage() {
   }
   function handleContent (e: React.ChangeEvent<HTMLInputElement>) {
     dispatch({type: "HANDLE_INPUT", payload: {inputField: "content", value: e.target.value}})
+  }
+  
+  async function handleCreateNewBlog() {
+    const userId = userInfo?.data.userInfo.id;   
+    try{
+      const newBlog = await createBlog({...state, userId});
+      console.log(newBlog);
+      if(newBlog) {
+        navigate("/")
+      }
+
+    }catch(err){
+      console.log(err);
+      if(isAxiosError(err)){
+        setError(err.response?.data.message);
+      }
+    }
   }
 
   return (
@@ -74,7 +92,7 @@ function CreateBlogPage() {
         bgcolor: "#f9f9f9",
         width: {xs: "100%", sm: "80%"},
         margin: "0 auto",
-        mt: 6,
+        mt: 4,
       }}
       >
         <Stack spacing={3}>

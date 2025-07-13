@@ -8,7 +8,7 @@ export default function verifyUserWebToken(
   req: Request,
   res: Response,
   next: NextFunction, 
-  withData? :boolean
+  withData :boolean = false
 ) {
   const jwtKey = process.env.SECRET_KEY;
   const authHeader = req.headers.authorization;

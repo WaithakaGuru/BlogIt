@@ -3,14 +3,14 @@ import { Response, Request } from "express";
 
 const createBlog = async (req: Request, res: Response) => {
   try {
-    const { title, synopsis, content, imageUrl, id } = req.body;
+    const { title, synopsis, content, featuredImageURL, userId } = req.body;
     const newClient = await client.posts.create({
       data: {
         title,
         synopsis,
         content,
-        featuredImageURL: imageUrl,
-        userId: id,
+        featuredImageURL,
+        userId,
       },
     });
     if (newClient) res.status(201).json(newClient);

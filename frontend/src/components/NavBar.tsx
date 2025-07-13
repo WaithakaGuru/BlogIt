@@ -13,7 +13,7 @@ function NavBar() {
   const {mutateAsync: logOutUser} = useLogOutUser();
   const [error, setError] = useState("");
   const {data: userInfo} = useGetCurrentUserInfo(isLoggedIn!)
-
+ 
   async function handleLogOut () {
     setIsLoggedIn(0);
     try{
@@ -87,7 +87,7 @@ function NavBar() {
             onClick={handleLogOut}
             sx={{ px: 1, maxWidth:{xs: "1rem", md:"5rem"} , ml: {xs: "-.8rem", md: "auto"}}}
           >
-            <Typography display={{xs: "none", sm:"flex"}} fontSize={".7rem"}>
+            <Typography display={{xs: "none", sm:"flex"}} fontSize={{sm:".6rem", md: ".7rem"}}>
               LogOut
             </Typography>
           </Button>
