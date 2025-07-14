@@ -5,7 +5,7 @@ const getUserInfo = async (_req: Request, res: Response) => {
   const { id } = res.locals.user;
   try {
     const userInfo = await client.user.findFirst({
-      where: { id },
+      where: { id }, select:{email:true}
     });
     if (userInfo) res.status(200).json(userInfo);
   } catch (err) {

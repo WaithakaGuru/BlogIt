@@ -8,7 +8,6 @@ export default function verifyUserWebToken(
   req: Request,
   res: Response,
   next: NextFunction,
-  withData: boolean = false,
 ) {
   const jwtKey = process.env.SECRET_KEY;
   const authHeader = req.headers.authorization;
@@ -21,8 +20,7 @@ export default function verifyUserWebToken(
   try {
     const decodedTokenData = jwt.verify(token, jwtKey!);
     res.locals.user = decodedTokenData;
-    withData && res.json({ userInfo: decodedTokenData });
-    !withData && next();
+    next();
   } catch (err: any) {
     console.log(err);
     if (err.name === "TokenExpiredError")

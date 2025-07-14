@@ -5,20 +5,20 @@ function TextInput({
   onChange,
   placeholder,
   label,
-  value,
   type,
   required = true,
+  value,
 }: TextFieldProps) {
   return (
     <TextField
       color="secondary"
-      value={value}
       label={label}
       placeholder={placeholder}
       type={type}
       required={required}
       variant={variant}
       onChange={onChange}
+      value={value}
       fullWidth
       sx={{
         input: {

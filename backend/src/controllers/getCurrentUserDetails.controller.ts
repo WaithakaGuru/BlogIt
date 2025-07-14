@@ -1,11 +1,11 @@
-import verifyUserWebToken from "../middlewares/verifyUserJWebToken.middleware.ts";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response} from "express";
 
 function getCurrentUserDetails(
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction,
 ) {
-  verifyUserWebToken(req, res, next, true);
+  const data = res.locals.user;
+  if(data) res.status(200).json(data);
+  else res.status(400).json({message: "Request Failed: Data not found!!"})
 }
 export default getCurrentUserDetails;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Stack,
   Typography,
@@ -14,7 +14,7 @@ import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import {
   useGetCurrentUserInfo,
-  useGetUserInfo,
+  useGetUserInfo
 } from "../service/FetchAllBlogs";
 import { useUpdateUserInfo, useUpdatePassword } from "../service/PatchRequests";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
@@ -22,16 +22,25 @@ import checkPasswordStrength from "../utils/checkPasswordStrength";
 type initialState = string | null;
 
 function ProfileUpdatePage() {
-  const { data: currentUser } = useGetCurrentUserInfo();
-  const { data: user } = useGetUserInfo(currentUser?.data.id);
-  const userInfo = user?.data;
-
+  const { data: user } = useGetCurrentUserInfo();
+  const { data: email } = useGetUserInfo(user?.data.id);
+  console.log(email?.data.email);
   const [formState, setFormState] = useState({
-    firstName: userInfo?.firstName || "",
-    lastName: userInfo?.lastName || "",
-    userName: userInfo?.userName || "",
-    email: userInfo?.email || "",
+     firstName: user?.data.firstName,
+        lastName: user?.data.lastName,
+        userName: user?.data.userName,
+        email: email?.data.email,
   });
+
+  useEffect(()=>{
+      setFormState({
+        firstName: user?.data.firstName,
+        lastName: user?.data.lastName,
+        userName: user?.data.userName,
+        email: email?.data.email,
+      })
+  }, [user])
+
 
   const [passwordState, setPasswordState] = useState({
     currentPassword: "",
@@ -101,19 +110,20 @@ function ProfileUpdatePage() {
         borderRadius={2}
         boxShadow={2}
       >
-        <Typography
-          variant="h4"
-          gutterBottom
-          maxWidth={{ xs: "100%", md: "50%" }}
-          fontWeight={600}
-          lineHeight={1.4}
-          color="#fff"
-        >
-          BlogIt User Profile: Your Interface to update your profile details
+        <Stack maxWidth={{ xs: "100%", md: "50%" }}>
+          <Typography
+            variant="h4"
+            gutterBottom
+            fontWeight={600}
+            lineHeight={1.4}
+            color="#fff"
+          >
+            BlogIt User Profile: Your Interface to update your profile details
+          </Typography>
           <Typography variant="h6" color="textSecondary">
             Design how you want to be addressed
           </Typography>
-        </Typography>
+        </Stack>
 
         <Stack
           direction="column"
@@ -121,7 +131,7 @@ function ProfileUpdatePage() {
           sx={{
             borderLeft: { xs: "none", md: "2px solid #ccc" },
             pl: { xs: 0, md: 3 },
-            width: { xs: "100%", md: "50%" },
+            width: { xs: "100%", md: "60%" },
           }}
           color="#fff"
         >
@@ -142,8 +152,8 @@ function ProfileUpdatePage() {
                 fontWeight: 600,
               }}
             >
-              {userInfo?.firstName[0]}
-              {userInfo?.lastName[0]}
+              {user?.data.firstName[0]}
+              {user?.data.lastName[0]}
             </Avatar>
 
             <Typography
@@ -169,13 +179,13 @@ function ProfileUpdatePage() {
           </Box>
 
           <Typography variant="body1">
-            <strong>Username:</strong> {userInfo?.userName}
+            <strong>Username:</strong> {user?.data.userName}
           </Typography>
           <Typography variant="body1">
-            <strong>First Name:</strong> {userInfo?.firstName}
+            <strong>First Name:</strong> {user?.data.firstName}
           </Typography>
           <Typography variant="body1">
-            <strong>Last Name:</strong> {userInfo?.lastName}
+            <strong>Last Name:</strong> {user?.data.lastName}
           </Typography>
         </Stack>
       </Stack>

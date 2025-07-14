@@ -87,7 +87,7 @@ function NavBar() {
             my={"auto"}
             align="center"
           >
-            Hello {userInfo?.data.userInfo.firstName}
+            Hello {userInfo?.data.firstName}
           </Typography>
 
           <Stack direction={"row"} gap={2} p={2}>
