@@ -1,18 +1,25 @@
 import { NextFunction, Request, Response } from "express";
 import client from "../utils/PrismaUtils.ts";
 
-export default async function verifyNameEmail(req: Request, res: Response, next: NextFunction) {
+export default async function verifyNameEmail(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
-    const {id} = res.locals.user;
+    const { id } = res.locals.user;
     const { userName, email } = req.body;
     const validIdentifier = await client.user.findFirst({
       where: {
         OR: [{ userName }, { email }],
-        NOT: {id}
+        NOT: { id },
       },
     });
     if (validIdentifier) {
-        return res.status(400).json({ message: "Email and Username Must be unique" });}
+      return res
+        .status(400)
+        .json({ message: "Email and Username Must be unique" });
+    }
     next();
   } catch (err) {
     console.log(err);

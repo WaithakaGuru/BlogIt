@@ -8,7 +8,7 @@ export default async function getUserSpecificBlogs(
   const { id } = res.locals.user;
   try {
     const userBlogs = await client.posts.findMany({
-      where: { AND: [{userId: id }, {isDeleted: false}]},
+      where: { AND: [{ userId: id }, { isDeleted: false }] },
       orderBy: { lastUpdated: "desc" },
       include: {
         blogAuthor: { select: { id: true, email: true, userName: true } },

@@ -32,7 +32,13 @@ function BlogComponent({
           Blog {name} Preview
         </Typography>
 
-        <Box component={"div"} p={2} border={1} borderColor="grey.300" borderRadius={2}>
+        <Box
+          component={"div"}
+          p={2}
+          border={1}
+          borderColor="grey.300"
+          borderRadius={2}
+        >
           <Markdown>{value}</Markdown>
         </Box>
       </Box>

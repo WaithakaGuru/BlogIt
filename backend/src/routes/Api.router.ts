@@ -12,7 +12,7 @@ import {
   getCurrentUserDetails,
   updateBlog,
   updateUserInfo,
-  updatePassword
+  updatePassword,
 } from "../controllers/exports.controller.ts";
 import {
   authenticateEmail,
@@ -21,7 +21,7 @@ import {
   verifyUserWebToken,
   createUserJWebToken,
   verifyPassword,
-  getUserPassword
+  getUserPassword,
 } from "../middlewares/exports.middleware.ts";
 import verifyNameEmail from "../middlewares/verifyNameEmail.middleware.ts";
 const router = Router();
@@ -33,12 +33,6 @@ router.post(
   createUser,
 );
 router.post("/auth/login", verifyLoginPassword, createUserJWebToken);
-router.post(
-  "/auth/register",
-  authenticateUsername,
-  authenticateEmail,
-  createUser,
-);
 router.post("/blogs", verifyUserWebToken, createBlog);
 router.post("/auth/logout", verifyUserWebToken, deleteUserToken);
 router.get("/users/:id", verifyUserWebToken, getUserInfo);
@@ -49,32 +43,12 @@ router.get("/blogs/:id", verifyUserWebToken, getSpecificBlog);
 router.get("/blogs", verifyUserWebToken, getAllBlogs);
 router.patch("/blogs/:id", verifyUserWebToken, updateBlog);
 router.patch("/users", verifyUserWebToken, verifyNameEmail, updateUserInfo);
-router.patch("/users/password", verifyUserWebToken, getUserPassword, verifyPassword, updatePassword);
-router.delete("/blogs/:id",verifyUserWebToken, deleteSpecificBlog);
+router.patch(
+  "/users/password",
+  verifyUserWebToken,
+  getUserPassword,
+  verifyPassword,
+  updatePassword,
+);
+router.delete("/blogs/:id", verifyUserWebToken, deleteSpecificBlog);
 export default router;
-
-/* Remaining tasks */
-/**
-//  * POST /api/auth/register: register a user
-
-// POST /api/auth/login: login a user
-
-//POST /api/auth/logout: logout a user
-
-// GET /api/blogs: get all blogs
-
-// POST /api/blogs: create a blog.
-
-// GET /api/blogs/:blogId: get a specific blog.
-
-// DELETE /api/blogs/:blogId: delete a blog
-
-// GET /api/user/blogs: get all blogs belonging to a specific user.
-
-// PATCH /api/blogs/:blogId: update a blog.
-
-PATCH /api/user: update user's primary information.
-
-PATCH /api/user/password: update user's password.
-
- */

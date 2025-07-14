@@ -1,25 +1,37 @@
 import { useState } from "react";
-import { Stack, Typography, Paper, Button, Alert, IconButton, Avatar, Box } from "@mui/material";
+import {
+  Stack,
+  Typography,
+  Paper,
+  Button,
+  Alert,
+  IconButton,
+  Avatar,
+  Box,
+} from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
-import { useGetCurrentUserInfo, useGetUserInfo } from "../service/FetchAllBlogs";
-import { useUpdateUserInfo, useUpdatePassword} from "../service/PatchRequests";
+import {
+  useGetCurrentUserInfo,
+  useGetUserInfo,
+} from "../service/FetchAllBlogs";
+import { useUpdateUserInfo, useUpdatePassword } from "../service/PatchRequests";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
 
 type initialState = string | null;
 
 function ProfileUpdatePage() {
-  const {data: currentUser} = useGetCurrentUserInfo();
-  const {data: user} = useGetUserInfo(currentUser?.data.id);
-  const userInfo = user?.data;   
+  const { data: currentUser } = useGetCurrentUserInfo();
+  const { data: user } = useGetUserInfo(currentUser?.data.id);
+  const userInfo = user?.data;
 
   const [formState, setFormState] = useState({
-    firstName: userInfo?.firstName ||  "",
+    firstName: userInfo?.firstName || "",
     lastName: userInfo?.lastName || "",
     userName: userInfo?.userName || "",
-    email: userInfo?.email || "",}
-  );
+    email: userInfo?.email || "",
+  });
 
   const [passwordState, setPasswordState] = useState({
     currentPassword: "",
@@ -60,14 +72,13 @@ function ProfileUpdatePage() {
         setError("Both current and new password are required.");
         return;
       }
-      if(checkPasswordStrength(passwordState.newPassword)){
+      if (checkPasswordStrength(passwordState.newPassword)) {
         await updatePassword(passwordState);
         setSuccess("Password updated successfully.");
         setError(errorSuccessFirstState);
         setPasswordState({ currentPassword: "", newPassword: "" });
-      }
-      else{
-        setError("Choose a stronger password!!")
+      } else {
+        setError("Choose a stronger password!!");
       }
     } catch (err: any) {
       setError(err?.response?.data?.message || "Failed to update password.");
@@ -86,7 +97,7 @@ function ProfileUpdatePage() {
         alignItems="center"
         mx={"auto"}
         gap={4}
-        width={{xs: "100%", sm: "90%", md: "80%"}}
+        width={{ xs: "100%", sm: "90%", md: "80%" }}
         borderRadius={2}
         boxShadow={2}
       >
@@ -99,7 +110,7 @@ function ProfileUpdatePage() {
           color="#fff"
         >
           BlogIt User Profile: Your Interface to update your profile details
-          <Typography variant="h6" color="textSecondary" >
+          <Typography variant="h6" color="textSecondary">
             Design how you want to be addressed
           </Typography>
         </Typography>
@@ -168,71 +179,102 @@ function ProfileUpdatePage() {
           </Typography>
         </Stack>
       </Stack>
-      <Typography variant="h4" fontWeight="bold" color="secondary" align="center">
+      <Typography
+        variant="h4"
+        fontWeight="bold"
+        color="secondary"
+        align="center"
+      >
         Profile Settings
       </Typography>
-    <Stack spacing={4} maxWidth={{xs: "100%", sm: "95%", md:"75%"}} mx="auto" p={3} direction={{xs: "column", md: "row"}}>
-
-      <Paper elevation={3} sx={{ p: 3, borderRadius: 2, borderRight:"1px solid", width: {xs: "95%", md: "50%"}}}>
-        <Typography variant="h6" mb={2}>
-          Update Personal Information
-        </Typography>
-        <form  onSubmit={handleProfileSubmit}>
-          <Stack spacing={2}>
-            <TextInput
-              label="First Name"
-              value={formState.firstName}
-              onChange={(e) => handleInputChange("firstName", e.target.value)}
-            />
-            <TextInput
-              label="Last Name"
-              value={formState.lastName}
-              onChange={(e) => handleInputChange("lastName", e.target.value)}
-            />
-            <TextInput
-              label="Username"
-              value={formState.userName}
-              onChange={(e) => handleInputChange("userName", e.target.value)}
-            />
-            <TextInput
-              label="Email"
-              value={formState.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              type="email"
-            />
-            <Button variant="contained" color="secondary" type="submit">
-              Update Profile
-            </Button>
-          </Stack>
-        </form>
-      </Paper>
-      <Paper elevation={3} sx={{ p: 3, borderRadius: 2, width: {xs: "95%", md: "48%"}, borderLeft: 1, ml: 2}}>
-        <Typography variant="h6" mb={2}>
-          Change Password
-        </Typography>
-        {error && <Alert severity="error">{error}</Alert>}
-        {success && <Alert severity="success">{success}</Alert>}
-        <form onSubmit={handlePasswordSubmit}>
-          <Stack spacing={2}>
-            <PasswordInput
-             required
-              label="Current Password"
-              value={passwordState.currentPassword}
-              onChange={(e) => handlePasswordChange("currentPassword", e.target.value)}
-            />
-            <PasswordInput
-             required
-              label="New Password"
-              value={passwordState.newPassword}
-              onChange={(e) => handlePasswordChange("newPassword", e.target.value)}
-            />
-            <Button variant="contained" color="secondary" type="submit">
-              Update Password
-            </Button>
-          </Stack>
-        </form>
-      </Paper>
-    </Stack>
+      <Stack
+        spacing={4}
+        maxWidth={{ xs: "100%", sm: "95%", md: "75%" }}
+        mx="auto"
+        p={3}
+        direction={{ xs: "column", md: "row" }}
+      >
+        <Paper
+          elevation={3}
+          sx={{
+            p: 3,
+            borderRadius: 2,
+            borderRight: "1px solid",
+            width: { xs: "95%", md: "50%" },
+          }}
+        >
+          <Typography variant="h6" mb={2}>
+            Update Personal Information
+          </Typography>
+          <form onSubmit={handleProfileSubmit}>
+            <Stack spacing={2}>
+              <TextInput
+                label="First Name"
+                value={formState.firstName}
+                onChange={(e) => handleInputChange("firstName", e.target.value)}
+              />
+              <TextInput
+                label="Last Name"
+                value={formState.lastName}
+                onChange={(e) => handleInputChange("lastName", e.target.value)}
+              />
+              <TextInput
+                label="Username"
+                value={formState.userName}
+                onChange={(e) => handleInputChange("userName", e.target.value)}
+              />
+              <TextInput
+                label="Email"
+                value={formState.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+                type="email"
+              />
+              <Button variant="contained" color="secondary" type="submit">
+                Update Profile
+              </Button>
+            </Stack>
+          </form>
+        </Paper>
+        <Paper
+          elevation={3}
+          sx={{
+            p: 3,
+            borderRadius: 2,
+            width: { xs: "95%", md: "48%" },
+            borderLeft: 1,
+            ml: 2,
+          }}
+        >
+          <Typography variant="h6" mb={2}>
+            Change Password
+          </Typography>
+          {error && <Alert severity="error">{error}</Alert>}
+          {success && <Alert severity="success">{success}</Alert>}
+          <form onSubmit={handlePasswordSubmit}>
+            <Stack spacing={2}>
+              <PasswordInput
+                required
+                label="Current Password"
+                value={passwordState.currentPassword}
+                onChange={(e) =>
+                  handlePasswordChange("currentPassword", e.target.value)
+                }
+              />
+              <PasswordInput
+                required
+                label="New Password"
+                value={passwordState.newPassword}
+                onChange={(e) =>
+                  handlePasswordChange("newPassword", e.target.value)
+                }
+              />
+              <Button variant="contained" color="secondary" type="submit">
+                Update Password
+              </Button>
+            </Stack>
+          </form>
+        </Paper>
+      </Stack>
     </>
   );
 }

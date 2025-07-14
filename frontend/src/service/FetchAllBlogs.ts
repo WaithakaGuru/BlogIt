@@ -81,19 +81,19 @@ const useGetCurrentUserInfo = (isLoggedIn: boolean = false) => {
   });
 };
 
-const useGetUserInfo = (id: String) =>  {
-  const {token} = useBlog();
+const useGetUserInfo = (id: String) => {
+  const { token } = useBlog();
   return useQuery({
     queryKey: ["GET_USER_INFO", id],
     queryFn: async () => {
       const userInfo = await axInstance.get(`users/${id}`, {
-        headers: {Authorization: `Bearer ${token}`},
-      })
+        headers: { Authorization: `Bearer ${token}` },
+      });
       return userInfo;
     },
-    retry :1,
-  })
-}
+    retry: 1,
+  });
+};
 
 export {
   useGetAllBlogs,
@@ -101,5 +101,5 @@ export {
   useGetUserSpecificBlog,
   useGetUserBlogs,
   useGetCurrentUserInfo,
-  useGetUserInfo
+  useGetUserInfo,
 };

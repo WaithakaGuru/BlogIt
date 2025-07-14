@@ -23,7 +23,7 @@ export {
   deleteUserToken,
   getUserSpecificBlog,
   getCurrentUserDetails,
-  updateBlog, 
+  updateBlog,
   updateUserInfo,
-  updatePassword
+  updatePassword,
 };

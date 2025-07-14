@@ -34,7 +34,7 @@ function NavBar() {
     try {
       const logOut = await logOutUser();
       addToken(logOut.data.token);
-      localStorage.setItem("token", "")
+      localStorage.setItem("token", "");
     } catch (err) {
       if (isAxiosError(err)) {
         setError(err.response?.data.message || "Unknown error");

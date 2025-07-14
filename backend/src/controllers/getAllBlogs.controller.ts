@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 export default async function getAllBlogs(_req: Request, res: Response) {
   try {
     const allBlogs = await client.posts.findMany({
-      where: {isDeleted: false},
+      where: { isDeleted: false },
       include: {
         blogAuthor: {
           select: {

@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import RegisterNewAccountPage from "./pages/RegisterNewAccountPage";
 import CreateBlogPage from "./pages/CreateBlogPage";
-import UpdateBlogPage from "./pages/UpdateBlogPage"
+import UpdateBlogPage from "./pages/UpdateBlogPage";
 import DashboardPage from "./pages/DashboardPage";
 import AllUserBlogsPage from "./pages/AllUserBlogsPage";
 import ProfileUpdatePage from "./pages/ProfileUpdatePage";

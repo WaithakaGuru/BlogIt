@@ -6,7 +6,7 @@ export default async function getSpecificBlog(req: Request, res: Response) {
     const id = req.params.id;
     const blog = await client.posts.findFirst({
       where: { AND: [{ id }, { isDeleted: false }] },
-      include: {blogAuthor: {select: {userName: true, email: true}}}
+      include: { blogAuthor: { select: { userName: true, email: true } } },
     });
     if (blog) res.status(200).json(blog);
     else res.status(404).json("Blog not found!!");

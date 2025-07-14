@@ -75,7 +75,7 @@ function AllUserBlogsPage() {
         {data?.map((blog: any) => (
           <Card
             sx={{
-              maxWidth: {xs: "25rem", md: "23rem"},
+              maxWidth: { xs: "25rem", md: "23rem" },
               height: "24.5rem",
               position: "relative",
               minWidth: { xs: "100%", sm: "20rem", md: "22rem" },
@@ -83,9 +83,21 @@ function AllUserBlogsPage() {
             }}
             key={blog.id}
           >
-            <Button endIcon={<EditNote/>} color="secondary" size="large" href={`/dashboard/blogs/create/${blog.id}`} title="Edit this Blog"
-             sx={{textTransform: "none", position: "absolute", right: 0, bottom: "45%"}} variant="contained">
-             Edit
+            <Button
+              endIcon={<EditNote />}
+              color="secondary"
+              size="large"
+              href={`/dashboard/blogs/create/${blog.id}`}
+              title="Edit this Blog"
+              sx={{
+                textTransform: "none",
+                position: "absolute",
+                right: 0,
+                bottom: "45%",
+              }}
+              variant="contained"
+            >
+              Edit
             </Button>
             <CardMedia
               component={"img"}

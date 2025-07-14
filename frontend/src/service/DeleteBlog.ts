@@ -7,13 +7,11 @@ const useDeleteBlog = (blogId: string) => {
   return useMutation({
     mutationKey: ["DELETE_BLOG", blogId],
     mutationFn: async () => {
-      const deletedBlog = await axInstance.delete(`/blogs/${blogId}`,
-        {        
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
+      const deletedBlog = await axInstance.delete(`/blogs/${blogId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
       return deletedBlog;
     },
   });

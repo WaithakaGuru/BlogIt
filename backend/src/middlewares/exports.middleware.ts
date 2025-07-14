@@ -13,5 +13,5 @@ export {
   verifyUserWebToken,
   createUserJWebToken,
   verifyPassword,
-  getUserPassword
+  getUserPassword,
 };
