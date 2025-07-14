@@ -24,7 +24,6 @@ type initialState = string | null;
 function ProfileUpdatePage() {
   const { data: user } = useGetCurrentUserInfo();
   const { data: email } = useGetUserInfo(user?.data.id);
-  console.log(email?.data.email);
   const [formState, setFormState] = useState({
     firstName: user?.data.firstName,
     lastName: user?.data.lastName,
@@ -96,98 +95,114 @@ function ProfileUpdatePage() {
 
   return (
     <>
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        my={4}
-        bgcolor="#8653fcff"
-        p={4}
-        justifyContent="space-between"
-        alignItems="center"
-        mx={"auto"}
-        gap={4}
-        width={{ xs: "100%", sm: "90%", md: "80%" }}
-        borderRadius={2}
-        boxShadow={2}
+      <Paper
+        elevation={4}
+        sx={{
+          p: 5,
+          borderRadius: 4,
+          background: "linear-gradient(135deg, #e7edf6ff, #c3cfe2)",
+          width: { xs: "100%", sm: "90%" },
+          minHeight: "24rem",
+          margin: "0 auto",
+          mt: 6,
+          boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+        }}
       >
-        <Stack maxWidth={{ xs: "100%", md: "50%" }}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            fontWeight={600}
-            lineHeight={1.4}
-            color="#fff"
-          >
-            BlogIt User Profile: Your Interface to update your profile details
-          </Typography>
-          <Typography variant="h6" color="textSecondary">
-            Design how you want to be addressed
-          </Typography>
-        </Stack>
-
         <Stack
-          direction="column"
-          spacing={2}
-          sx={{
-            borderLeft: { xs: "none", md: "2px solid #ccc" },
-            pl: { xs: 0, md: 3 },
-            width: { xs: "100%", md: "60%" },
-          }}
-          color="#fff"
+          direction={{ xs: "column", md: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={4}
+          flexWrap="wrap"
         >
-          <Box
-            component="section"
-            display="flex"
-            alignItems="center"
-            gap={2}
-            mb={2}
-          >
-            <Avatar
-              sx={{
-                bgcolor: "darkslateblue",
-                width: 80,
-                height: 80,
-                fontSize: "2rem",
-                fontFamily: "cursive",
-                fontWeight: 600,
-              }}
-            >
-              {user?.data.firstName[0]}
-              {user?.data.lastName[0]}
-            </Avatar>
-
+          <Stack maxWidth={{ xs: "100%", md: "50%" }}>
             <Typography
               variant="h4"
-              sx={{ textDecoration: "underline", fontWeight: 500 }}
+              gutterBottom
+              fontWeight={700}
+              color="secondary"
+              sx={{ textShadow: "0 1px 1px rgba(0,0,0,0.1)" }}
             >
-              Profile Info
+              BlogIt User Profile
             </Typography>
-            <IconButton title="Edit Profile" href="/dashboard/profile">
-              <Edit
-                sx={{
-                  position: "relative",
-                  right: 0,
-                  cursor: "pointer",
-                  color: " #fff",
-                  bgcolor: "darkslateblue",
-                  borderRadius: "50%",
-                  height: "3rem",
-                  width: "3rem",
-                }}
-              />
-            </IconButton>
-          </Box>
+            <Typography variant="h6" color="text.secondary">
+              Your interface to update your profile details.
+            </Typography>
+            <Typography variant="body2" color="text.secondary" mt={1}>
+              Design how you want to be addressed.
+            </Typography>
+          </Stack>
 
-          <Typography variant="body1">
-            <strong>Username:</strong> {user?.data.userName}
-          </Typography>
-          <Typography variant="body1">
-            <strong>First Name:</strong> {user?.data.firstName}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Last Name:</strong> {user?.data.lastName}
-          </Typography>
+          <Stack
+            direction="column"
+            spacing={2}
+            sx={{
+              borderLeft: { xs: "none", md: "2px dashed #bbb" },
+              pl: { xs: 0, md: 3 },
+              width: { xs: "100%", md: "50%" },
+              bgcolor: "rgba(255,255,255,0.5)",
+              p: 3,
+              borderRadius: 3,
+            }}
+          >
+            <Box display="flex" alignItems="center" gap={2} mb={2}>
+              <Avatar
+                sx={{
+                  bgcolor: "darkslateblue",
+                  width: 80,
+                  height: 80,
+                  fontSize: "2rem",
+                  fontFamily: "cursive",
+                  fontWeight: 600,
+                  color: "#fff",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                }}
+              >
+                {user?.data.firstName[0]}
+                {user?.data.lastName[0]}
+              </Avatar>
+
+              <Typography
+                variant="h5"
+                fontWeight="bold"
+                color="primary"
+                sx={{ textDecoration: "underline wavy" }}
+              >
+                Profile Info
+              </Typography>
+
+              <IconButton title="Edit Profile" href="/dashboard/profile">
+                <Edit
+                  sx={{
+                    color: "#fff",
+                    backgroundColor: "#8B5CF6",
+                    borderRadius: "50%",
+                    width: "2.5rem",
+                    height: "2.5rem",
+                    p: 1,
+                    boxShadow: "0 3px 6px rgba(0,0,0,0.15)",
+                    transition: "transform 0.2s ease",
+                    "&:hover": {
+                      transform: "scale(1.1)",
+                    },
+                  }}
+                />
+              </IconButton>
+            </Box>
+
+            <Typography variant="body1">
+              <strong>Username:</strong> {user?.data.userName}
+            </Typography>
+            <Typography variant="body1">
+              <strong>First Name:</strong> {user?.data.firstName}
+            </Typography>
+            <Typography variant="body1">
+              <strong>Last Name:</strong> {user?.data.lastName}
+            </Typography>
+          </Stack>
         </Stack>
-      </Stack>
+      </Paper>
+
       <Typography
         variant="h4"
         fontWeight="bold"

@@ -1,10 +1,11 @@
-import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Stack, Typography, Paper } from "@mui/material";
 import {
   useGetAllBlogs,
   useGetCurrentUserInfo,
 } from "../service/FetchAllBlogs";
 import BlogSummary from "../components/BlogSummary";
 import { Edit } from "@mui/icons-material";
+import NoBlogsCard from "../components/NoBlogCard";
 
 function DashboardPage() {
   const { data } = useGetAllBlogs();
@@ -12,94 +13,110 @@ function DashboardPage() {
 
   return (
     <Box bgcolor={"#f9f9f9"} px={"1rem"}>
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        my={4}
-        bgcolor="#8653fcff"
-        p={4}
-        justifyContent="space-between"
-        alignItems="center"
-        gap={4}
-        width="100%"
-        borderRadius={2}
-        boxShadow={2}
-        height={"20rem"}
+      <Paper
+        elevation={4}
+        sx={{
+          p: 5,
+          borderRadius: 4,
+          background: "linear-gradient(135deg, #7b2ff7 0%, #f107a3 100%)", // Vibrant gradient
+          width: { xs: "100%", sm: "90%" },
+          minHeight: "20rem",
+          margin: "0 auto",
+          mt: 4,
+          boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+          color: "#fff",
+        }}
       >
-        <Typography
-          variant="h4"
-          gutterBottom
-          maxWidth={{ xs: "100%", md: "50%" }}
-          fontWeight={600}
-          lineHeight={1.4}
-          color="#fff"
-        >
-          BlogIt Dashboard: Your Workspace to Air Out Stories in Writing
-        </Typography>
-
         <Stack
-          direction="column"
-          spacing={2}
-          sx={{
-            borderLeft: { xs: "none", md: "2px solid #ccc" },
-            pl: { xs: 0, md: 3 },
-            width: { xs: "100%", md: "50%" },
-          }}
-          color="#fff"
+          direction={{ xs: "column", md: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={4}
+          // flexWrap="wrap"
         >
-          <Box
-            component="section"
-            display="flex"
-            alignItems="center"
-            gap={2}
-            mb={2}
+          <Typography
+            variant="h4"
+            fontWeight={700}
+            lineHeight={1.4}
+            sx={{
+              maxWidth: { xs: "100%", md: "50%" },
+              textShadow: "0 1px 2px rgba(0,0,0,0.3)",
+            }}
           >
-            <Avatar
-              sx={{
-                bgcolor: "darkslateblue",
-                width: 80,
-                height: 80,
-                fontSize: "2rem",
-                fontFamily: "cursive",
-                fontWeight: 600,
-              }}
-            >
-              {userInfo?.data.userInfo.firstName[0]}
-              {userInfo?.data.userInfo.lastName[0]}
-            </Avatar>
-
-            <Typography
-              variant="h4"
-              sx={{ textDecoration: "underline", fontWeight: 500 }}
-            >
-              Profile Info
-            </Typography>
-            <IconButton title="Edit Profile" href="/dashboard/profile">
-              <Edit
+            BlogIt Dashboard: Your Workspace to Air Out Stories in Writing
+          </Typography>
+         
+          <Stack
+            direction="column"
+            spacing={2}
+            sx={{
+              borderLeft: { xs: "none", md: "2px dashed rgba(255,255,255,0.5)" },
+              pl: { xs: 0, md: 3 },
+              width: { xs: "100%", md: "50%" },
+              bgcolor: "rgba(255,255,255,0.1)",
+              borderRadius: 3,
+              p: 2,
+            }}
+          >
+            <Box display="flex" alignItems="center" gap={2} mb={2} p={2}>
+              <Avatar
                 sx={{
-                  position: "relative",
-                  right: 0,
-                  cursor: "pointer",
-                  color: " #fff",
-                  bgcolor: "darkslateblue",
-                  borderRadius: "50%",
-                  height: "3rem",
-                  width: "3rem",
+                  bgcolor: "#4B0082",
+                  width: 80,
+                  height: 80,
+                  fontSize: "2rem",
+                  fontFamily: "cursive",
+                  fontWeight: 600,
+                  color: "#fff",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
                 }}
-              />
-            </IconButton>
-          </Box>
+              >
+                {userInfo?.data.firstName[0]}
+                {userInfo?.data.lastName[0]}
+              </Avatar>
 
-          <Typography variant="body1">
-            <strong>Username:</strong> {userInfo?.data.userInfo.userName}
-          </Typography>
-          <Typography variant="body1">
-            <strong>First Name:</strong> {userInfo?.data.userInfo.firstName}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Last Name:</strong> {userInfo?.data.userInfo.lastName}
-          </Typography>
+              <Typography
+                variant="h5"
+                sx={{
+                  textDecoration: "underline double",
+                  fontWeight: 600,
+                  color: "#fff",
+                }}
+              >
+                Profile Info
+              </Typography>
+
+              <IconButton title="Edit Profile" href="/dashboard/profile">
+                <Edit
+                  sx={{
+                    color: "#fff",
+                    bgcolor: "#4B0082",
+                    borderRadius: "50%",
+                    height: "2.5rem",
+                    width: "2.5rem",
+                    p: 1,
+                    boxShadow: "0 3px 6px rgba(0,0,0,0.2)",
+                    transition: "transform 0.2s ease",
+                    "&:hover": {
+                      transform: "scale(1.1)",
+                    },
+                  }}
+                />
+              </IconButton>
+            </Box>
+
+            <Typography variant="body1" pl={1}>
+              <strong>Username:</strong> {userInfo?.data.userName}
+            </Typography>
+            <Typography variant="body1" pl={1}>
+              <strong>First Name:</strong> {userInfo?.data.firstName}
+            </Typography>
+            <Typography variant="body1" pl={1}>
+              <strong>Last Name:</strong> {userInfo?.data.lastName}
+            </Typography>
+          </Stack>
         </Stack>
-      </Stack>
+      </Paper>
 
       <Typography
         variant="h3"
@@ -122,6 +139,9 @@ function DashboardPage() {
       >
         {data?.map((blog: any) => <BlogSummary key={blog.id} {...blog} />)}
       </Stack>
+      {!data?.data && (
+        <NoBlogsCard/>
+      )}
     </Box>
   );
 }

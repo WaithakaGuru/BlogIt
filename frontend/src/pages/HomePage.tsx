@@ -103,7 +103,7 @@ function HomePage() {
             objectFit: { md: "contain", sm: "cover" },
             objectPosition: "center",
             background:
-              "linear-gradient(to right,rgb(46, 47, 48), color-mix(in srgb, #8B5CF6 80%, #3B82F6 20%))",
+              "linear-gradient(135deg, #420e95ff 0%, #f107a3 100%)",
           }}
         />
       </Stack>

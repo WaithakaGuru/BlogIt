@@ -7,7 +7,7 @@ function TextInput({
   label,
   type,
   required = true,
-  value,
+  value = "",
 }: TextFieldProps) {
   return (
     <TextField

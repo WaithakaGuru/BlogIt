@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetUserBlogs } from "../service/FetchAllBlogs";
+import NoBlogsCard from "../components/NoBlogCard";
 
 function AllUserBlogsPage() {
   const { data: allUserBlogs } = useGetUserBlogs();
@@ -24,7 +25,7 @@ function AllUserBlogsPage() {
         sx={{
           p: 5,
           borderRadius: 4,
-          background: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
+          background: "linear-gradient(135deg, #e7edf6ff, #c3cfe2)",
           width: { xs: "100%", sm: "90%" },
           minHeight: "24rem",
           margin: "0 auto",
@@ -103,7 +104,7 @@ function AllUserBlogsPage() {
         </Stack>
       </Paper>
 
-      <Stack
+      {data?.data ? <Stack
         p={3}
         bgcolor={"#f5f5f5ff"}
         my={6}
@@ -230,7 +231,7 @@ function AllUserBlogsPage() {
             </Box>
           </Card>
         ))}
-      </Stack>
+      </Stack>: <NoBlogsCard/>})
     </>
   );
 }
