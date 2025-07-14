@@ -8,7 +8,7 @@ import {
   Avatar,
   CardMedia,
   Divider,
-  Box
+  Box,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetUserBlogs } from "../service/FetchAllBlogs";
@@ -77,7 +77,9 @@ function AllUserBlogsPage() {
           </Stack>
 
           <Typography variant="body1" color="text.secondary">
-            Ready to share your ideas? Use the button above to create a new blog post. Craft your message, style your content, and inspire others with your insights.
+            Ready to share your ideas? Use the button above to create a new blog
+            post. Craft your message, style your content, and inspire others
+            with your insights.
           </Typography>
 
           <Paper
@@ -94,7 +96,8 @@ function AllUserBlogsPage() {
               Need Inspiration?
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Browse trending topics, read community blogs, or revisit your past posts to spark new ideas.
+              Browse trending topics, read community blogs, or revisit your past
+              posts to spark new ideas.
             </Typography>
           </Paper>
         </Stack>
@@ -109,7 +112,7 @@ function AllUserBlogsPage() {
         gap={2}
         justifyContent={"center"}
         alignItems={"center"}
-        width= "98%"
+        width="98%"
         mx={"auto"}
       >
         {data?.map((blog: any) => (
@@ -120,9 +123,8 @@ function AllUserBlogsPage() {
               position: "relative",
               minWidth: { xs: "100%", sm: "20rem", md: "22rem" },
               m: ".2rem",
-              bgcolor:"rgba(255,255,255,0.1)"
+              bgcolor: "rgba(255,255,255,0.1)",
             }}
-            
             key={blog.id}
           >
             <Button
@@ -153,7 +155,11 @@ function AllUserBlogsPage() {
               gutterBottom
               fontFamily={"cursive"}
             >
-              <Link to={`${blog.id}`}><Typography color="#8653fcff" fontSize={"1.2rem"}>{blog.title}</Typography></Link>
+              <Link to={`${blog.id}`}>
+                <Typography color="#8653fcff" fontSize={"1.2rem"}>
+                  {blog.title}
+                </Typography>
+              </Link>
             </Typography>
             <Typography
               variant="body1"
@@ -165,59 +171,63 @@ function AllUserBlogsPage() {
             >
               {blog.synopsis}
             </Typography>
-            <Divider/>
-            <Box display={"flex"} alignItems={"flex-start"} width={"90%"} pt={"1rem"}
-       sx={{placeSelf: "center"}} height={"6rem"} justifyContent={"space-between"}>
-        <Stack direction={"row"} p={1}>
-          <Avatar
-              component={"b"}
-              sx={{
-                color: "",
-                bgcolor: "#8B5CF6",
-                fontFamily: "cursive",
-                height: "3rem",
-                width: "3rem",
-              }}
-            >
-              {blog.blogAuthor.userName[0]}
-            </Avatar>
-          <Stack
-            justifyContent={"space-around"}
-            px={1}
-          >
-            <Typography
-              variant="body1"
-              alignItems={"center"}
+            <Divider />
+            <Box
               display={"flex"}
-              fontFamily={"cursive"}
-              fontWeight={600}
-              fontSize={"1.2rem"}
-              color="secondary"
+              alignItems={"flex-start"}
+              width={"90%"}
+              pt={"1rem"}
+              sx={{ placeSelf: "center" }}
+              height={"6rem"}
+              justifyContent={"space-between"}
             >
-              {blog.blogAuthor.userName}
-            </Typography>
-            <Typography
-              variant="caption"
-              fontWeight={"bold"}
-              color="textSecondary"
-              display={"flex"}
-              alignItems={"center"}
-            >
-              {blog.blogAuthor.email.toLowerCase()}
-            </Typography>
-          </Stack>
-        </Stack>
-        <Typography
-          variant="subtitle1"
-          fontFamily={"cursive"}
-          fontWeight={600}
-          color="secondary"
-          gutterBottom
-          my={1}
-        >
-          {blog.creationDate.split("T")[0]}
-        </Typography>
-      </Box>
+              <Stack direction={"row"} p={1}>
+                <Avatar
+                  component={"b"}
+                  sx={{
+                    color: "",
+                    bgcolor: "#8B5CF6",
+                    fontFamily: "cursive",
+                    height: "3rem",
+                    width: "3rem",
+                  }}
+                >
+                  {blog.blogAuthor.userName[0]}
+                </Avatar>
+                <Stack justifyContent={"space-around"} px={1}>
+                  <Typography
+                    variant="body1"
+                    alignItems={"center"}
+                    display={"flex"}
+                    fontFamily={"cursive"}
+                    fontWeight={600}
+                    fontSize={"1.2rem"}
+                    color="secondary"
+                  >
+                    {blog.blogAuthor.userName}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    fontWeight={"bold"}
+                    color="textSecondary"
+                    display={"flex"}
+                    alignItems={"center"}
+                  >
+                    {blog.blogAuthor.email.toLowerCase()}
+                  </Typography>
+                </Stack>
+              </Stack>
+              <Typography
+                variant="subtitle1"
+                fontFamily={"cursive"}
+                fontWeight={600}
+                color="secondary"
+                gutterBottom
+                my={1}
+              >
+                {blog.creationDate.split("T")[0]}
+              </Typography>
+            </Box>
           </Card>
         ))}
       </Stack>

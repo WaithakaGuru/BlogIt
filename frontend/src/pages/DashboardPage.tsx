@@ -116,7 +116,7 @@ function DashboardPage() {
         bgcolor={"#f1f1f1"}
         direction={{ xs: "column", md: "row" }}
         gap={2}
-        sx={{placeContent: "center"}}
+        sx={{ placeContent: "center" }}
         flexWrap={"wrap"}
         width={"100%"}
       >

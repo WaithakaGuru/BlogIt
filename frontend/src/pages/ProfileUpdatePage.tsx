@@ -14,7 +14,7 @@ import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import {
   useGetCurrentUserInfo,
-  useGetUserInfo
+  useGetUserInfo,
 } from "../service/FetchAllBlogs";
 import { useUpdateUserInfo, useUpdatePassword } from "../service/PatchRequests";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
@@ -26,21 +26,20 @@ function ProfileUpdatePage() {
   const { data: email } = useGetUserInfo(user?.data.id);
   console.log(email?.data.email);
   const [formState, setFormState] = useState({
-     firstName: user?.data.firstName,
-        lastName: user?.data.lastName,
-        userName: user?.data.userName,
-        email: email?.data.email,
+    firstName: user?.data.firstName,
+    lastName: user?.data.lastName,
+    userName: user?.data.userName,
+    email: email?.data.email,
   });
 
-  useEffect(()=>{
-      setFormState({
-        firstName: user?.data.firstName,
-        lastName: user?.data.lastName,
-        userName: user?.data.userName,
-        email: email?.data.email,
-      })
-  }, [user])
-
+  useEffect(() => {
+    setFormState({
+      firstName: user?.data.firstName,
+      lastName: user?.data.lastName,
+      userName: user?.data.userName,
+      email: email?.data.email,
+    });
+  }, [user]);
 
   const [passwordState, setPasswordState] = useState({
     currentPassword: "",
@@ -205,7 +204,7 @@ function ProfileUpdatePage() {
         p={3}
         direction={{ xs: "column", md: "row" }}
       >
-         {error && <Alert severity="error">{error}</Alert>}
+        {error && <Alert severity="error">{error}</Alert>}
         {success && <Alert severity="success">{success}</Alert>}
         <Paper
           elevation={3}

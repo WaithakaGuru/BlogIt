@@ -1,4 +1,12 @@
-import { Card, Typography, CardMedia, Avatar, Stack, Divider, Box } from "@mui/material";
+import {
+  Card,
+  Typography,
+  CardMedia,
+  Avatar,
+  Stack,
+  Divider,
+  Box,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 type BlogAuthorType = {
@@ -33,12 +41,18 @@ function BlogSummary(blog: BlogInfoType) {
         image={blog.featuredImageURL}
         sx={{ maxHeight: "52%" }}
       />
-      <Typography variant="h6" mb={2} px={2} gutterBottom fontFamily={"cursive"} >
-        <Link to={`blogs/${blog.id}`}><Typography
-           color="#8653fcff" fontSize={"1.2rem"}
-        >
-          {blog.title}
-        </Typography></Link>
+      <Typography
+        variant="h6"
+        mb={2}
+        px={2}
+        gutterBottom
+        fontFamily={"cursive"}
+      >
+        <Link to={`blogs/${blog.id}`}>
+          <Typography color="#8653fcff" fontSize={"1.2rem"}>
+            {blog.title}
+          </Typography>
+        </Link>
       </Typography>
       <Typography
         variant="body1"
@@ -51,26 +65,30 @@ function BlogSummary(blog: BlogInfoType) {
       >
         {blog.synopsis}
       </Typography>
-      <Divider/>
-      <Box display={"flex"} alignItems={"flex-start"} width={"90%"} pt={"1rem"}
-       sx={{placeSelf: "center"}} height={"6rem"} justifyContent={"space-between"}>
+      <Divider />
+      <Box
+        display={"flex"}
+        alignItems={"flex-start"}
+        width={"90%"}
+        pt={"1rem"}
+        sx={{ placeSelf: "center" }}
+        height={"6rem"}
+        justifyContent={"space-between"}
+      >
         <Stack direction={"row"} p={1}>
           <Avatar
-              component={"b"}
-              sx={{
-                color: "",
-                bgcolor: "#8B5CF6",
-                fontFamily: "cursive",
-                height: "3rem",
-                width: "3rem",
-              }}
-            >
-              {blog.blogAuthor.userName[0]}
-            </Avatar>
-          <Stack
-            justifyContent={"space-around"}
-            px={1}
+            component={"b"}
+            sx={{
+              color: "",
+              bgcolor: "#8B5CF6",
+              fontFamily: "cursive",
+              height: "3rem",
+              width: "3rem",
+            }}
           >
+            {blog.blogAuthor.userName[0]}
+          </Avatar>
+          <Stack justifyContent={"space-around"} px={1}>
             <Typography
               variant="body1"
               alignItems={"center"}
