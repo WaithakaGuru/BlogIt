@@ -9,7 +9,7 @@ import { isAxiosError } from "axios"
 
 function SingleUserBlogPage() {
     const {id} = useParams();
-    const { mutateAsync: deleteBlog } = useDeleteBlog(id!, true);
+    const { mutateAsync: deleteBlog } = useDeleteBlog(id!);
     const {data: blog} =  useGetUserSpecificBlog(id!)
     const [deleteForm, setDeleteForm] = useState(false);
     const [error, setError] = useState("");
@@ -23,7 +23,7 @@ function SingleUserBlogPage() {
     }
     async function handleDeleteBlog() {
         try{
-            const deletedBlog = await deleteBlog(id!);
+            const deletedBlog = await deleteBlog();
             if(deletedBlog){
                 navigate("/dashboard/blogs", {replace:true});
             }

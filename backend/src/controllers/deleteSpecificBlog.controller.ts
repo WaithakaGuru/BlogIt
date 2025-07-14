@@ -2,13 +2,14 @@ import client from "../utils/PrismaUtils.ts";
 import { Request, Response } from "express";
 
 export default async function deleteSpecificBlog(req: Request, res: Response) {
-  const blogId = req.params.id;
-  const { data } = req.body;
-
+  const {id} = req.params
+   if (!id) {
+    return res.status(400).json({ message: "Blog ID is required." });
+  }
   try {
     const deleted = await client.posts.update({
-      where: { id: blogId },
-      data: { isDeleted: data },
+      where: { id: id },
+      data: { isDeleted: true},
     });
     if (deleted) res.status(201).json(deleted);
   } catch (err) {

@@ -43,7 +43,7 @@ router.get("/user/blogs/:id", verifyUserWebToken, getUserSpecificBlog);
 router.get("/blogs/:id", verifyUserWebToken, getSpecificBlog);
 router.get("/blogs", verifyUserWebToken, getAllBlogs);
 router.patch("/blogs/:id", verifyUserWebToken, updateBlog);
-router.delete("/blogs/:blogId", deleteSpecificBlog);
+router.delete("/blogs/:id",verifyUserWebToken, deleteSpecificBlog);
 export default router;
 
 /* Remaining tasks */
