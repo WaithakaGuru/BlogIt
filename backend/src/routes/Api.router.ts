@@ -10,7 +10,9 @@ import {
   deleteSpecificBlog,
   deleteUserToken,
   getCurrentUserDetails,
-  updateBlog
+  updateBlog,
+  updateUserInfo,
+  updatePassword
 } from "../controllers/exports.controller.ts";
 import {
   authenticateEmail,
@@ -18,7 +20,10 @@ import {
   verifyLoginPassword,
   verifyUserWebToken,
   createUserJWebToken,
+  verifyPassword,
+  getUserPassword
 } from "../middlewares/exports.middleware.ts";
+import verifyNameEmail from "../middlewares/verifyNameEmail.middleware.ts";
 const router = Router();
 
 router.post(
@@ -43,6 +48,8 @@ router.get("/user/blogs/:id", verifyUserWebToken, getUserSpecificBlog);
 router.get("/blogs/:id", verifyUserWebToken, getSpecificBlog);
 router.get("/blogs", verifyUserWebToken, getAllBlogs);
 router.patch("/blogs/:id", verifyUserWebToken, updateBlog);
+router.patch("/users", verifyUserWebToken, verifyNameEmail, updateUserInfo);
+router.patch("/users/password", verifyUserWebToken, getUserPassword, verifyPassword, updatePassword);
 router.delete("/blogs/:id",verifyUserWebToken, deleteSpecificBlog);
 export default router;
 

@@ -7,7 +7,7 @@ function useUpdatePassword() {
 
     return useMutation({
         mutationKey: ["UPDATE_PASSWORD"],
-        mutationFn: async(passData : {newPassword: string, currentPassword: string}) => {
+        mutationFn: async(passData : { currentPassword: string, newPassword: string}) => {
             const updatedPassword  = await axInstance.patch(`user/password`, 
                 passData,
                 {headers: {Authorization: `Bearer ${token}`}}

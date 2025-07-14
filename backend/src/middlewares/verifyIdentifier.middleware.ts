@@ -1,5 +1,5 @@
 import client from "../utils/PrismaUtils.ts";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 
 export default async function verifyIdentifier(req: Request, res: Response) {
   try {
