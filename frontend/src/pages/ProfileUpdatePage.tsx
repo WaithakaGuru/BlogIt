@@ -5,6 +5,7 @@ import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import { useGetCurrentUserInfo, useGetUserInfo } from "../service/FetchAllBlogs";
 import { useUpdateUserInfo, useUpdatePassword} from "../service/PatchRequests";
+import checkPasswordStrength from "../utils/checkPasswordStrength";
 
 type initialState = string | null;
 
@@ -59,11 +60,15 @@ function ProfileUpdatePage() {
         setError("Both current and new password are required.");
         return;
       }
-
-      await updatePassword(passwordState);
-      setSuccess("Password updated successfully.");
-      setError(errorSuccessFirstState);
-      setPasswordState({ currentPassword: "", newPassword: "" });
+      if(checkPasswordStrength(passwordState.newPassword)){
+        await updatePassword(passwordState);
+        setSuccess("Password updated successfully.");
+        setError(errorSuccessFirstState);
+        setPasswordState({ currentPassword: "", newPassword: "" });
+      }
+      else{
+        setError("Choose a stronger password!!")
+      }
     } catch (err: any) {
       setError(err?.response?.data?.message || "Failed to update password.");
       setSuccess(errorSuccessFirstState);
@@ -72,7 +77,7 @@ function ProfileUpdatePage() {
 
   return (
     <>
-        <Stack
+      <Stack
         direction={{ xs: "column", md: "row" }}
         my={4}
         bgcolor="#8653fcff"
@@ -93,7 +98,10 @@ function ProfileUpdatePage() {
           lineHeight={1.4}
           color="#fff"
         >
-          BlogIt Dashboard: Your Workspace to Air Out Stories in Writing
+          BlogIt User Profile: Your Interface to update your profile details
+          <Typography variant="h6" color="textSecondary" >
+            Design how you want to be addressed
+          </Typography>
         </Typography>
 
         <Stack
@@ -160,14 +168,12 @@ function ProfileUpdatePage() {
           </Typography>
         </Stack>
       </Stack>
-
-
       <Typography variant="h4" fontWeight="bold" color="secondary" align="center">
         Profile Settings
       </Typography>
-    <Stack spacing={4} maxWidth={{xs: "100%", sm: "95%", md:"70%"}} mx="auto" p={3} direction={{xs: "column", md: "row"}}>
+    <Stack spacing={4} maxWidth={{xs: "100%", sm: "95%", md:"75%"}} mx="auto" p={3} direction={{xs: "column", md: "row"}}>
 
-      <Paper elevation={3} sx={{ p: 3, borderRadius: 2 , width: {xs: "95%", md: "50%"}}}>
+      <Paper elevation={3} sx={{ p: 3, borderRadius: 2, borderRight:"1px solid", width: {xs: "95%", md: "50%"}}}>
         <Typography variant="h6" mb={2}>
           Update Personal Information
         </Typography>
@@ -186,7 +192,7 @@ function ProfileUpdatePage() {
             <TextInput
               label="Username"
               value={formState.userName}
-              onChange={(e) => handleInputChange("username", e.target.value)}
+              onChange={(e) => handleInputChange("userName", e.target.value)}
             />
             <TextInput
               label="Email"
@@ -200,12 +206,12 @@ function ProfileUpdatePage() {
           </Stack>
         </form>
       </Paper>
-
-
       <Paper elevation={3} sx={{ p: 3, borderRadius: 2, width: {xs: "95%", md: "48%"}, borderLeft: 1, ml: 2}}>
         <Typography variant="h6" mb={2}>
           Change Password
         </Typography>
+        {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
         <form onSubmit={handlePasswordSubmit}>
           <Stack spacing={2}>
             <PasswordInput
@@ -226,9 +232,6 @@ function ProfileUpdatePage() {
           </Stack>
         </form>
       </Paper>
-    
-      {error && <Alert severity="error">{error}</Alert>}
-      {success && <Alert severity="success">{success}</Alert>}
     </Stack>
     </>
   );

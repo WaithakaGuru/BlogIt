@@ -1,5 +1,5 @@
- import hashPassword from "../utils/hashPassword";
-import client from "../utils/PrismaUtils";
+ import hashPassword from "../utils/hashPassword.ts";
+import client from "../utils/PrismaUtils.ts";
 import { Request, Response } from "express";
 
 export default async function updatePassword(req: Request, res: Response) {

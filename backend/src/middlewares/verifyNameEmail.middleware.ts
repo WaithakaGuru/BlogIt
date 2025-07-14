@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import client from "../utils/PrismaUtils";
+import client from "../utils/PrismaUtils.ts";
 
 export default async function verifyNameEmail(req: Request, res: Response, next: NextFunction) {
   try {
