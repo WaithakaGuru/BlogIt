@@ -11,7 +11,7 @@ function DashboardPage() {
   const { data: userInfo } = useGetCurrentUserInfo();
 
   return (
-    <Box bgcolor={"#f9f9f9"} px={"2rem"}>
+    <Box bgcolor={"#f9f9f9"} px={"1rem"}>
       <Stack
         direction={{ xs: "column", md: "row" }}
         my={4}
@@ -23,6 +23,7 @@ function DashboardPage() {
         width="100%"
         borderRadius={2}
         boxShadow={2}
+        height={"20rem"}
       >
         <Typography
           variant="h4"
@@ -101,20 +102,23 @@ function DashboardPage() {
       </Stack>
 
       <Typography
-        variant="h4"
+        variant="h3"
         gutterBottom
-        pb={2}
+        fontWeight={600}
         align="left"
         color="secondary"
+        mt="5rem"
       >
         Recent Popular Blogs
       </Typography>
       <Stack
-        p={3}
+        py={3}
         bgcolor={"#f1f1f1"}
         direction={{ xs: "column", md: "row" }}
         gap={2}
+        sx={{placeContent: "center"}}
         flexWrap={"wrap"}
+        width={"100%"}
       >
         {data?.map((blog: any) => <BlogSummary key={blog.id} {...blog} />)}
       </Stack>

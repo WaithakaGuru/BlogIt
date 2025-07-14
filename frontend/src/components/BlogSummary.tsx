@@ -1,5 +1,4 @@
-import { Card, Typography, CardMedia, Avatar, Stack } from "@mui/material";
-import { Email } from "@mui/icons-material";
+import { Card, Typography, CardMedia, Avatar, Stack, Divider, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
 type BlogAuthorType = {
@@ -21,83 +20,90 @@ function BlogSummary(blog: BlogInfoType) {
   return (
     <Card
       sx={{
-        maxWidth: "25rem",
-        height: "24.5rem",
+        maxWidth: "27rem",
+        height: "32rem",
         position: "relative",
         minWidth: { xs: "100%", sm: "auto" },
-        mt: "2rem",
+        mt: 1,
         flexWrap: "wrap",
       }}
     >
       <CardMedia
         component={"img"}
         image={blog.featuredImageURL}
-        sx={{ maxHeight: "55%" }}
+        sx={{ maxHeight: "52%" }}
       />
-      <Typography variant="h6" m={0} px={2} gutterBottom fontFamily={"cursive"}>
-        <Link to={`blogs/${blog.id}`}>{blog.title}</Link>
+      <Typography variant="h6" mb={2} px={2} gutterBottom fontFamily={"cursive"} >
+        <Link to={`blogs/${blog.id}`}><Typography
+           color="#8653fcff" fontSize={"1.2rem"}
+        >
+          {blog.title}
+        </Typography></Link>
       </Typography>
       <Typography
         variant="body1"
         px={2}
-        my={1}
+        mb={1}
         color="textSecondary"
-        maxHeight={"4rem"}
+        height={"4.5rem"}
         overflow={"auto"}
+        borderTop={"1px solid #8653fcff"}
       >
         {blog.synopsis}
       </Typography>
-      <Typography
-        variant="body1"
-        px={2}
-        alignItems={"center"}
-        gutterBottom
-        display={"flex"}
-        fontFamily={"cursive"}
-        color="secondary"
-      >
-        <Avatar
-          component={"b"}
-          sx={{
-            color: "",
-            bgcolor: "#8B5CF6",
-            fontFamily: "cursive",
-            mr: 1,
-            height: "2rem",
-            width: "2rem",
-          }}
-        >
-          {blog.blogAuthor.userName[0]}
-        </Avatar>
-        {blog.blogAuthor.userName}
-      </Typography>
-      <Stack
-        direction={{ xs: "column", sm: "row" }}
-        spacing={1}
-        gap={1}
-        justifyContent={"center"}
-        px={1}
-      >
+      <Divider/>
+      <Box display={"flex"} alignItems={"flex-start"} width={"90%"} pt={"1rem"}
+       sx={{placeSelf: "center"}} height={"6rem"} justifyContent={"space-between"}>
+        <Stack direction={"row"} p={1}>
+          <Avatar
+              component={"b"}
+              sx={{
+                color: "",
+                bgcolor: "#8B5CF6",
+                fontFamily: "cursive",
+                height: "3rem",
+                width: "3rem",
+              }}
+            >
+              {blog.blogAuthor.userName[0]}
+            </Avatar>
+          <Stack
+            justifyContent={"space-around"}
+            px={1}
+          >
+            <Typography
+              variant="body1"
+              alignItems={"center"}
+              display={"flex"}
+              fontFamily={"cursive"}
+              fontWeight={600}
+              fontSize={"1.2rem"}
+              color="secondary"
+            >
+              {blog.blogAuthor.userName}
+            </Typography>
+            <Typography
+              variant="caption"
+              fontWeight={"bold"}
+              color="textSecondary"
+              display={"flex"}
+              alignItems={"center"}
+            >
+              {blog.blogAuthor.email.toLowerCase()}
+            </Typography>
+          </Stack>
+        </Stack>
         <Typography
-          variant="body2"
-          color="secondary"
-          display={"flex"}
-          alignItems={"center"}
-        >
-          <Email /> {blog.blogAuthor.email}
-        </Typography>
-        <Typography
-          variant="caption"
+          variant="subtitle1"
           fontFamily={"cursive"}
-          fontWeight={500}
-          fontSize={".9rem"}
+          fontWeight={600}
           color="secondary"
           gutterBottom
           my={1}
         >
-          Created on: {blog.creationDate.split("T")[0]}
+          {blog.creationDate.split("T")[0]}
         </Typography>
-      </Stack>
+      </Box>
     </Card>
   );
 }

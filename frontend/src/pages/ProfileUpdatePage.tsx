@@ -191,9 +191,12 @@ function ProfileUpdatePage() {
         spacing={4}
         maxWidth={{ xs: "100%", sm: "95%", md: "75%" }}
         mx="auto"
+        minHeight={"28rem"}
         p={3}
         direction={{ xs: "column", md: "row" }}
       >
+         {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
         <Paper
           elevation={3}
           sx={{
@@ -248,8 +251,6 @@ function ProfileUpdatePage() {
           <Typography variant="h6" mb={2}>
             Change Password
           </Typography>
-          {error && <Alert severity="error">{error}</Alert>}
-          {success && <Alert severity="success">{success}</Alert>}
           <form onSubmit={handlePasswordSubmit}>
             <Stack spacing={2}>
               <PasswordInput
