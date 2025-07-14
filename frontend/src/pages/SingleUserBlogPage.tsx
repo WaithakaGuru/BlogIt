@@ -12,7 +12,7 @@ function SingleUserBlogPage() {
     const { mutateAsync: deleteBlog } = useDeleteBlog(id!, true);
     const {data: blog} =  useGetUserSpecificBlog(id!)
     const [deleteForm, setDeleteForm] = useState(false);
-    const [error, setError] = useState("fioe");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     function handleToggleDeleteBlog() {
@@ -74,7 +74,7 @@ function SingleUserBlogPage() {
                                 <Button
                                     endIcon={<Edit />}
                                     variant="contained"
-                                    href={`create/${blog!.id}`}
+                                    href={`create/${blog?.id}`}
                                     color="secondary"
                                 >
                                     <Typography variant="body2" sx={{ textWrap: "nowrap" }}>

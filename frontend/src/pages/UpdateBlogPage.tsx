@@ -1,20 +1,24 @@
 import { Alert, Stack, Typography, Button, Paper } from "@mui/material";
 import { EditNote } from "@mui/icons-material";
 import BlogComponent from "../components/BlogContentInput";
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { isAxiosError } from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetUserSpecificBlog } from "../service/FetchAllBlogs";
 import Markdown from "react-markdown";
 import useUpdateBlog from "../service/UpdateBlog";
 
-type BlogActionType = {
-  type: string;
+type BlogActionType = | {
+  type: "HANDLE_INPUT";
   payload: {
     value: string;
-    inputField: string;
-  };
-};
+    inputField: keyof BlogStateType;
+    
+  }; }
+    | {
+      type: "INITIAL_RENDER";
+      payload: BlogStateType;
+    };
 
 type BlogStateType = {
   title: string;
@@ -32,6 +36,11 @@ function createBlogReducer(prevState: BlogStateType, action: BlogActionType) {
         [inputField]: action.payload.value,
       };
 
+    case "INITIAL_RENDER" :
+        return {
+            ...prevState, ...action.payload
+        }
+
     default:
       return prevState;
   }
@@ -40,9 +49,7 @@ function createBlogReducer(prevState: BlogStateType, action: BlogActionType) {
 
 function UpdateBlogPage() {
     const {id} = useParams()
-    console.log(id);
     const {data: currentBlog} = useGetUserSpecificBlog(id!)
-    console.log(currentBlog);
     const [error, setError] = useState();
     const navigate = useNavigate();
     const initialState = {
@@ -54,6 +61,16 @@ function UpdateBlogPage() {
     const [state, dispatch] = useReducer(createBlogReducer, initialState);
     const { mutateAsync: updateBlog } = useUpdateBlog(id!, state);
     
+    useEffect(() => {
+        if (currentBlog) {
+            dispatch({ type: "INITIAL_RENDER", payload: {
+            title: currentBlog.title,
+            synopsis: currentBlog.synopsis,
+            content: currentBlog.content,
+            featuredImageURL: currentBlog.featuredImageURL,
+            }});
+        }
+        }, [currentBlog]);
 
     function handleFeaturedImage(e: React.ChangeEvent<HTMLInputElement>) {
         dispatch({
@@ -85,7 +102,7 @@ function UpdateBlogPage() {
             const updatedBlog = await updateBlog();
             console.log(updatedBlog);
             if (updatedBlog) {
-                navigate(-1);
+                navigate("dashboard/blogs", {replace: true});
             }
         } catch (err) {
             console.log(err);
@@ -123,8 +140,9 @@ function UpdateBlogPage() {
             </Stack>
 
             <Typography variant="body1" color="text.secondary">
-               Perform Updates for this Blog 📝Blog Title: <Markdown>{currentBlog?.title}</Markdown>
+               Perform Updates for this Blog 📝Blog Title: 
             </Typography>
+            <Markdown>{currentBlog?.title}</Markdown>
             </Stack>
         </Paper>
         <Stack
@@ -141,18 +159,18 @@ function UpdateBlogPage() {
             {error && <Alert severity="error">{error}</Alert>}
             <BlogComponent
             name="Featured Blog Image URL"
-            value={state.featuredImageURL}
+            value={state.featuredImageURL?? ""}
             onChange={handleFeaturedImage}
             />
             <BlogComponent
             name="Title"
-            value={state.title}
+            value={state.title ?? ""}
             onChange={handleTitle}
             />
             <BlogComponent
             multiline={true}
             name="Synopsis"
-            value={state.synopsis}
+            value={state.synopsis ?? ""}
             onChange={handleSynopsis}
             />
             <BlogComponent
@@ -160,7 +178,7 @@ function UpdateBlogPage() {
             multiline={true}
             name="Content"
             value={state.content}
-            onChange={handleContent}
+            onChange={handleContent?? ""}
             />
             <Button
             variant="contained"

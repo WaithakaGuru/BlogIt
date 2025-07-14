@@ -66,6 +66,9 @@ function AllUserBlogsPage() {
         bgcolor={"#f1f1f1"}
         my={6}
         direction={{ xs: "column", md: "row" }}
+        flexWrap={"wrap"}
+        gap={2}
+        justifyContent={"center"}
         spacing={2}
         width={{ sm: "95%", md: "90%" }}
         mx={"auto"}
@@ -73,12 +76,11 @@ function AllUserBlogsPage() {
         {data?.map((blog: any) => (
           <Card
             sx={{
-              maxWidth: "25rem",
+              maxWidth: {xs: "25rem", md: "23rem"},
               height: "24.5rem",
               position: "relative",
-              minWidth: { xs: "100%", sm: "auto" },
+              minWidth: { xs: "100%", sm: "20rem", md: "22rem" },
               m: ".2rem",
-              flexWrap: "wrap",
             }}
             key={blog.id}
           >

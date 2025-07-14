@@ -8,7 +8,7 @@ const useUpdateBlog = (id:string, data: any) => {
     return useMutation({
         mutationKey: ["UPDATE_BLOG", id],
         mutationFn: async () => {
-            const updatedBlog = await axInstance.patch("/user/blogs/:blogId", data, {
+            const updatedBlog = await axInstance.patch(`/blogs/${id}`, data, {
                 headers: {Authorization: `Bearer ${token}`}
             })
             return updatedBlog
