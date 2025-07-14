@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
   getSpecificBlog,
-  getUsers,
+  getUserInfo,
   createBlog,
   createUser,
   getAllBlogs,
@@ -36,7 +36,7 @@ router.post(
 );
 router.post("/blogs", verifyUserWebToken, createBlog);
 router.post("/auth/logout", verifyUserWebToken, deleteUserToken);
-router.get("/users", getUsers);
+router.get("/users/:id", verifyUserWebToken, getUserInfo);
 router.get("/user", getCurrentUserDetails);
 router.get("/user/blogs", verifyUserWebToken, getUserSpecificBlogs);
 router.get("/user/blogs/:id", verifyUserWebToken, getUserSpecificBlog);
@@ -64,7 +64,7 @@ export default router;
 
 // GET /api/user/blogs: get all blogs belonging to a specific user.
 
-PATCH /api/blogs/:blogId: update a blog.
+// PATCH /api/blogs/:blogId: update a blog.
 
 PATCH /api/user: update user's primary information.
 

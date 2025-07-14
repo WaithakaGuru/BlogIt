@@ -3,12 +3,11 @@ import { TextField, type TextFieldProps } from "@mui/material";
 function TextInput({
   variant,
   onChange,
-  name,
   placeholder,
   label,
   value,
   type,
-  ...rest
+  required = true,
 }: TextFieldProps) {
   return (
     <TextField
@@ -17,7 +16,7 @@ function TextInput({
       label={label}
       placeholder={placeholder}
       type={type}
-      required={rest.required}
+      required={required}
       variant={variant}
       onChange={onChange}
       fullWidth
