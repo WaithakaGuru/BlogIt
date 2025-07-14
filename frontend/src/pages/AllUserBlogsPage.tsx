@@ -69,7 +69,6 @@ function AllUserBlogsPage() {
         flexWrap={"wrap"}
         gap={2}
         justifyContent={"center"}
-        spacing={2}
         width={{ sm: "95%", md: "90%" }}
         mx={"auto"}
       >

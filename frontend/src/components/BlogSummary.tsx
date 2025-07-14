@@ -25,7 +25,7 @@ function BlogSummary(blog: BlogInfoType) {
         height: "24.5rem",
         position: "relative",
         minWidth: { xs: "100%", sm: "auto" },
-        m: ".2rem",
+        mt: "2rem",
         flexWrap: "wrap",
       }}
     >
