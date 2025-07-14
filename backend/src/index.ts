@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(
   Cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://blog-it-blush-five.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   }),
