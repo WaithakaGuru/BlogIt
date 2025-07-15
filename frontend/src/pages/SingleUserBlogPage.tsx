@@ -17,9 +17,10 @@ import { isAxiosError } from "axios";
 
 function SingleUserBlogPage() {
   const { id } = useParams();
-  const { mutateAsync: deleteBlog } = useDeleteBlog(id!);
+  const { mutateAsync: deleteBlog, isPending } = useDeleteBlog(id!);
   const { data: blog } = useGetUserSpecificBlog(id!);
   const [deleteForm, setDeleteForm] = useState(false);
+  const [isDeleteBlogBtnLoading, setIsDeleteBlogBtnLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -31,6 +32,7 @@ function SingleUserBlogPage() {
   }
   async function handleDeleteBlog() {
     try {
+      isPending && setIsDeleteBlogBtnLoading(true);
       const deletedBlog = await deleteBlog();
       if (deletedBlog) {
         navigate("/dashboard/blogs", { replace: true });
@@ -139,6 +141,7 @@ function SingleUserBlogPage() {
                   variant="outlined"
                   color="error"
                   onClick={handleDeleteBlog}
+                  loading={isDeleteBlogBtnLoading}
                 >
                   Yes, I'm Sure
                 </Button>

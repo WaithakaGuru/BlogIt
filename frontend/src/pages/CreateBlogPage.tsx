@@ -45,8 +45,9 @@ const initialState = {
 
 function CreateBlogPage() {
   const [state, dispatch] = useReducer(createBlogReducer, initialState);
-  const { mutateAsync: createBlog } = useCreateBlog();
+  const { mutateAsync: createBlog, isPending } = useCreateBlog();
   const [error, setError] = useState();
+  const [isPublishBlogBtnLoading, setIsPublishBlogBtnLoading] = useState(false);
   const navigate = useNavigate();
   const { data: userInfo } = useGetCurrentUserInfo();
 
@@ -78,8 +79,8 @@ function CreateBlogPage() {
   async function handleCreateNewBlog() {
     const userId = userInfo?.data.userInfo.id;
     try {
-      const newBlog = await createBlog({ ...state, userId });
-      console.log(newBlog);
+      isPending && setIsPublishBlogBtnLoading(true);
+     const newBlog = await createBlog({ ...state, userId });
       if (newBlog) {
         navigate("/");
       }
@@ -164,6 +165,7 @@ function CreateBlogPage() {
           color="secondary"
           size="large"
           type="submit"
+          loading={isPublishBlogBtnLoading}
         >
           Publish Blog
         </Button>

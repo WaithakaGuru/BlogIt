@@ -9,7 +9,7 @@ import Markdown from "react-markdown";
 import useUpdateBlog from "../service/UpdateBlog";
 
 type BlogActionType =
-  | {
+   {
       type: "HANDLE_INPUT";
       payload: {
         value: string;
@@ -19,13 +19,18 @@ type BlogActionType =
   | {
       type: "INITIAL_RENDER";
       payload: BlogStateType;
-    };
+    }
+  | {
+    type: "HANDLE_LOADING";
+    payload: boolean
+  }
 
 type BlogStateType = {
   title: string;
   synopsis: string;
   content: string;
   featuredImageURL: string;
+  isLoading?: boolean
 };
 
 function createBlogReducer(prevState: BlogStateType, action: BlogActionType) {
@@ -43,6 +48,11 @@ function createBlogReducer(prevState: BlogStateType, action: BlogActionType) {
         ...action.payload,
       };
 
+      case "HANDLE_LOADING": 
+        return {
+          ...prevState, isLoading: action.payload
+        }
+
     default:
       return prevState;
   }
@@ -58,6 +68,7 @@ function UpdateBlogPage() {
     synopsis: currentBlog?.synopsis,
     content: currentBlog?.content,
     featuredImageURL: currentBlog?.featuredImageURL,
+    isLoading: false,
   };
   const [state, dispatch] = useReducer(createBlogReducer, initialState);
   const { mutateAsync: updateBlog } = useUpdateBlog(id!, state);
@@ -103,8 +114,8 @@ function UpdateBlogPage() {
 
   async function handleUpdateBlog() {
     try {
+      state.isLoading && dispatch({type: "HANDLE_LOADING", payload: true});
       const updatedBlog = await updateBlog();
-      console.log(updatedBlog);
       if (updatedBlog) {
         navigate("dashboard/blogs", { replace: true });
       }
@@ -189,6 +200,7 @@ function UpdateBlogPage() {
           color="secondary"
           size="large"
           type="submit"
+          loading={state.isLoading}
         >
           Update Blog
         </Button>

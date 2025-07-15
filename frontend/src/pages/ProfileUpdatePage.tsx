@@ -28,7 +28,6 @@ function ProfileUpdatePage() {
     userName: user?.data.userName,
     email: user?.data.email,
   });
-   console.log(user?.data);
   useEffect(() => {
     setFormState({
       firstName: user?.data.firstName,
@@ -45,9 +44,11 @@ function ProfileUpdatePage() {
   const errorSuccessFirstState: initialState = "";
   const [error, setError] = useState(errorSuccessFirstState);
   const [success, setSuccess] = useState(errorSuccessFirstState);
+  const [isPasswordBtnLoading, setIsPasswordBtnLoading] = useState(false);
+  const [isProfileBtnLoading, setIsProfileBtnLoading] = useState(false);
 
-  const { mutateAsync: updateProfile } = useUpdateUserInfo();
-  const { mutateAsync: updatePassword } = useUpdatePassword();
+  const { mutateAsync: updateProfile, ...otherProfile } = useUpdateUserInfo();
+  const { mutateAsync: updatePassword, ...other } = useUpdatePassword();
 
   const handleInputChange = (field: string, value: string) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
@@ -60,8 +61,8 @@ function ProfileUpdatePage() {
   const handleProfileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const data = updateProfile(formState!);
-      console.log(data);
+      otherProfile.isPending && setIsProfileBtnLoading(true);
+      updateProfile(formState!);
       setSuccess("Profile updated successfully.");
       setError(errorSuccessFirstState);
     } catch (err: any) {
@@ -78,6 +79,7 @@ function ProfileUpdatePage() {
         return;
       }
       if (checkPasswordStrength(passwordState.newPassword)) {
+        other.isPending && setIsPasswordBtnLoading(true);
         await updatePassword(passwordState);
         setSuccess("Password updated successfully.");
         setError(errorSuccessFirstState);
@@ -254,7 +256,7 @@ function ProfileUpdatePage() {
                 onChange={(e) => handleInputChange("email", e.target.value)}
                 type="email"
               />
-              <Button variant="contained" color="secondary" type="submit">
+              <Button variant="contained" color="secondary" type="submit" loading={isProfileBtnLoading}>
                 Update Profile
               </Button>
             </Stack>
@@ -291,7 +293,7 @@ function ProfileUpdatePage() {
                   handlePasswordChange("newPassword", e.target.value)
                 }
               />
-              <Button variant="contained" color="secondary" type="submit">
+              <Button variant="contained" color="secondary" type="submit" loading={isPasswordBtnLoading}>
                 Update Password
               </Button>
             </Stack>

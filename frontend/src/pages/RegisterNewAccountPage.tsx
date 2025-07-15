@@ -6,6 +6,7 @@ import checkPasswordStrength from "../utils/checkPasswordStrength";
 import { useRegisterNewUser } from "../service/PostRequests";
 import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type ActionType = {
   type: string;
@@ -48,7 +49,8 @@ function RegisterNewAccountPage() {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducerFunc, initialState);
   const [error, setError] = useState("");
-  const { mutateAsync: reigsterUser } = useRegisterNewUser();
+  const [isRegisterNewUserBtnLoading, setIsregisterNewUserBtnLoading] = useState(false);
+  const { mutateAsync: reigsterUser, isPending } = useRegisterNewUser();
 
   function handleFirstName(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch({
@@ -98,6 +100,7 @@ function RegisterNewAccountPage() {
         setError("Password and confirm password must be the same");
       }
       const { confirmPassword, ...newUserInfo } = state;
+      isPending && setIsregisterNewUserBtnLoading(true);
       const newUser = await reigsterUser(newUserInfo);
       if (newUser) {
         navigate("/login", { replace: true });
@@ -185,10 +188,17 @@ function RegisterNewAccountPage() {
         <Button
           type="submit"
           variant="contained"
+          loading={isRegisterNewUserBtnLoading}
           sx={{ background: "linear-gradient(to right, #4f46e5, #8B5CF6)" }}
         >
           Register
         </Button>
+        <Typography variant="subtitle1">
+          Don't have an account?{" "}
+          <Link to={"/login"} title="create new account">
+            Log in 
+          </Link>{" "}
+        </Typography>
       </Stack>
     </>
   );

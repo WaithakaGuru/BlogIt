@@ -10,9 +10,10 @@ function LoginPage() {
   const [identifier, setIdentifier] = useState("");
   const [enteredPassword, setPass] = useState("");
   const [error, setError] = useState("");
+  const [isLoginBtnLoading, setIsLoginBtnLoading] = useState(false);
   const { addToken, setIsLoggedIn } = useBlog();
   const nav = useNavigate();
-  const { mutateAsync: login } = useLogUserIn();
+  const { mutateAsync: login, isPending } = useLogUserIn();
 
   const handleIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(e.target.value);
@@ -26,6 +27,7 @@ function LoginPage() {
     setError("");
     e.preventDefault();
     try {
+      isPending && setIsLoginBtnLoading(true);
       const loggedIn = await login({ identifier, enteredPassword });
       if (loggedIn) {
         const userJWToken = loggedIn.token;
@@ -84,6 +86,7 @@ function LoginPage() {
         <Button
           type="submit"
           variant="contained"
+          loading={isLoginBtnLoading}
           sx={{
             background: "linear-gradient(45deg, #3b82f6 10%, #8B5CF6 80% )",
           }}
