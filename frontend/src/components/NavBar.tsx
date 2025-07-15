@@ -47,7 +47,7 @@ function NavBar() {
 
   return (
     <>
-      {!isLoggedIn ? (
+      {isLoggedIn ? (
         <Box
           component={"nav"}
           sx={{
