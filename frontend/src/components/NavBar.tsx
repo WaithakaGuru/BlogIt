@@ -47,7 +47,7 @@ function NavBar() {
 
   return (
     <>
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <Box
           component={"nav"}
           sx={{
@@ -87,14 +87,14 @@ function NavBar() {
             fontSize={"1.2rem"}
             lineHeight={".6cm"}
             color="secondary"
-            px={2}
+            px={".1rem"}
             my={"auto"}
             align="center"
           >
-            Hello {userInfo?.data.firstName}
+            Hello {userInfo?.data.firstName} Waithaka
           </Typography>
 
-          <Stack direction={"row"} gap={2} p={2}>
+          <Stack direction={"row"} gap={2} p={2} width={"max-content"}>
             <Button
               href="/"
               variant={path === "/" ? "contained" : "outlined"}

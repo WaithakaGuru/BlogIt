@@ -92,7 +92,7 @@ function HomePage() {
           component={"img"}
           src="BlogItTransparent1.png"
           height={{ xs: "16rem", md: "25rem" }}
-          minWidth={{ xs: "29.5rem" }}
+          minWidth={{ xs: "28rem" }}
           maxWidth={{ xs: "35rem", sm: "48rem", md: "33rem" }}
           mx={0}
           my={"auto"}
