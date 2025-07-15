@@ -6,6 +6,7 @@ import useCreateBlog from "../service/CreateBlog";
 import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGetCurrentUserInfo } from "../service/FetchAllBlogs";
+import BlogImageInput from "../components/BlogImageInput";
 
 type BlogActionType = {
   type: string;
@@ -50,13 +51,7 @@ function CreateBlogPage() {
   const [isPublishBlogBtnLoading, setIsPublishBlogBtnLoading] = useState(false);
   const navigate = useNavigate();
   const { data: userInfo } = useGetCurrentUserInfo();
-
-  function handleFeaturedImage(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch({
-      type: "HANDLE_INPUT",
-      payload: { inputField: "featuredImageURL", value: e.target.value },
-    });
-  }
+  
   function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch({
       type: "HANDLE_INPUT",
@@ -137,13 +132,7 @@ function CreateBlogPage() {
         borderRadius={2}
       >
         {error && <Alert severity="error">{error}</Alert>}
-        {/* <BlogComponent
-          name="Featured Blog Image URL"
-          value={state.featuredImageURL}
-          type="file"
-          onChange={handleFeaturedImage}
-        /> */}
-        <TextField type="file"/>
+       <BlogImageInput/>
         <BlogComponent
           name="Title"
           value={state.title}

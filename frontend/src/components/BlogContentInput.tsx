@@ -1,7 +1,7 @@
 import { Box, TextField, Typography, type TextFieldProps } from "@mui/material";
 import Markdown from "react-markdown";
 
-type BlogComponentPropsType = TextFieldProps & { name: string; value: string };
+type BlogComponentPropsType = TextFieldProps & { name: string; value: string, markDownValue?: string };
 
 function BlogComponent({
   multiline = false,
@@ -10,6 +10,9 @@ function BlogComponent({
   required = true,
   onChange,
   name,
+  type = "text",
+  markDownValue,
+  label=""
 }: BlogComponentPropsType) {
   return (
     <Box p={2}>
@@ -18,10 +21,11 @@ function BlogComponent({
       </Typography>
 
       <TextField
-        label={`Write your BLog ${name} here in Markdown`}
+        label={label || `Write your BLog ${name} here in Markdown`}
         multiline={multiline}
         minRows={minRows}
         fullWidth
+        type={type}
         value={value}
         required={required}
         onChange={onChange}
@@ -39,7 +43,7 @@ function BlogComponent({
           borderColor="grey.300"
           borderRadius={2}
         >
-          <Markdown>{value}</Markdown>
+          <Markdown>{markDownValue}</Markdown>
         </Box>
       </Box>
     </Box>
