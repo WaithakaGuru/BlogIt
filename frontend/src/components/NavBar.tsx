@@ -91,7 +91,7 @@ function NavBar() {
             my={"auto"}
             align="center"
           >
-            Hello {userInfo?.data.firstName} Waithaka
+            Hello {userInfo?.data.firstName}
           </Typography>
 
           <Stack direction={"row"} gap={2} p={2} width={"max-content"}>
