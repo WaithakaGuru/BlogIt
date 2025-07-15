@@ -7,6 +7,7 @@ configDotenv({ path: "./.env" });
 const PORT = process.env.PORT_NUMBER;
 const app = express();
 
+app.get("/", () => response.send("Welcome to BlgIt"));
 app.use(express.json());
 app.use(
   Cors({
@@ -17,7 +18,6 @@ app.use(
 );
 
 app.use("/api", router);
-app.get("/", () => response.send("Welcome to BlgIt"));
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on Port: ${PORT}`);
