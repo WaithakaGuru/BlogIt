@@ -17,6 +17,7 @@ import {
 } from "../service/FetchAllBlogs";
 import { useUpdateUserInfo, useUpdatePassword } from "../service/PatchRequests";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
+import { isAxiosError } from "axios";
 
 type initialState = string | null;
 
@@ -42,13 +43,15 @@ function ProfileUpdatePage() {
     newPassword: "",
   });
   const errorSuccessFirstState: initialState = "";
-  const [error, setError] = useState(errorSuccessFirstState);
-  const [success, setSuccess] = useState(errorSuccessFirstState);
+  const [profileError, setProfileError] = useState(errorSuccessFirstState);
+  const [profileSuccess, setProfileSuccess] = useState(errorSuccessFirstState);
+  const [passwordError, setPasswordError] = useState(errorSuccessFirstState);
+  const [passwordSuccess, setPasswordSuccess] = useState(errorSuccessFirstState);
   const [isPasswordBtnLoading, setIsPasswordBtnLoading] = useState(false);
   const [isProfileBtnLoading, setIsProfileBtnLoading] = useState(false);
 
-  const { mutateAsync: updateProfile, ...otherProfile } = useUpdateUserInfo();
-  const { mutateAsync: updatePassword, ...other } = useUpdatePassword();
+  const { mutateAsync: updateProfile, isPending, isSuccess } = useUpdateUserInfo();
+  const { mutateAsync: updatePassword, ...other} = useUpdatePassword();
 
   const handleInputChange = (field: string, value: string) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
@@ -61,35 +64,41 @@ function ProfileUpdatePage() {
   const handleProfileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      otherProfile.isPending && setIsProfileBtnLoading(true);
       updateProfile(formState!);
-      setSuccess("Profile updated successfully.");
-      setError(errorSuccessFirstState);
+      isSuccess && setProfileSuccess("Profile updated successfully.");
+      setProfileError(errorSuccessFirstState);
     } catch (err: any) {
-      setError(err?.response?.data?.message || "Something went wrong.");
-      setSuccess(errorSuccessFirstState);
+      setProfileError(err?.response?.data?.message || "Something went wrong.");
+      setProfileSuccess(errorSuccessFirstState);
     }
   };
+
+  useEffect(()=>{
+     other.isPending ? setIsPasswordBtnLoading(true) : setIsPasswordBtnLoading(false);
+     isPending ? setIsProfileBtnLoading(true) : setIsProfileBtnLoading(false);
+  }, [other.isPending, isPending])
 
   const handlePasswordSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       if (!passwordState.currentPassword || !passwordState.newPassword) {
-        setError("Both current and new password are required.");
+        setPasswordError("Both current and new password are required.");
         return;
       }
       if (checkPasswordStrength(passwordState.newPassword)) {
-        other.isPending && setIsPasswordBtnLoading(true);
         await updatePassword(passwordState);
-        setSuccess("Password updated successfully.");
-        setError(errorSuccessFirstState);
+        setPasswordSuccess("Password updated successfully.");
+        setPasswordError(errorSuccessFirstState);
         setPasswordState({ currentPassword: "", newPassword: "" });
       } else {
-        setError("Choose a stronger password!!");
+        setPasswordError("Choose a stronger password!!");
       }
     } catch (err: any) {
-      setError(err?.response?.data?.message || "Failed to update password.");
-      setSuccess(errorSuccessFirstState);
+      console.log(err);
+      if(isAxiosError(err)){
+        setPasswordError(err?.response?.data?.message );
+      }else setPasswordError("Failed to update password.");
+      setPasswordSuccess(errorSuccessFirstState);
     }
   };
 
@@ -219,8 +228,8 @@ function ProfileUpdatePage() {
         p={3}
         direction={{ xs: "column", md: "row" }}
       >
-        {error && <Alert severity="error">{error}</Alert>}
-        {success && <Alert severity="success">{success}</Alert>}
+        {profileError && <Alert severity="error">{profileError}</Alert>}
+        {profileSuccess && <Alert severity="success">{profileSuccess}</Alert>}
         <Paper
           elevation={3}
           sx={{
@@ -272,6 +281,8 @@ function ProfileUpdatePage() {
             ml: 2,
           }}
         >
+          {passwordError && <Alert severity="error">{passwordError}</Alert>}
+          {passwordSuccess && <Alert severity="success">{passwordSuccess}</Alert>}  
           <Typography variant="h6" mb={2}>
             Change Password
           </Typography>

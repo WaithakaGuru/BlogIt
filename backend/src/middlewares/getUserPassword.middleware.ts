@@ -13,7 +13,7 @@ export default async function getUserPassword(
       select: { password: true },
     });
     if (pass) {
-      res.locals.pass = pass;
+      res.locals.pass = pass.password;
       next();
     }
   } catch (err) {

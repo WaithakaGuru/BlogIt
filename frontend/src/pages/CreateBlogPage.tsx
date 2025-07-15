@@ -1,4 +1,4 @@
-import { Alert, Stack, Typography, Button, Paper } from "@mui/material";
+import { Alert, Stack, Typography, Button, Paper, TextField } from "@mui/material";
 import { EditNote } from "@mui/icons-material";
 import BlogComponent from "../components/BlogContentInput";
 import { useReducer, useState } from "react";
@@ -137,11 +137,13 @@ function CreateBlogPage() {
         borderRadius={2}
       >
         {error && <Alert severity="error">{error}</Alert>}
-        <BlogComponent
+        {/* <BlogComponent
           name="Featured Blog Image URL"
           value={state.featuredImageURL}
+          type="file"
           onChange={handleFeaturedImage}
-        />
+        /> */}
+        <TextField type="file"/>
         <BlogComponent
           name="Title"
           value={state.title}

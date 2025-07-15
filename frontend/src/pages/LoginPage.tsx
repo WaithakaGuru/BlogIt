@@ -2,7 +2,7 @@ import { Alert, Button, Stack, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
 import useLogUserIn from "../service/UserLogin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useBlog from "../store/Blog.store";
 import { isAxiosError } from "axios";
 
@@ -23,11 +23,15 @@ function LoginPage() {
     setPass(e.target.value);
   }
 
+  useEffect(()=>{
+    (isPending) ? setIsLoginBtnLoading(true) : setIsLoginBtnLoading(false)
+  }, [isPending])
+
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
     setError("");
     e.preventDefault();
     try {
-      isPending && setIsLoginBtnLoading(true);
+      isPending ?setIsLoginBtnLoading(true) : setIsLoginBtnLoading(false);
       const loggedIn = await login({ identifier, enteredPassword });
       if (loggedIn) {
         const userJWToken = loggedIn.token;

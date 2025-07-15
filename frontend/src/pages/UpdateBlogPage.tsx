@@ -173,7 +173,7 @@ function UpdateBlogPage() {
       >
         {error && <Alert severity="error">{error}</Alert>}
         <BlogComponent
-          name="Featured Blog Image URL"
+          name="Featured Blog Image"
           value={state.featuredImageURL ?? ""}
           onChange={handleFeaturedImage}
         />

@@ -2,7 +2,7 @@ import hashPassword from "../utils/hashPassword.ts";
 import client from "../utils/PrismaUtils.ts";
 import { Request, Response } from "express";
 
-export default async function updatePassword(req: Request, res: Response) {
+export default async function updatePassword(_req: Request, res: Response) {
   const { id } = res.locals.user;
   const pass = res.locals.userPass;
   // const {currentPassword, newPassword} = req.body;

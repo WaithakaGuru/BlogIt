@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import verifyIdentifier from "./verifyIdentifier.middleware.ts";
 import checkPassword from "../utils/verifyPassword.ts";
 
 export default async function verifyPassword(

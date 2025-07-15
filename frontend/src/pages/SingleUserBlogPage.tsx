@@ -11,7 +11,7 @@ import { Notes, Edit, Delete, Email, Person } from "@mui/icons-material";
 import SingleBlog from "../components/SingleBlog";
 import { useGetUserSpecificBlog } from "../service/FetchAllBlogs";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useDeleteBlog from "../service/DeleteBlog";
 import { isAxiosError } from "axios";
 
@@ -30,6 +30,11 @@ function SingleUserBlogPage() {
   function handleCancelDelete() {
     setDeleteForm(false);
   }
+
+  useEffect(()=>{
+    isPending? setIsDeleteBlogBtnLoading(true) : setIsDeleteBlogBtnLoading(false)
+  }, [isPending])
+
   async function handleDeleteBlog() {
     try {
       isPending && setIsDeleteBlogBtnLoading(true);

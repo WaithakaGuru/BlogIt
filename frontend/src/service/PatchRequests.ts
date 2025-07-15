@@ -12,7 +12,7 @@ function useUpdatePassword() {
       newPassword: string;
     }) => {
       const updatedPassword = await axInstance.patch(
-        `user/password`,
+        `users/password`,
         passData,
         { headers: { Authorization: `Bearer ${token}` } },
       );

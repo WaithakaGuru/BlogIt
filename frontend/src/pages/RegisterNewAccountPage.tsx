@@ -1,7 +1,7 @@
 import { Alert, Button, Stack, Typography } from "@mui/material";
 import PasswordInput from "../components/PasswordInput";
 import TextInput from "../components/TextInput";
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
 import { useRegisterNewUser } from "../service/PostRequests";
 import { isAxiosError } from "axios";
@@ -49,7 +49,7 @@ function RegisterNewAccountPage() {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducerFunc, initialState);
   const [error, setError] = useState("");
-  const [isRegisterNewUserBtnLoading, setIsregisterNewUserBtnLoading] = useState(false);
+  const [isRegisterNewUserBtnLoading, setIsRegisterNewUserBtnLoading] = useState(false);
   const { mutateAsync: reigsterUser, isPending } = useRegisterNewUser();
 
   function handleFirstName(e: React.ChangeEvent<HTMLInputElement>) {
@@ -89,6 +89,10 @@ function RegisterNewAccountPage() {
     });
   }
 
+  useEffect(()=>{
+    isPending ? setIsRegisterNewUserBtnLoading(true) :  setIsRegisterNewUserBtnLoading(false);
+  }, [isPending])
+
   async function handleRegisterNewUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
@@ -100,7 +104,6 @@ function RegisterNewAccountPage() {
         setError("Password and confirm password must be the same");
       }
       const { confirmPassword, ...newUserInfo } = state;
-      isPending && setIsregisterNewUserBtnLoading(true);
       const newUser = await reigsterUser(newUserInfo);
       if (newUser) {
         navigate("/login", { replace: true });
