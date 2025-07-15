@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import { configDotenv } from "dotenv";
 import Cors from "cors";
 import router from "./routes/Api.router.ts";
@@ -17,6 +17,7 @@ app.use(
 );
 
 app.use("/api", router);
+app.get("/", () => response.send("Welcome to BlgIt"));
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on Port: ${PORT}`);
