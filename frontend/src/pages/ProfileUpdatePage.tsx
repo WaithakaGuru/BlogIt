@@ -28,7 +28,7 @@ function ProfileUpdatePage() {
     userName: user?.data.userName,
     email: user?.data.email,
   });
-
+   console.log(user?.data);
   useEffect(() => {
     setFormState({
       firstName: user?.data.firstName,

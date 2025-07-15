@@ -90,8 +90,9 @@ function RegisterNewAccountPage() {
   async function handleRegisterNewUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      if (checkPasswordStrength(state.password)) {
+      if (!checkPasswordStrength(state.password)) {
         setError("Please Choose a Stronger Password");
+        return;
       }
       if (!(state.password === state.confirmPassword)) {
         setError("Password and confirm password must be the same");
