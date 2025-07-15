@@ -14,7 +14,6 @@ import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import {
   useGetCurrentUserInfo,
-  useGetUserInfo,
 } from "../service/FetchAllBlogs";
 import { useUpdateUserInfo, useUpdatePassword } from "../service/PatchRequests";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
@@ -23,12 +22,11 @@ type initialState = string | null;
 
 function ProfileUpdatePage() {
   const { data: user } = useGetCurrentUserInfo();
-  const { data: email } = useGetUserInfo(user?.data.id);
   const [formState, setFormState] = useState({
     firstName: user?.data.firstName,
     lastName: user?.data.lastName,
     userName: user?.data.userName,
-    email: email?.data.email,
+    email: user?.data.email,
   });
 
   useEffect(() => {
@@ -36,7 +34,7 @@ function ProfileUpdatePage() {
       firstName: user?.data.firstName,
       lastName: user?.data.lastName,
       userName: user?.data.userName,
-      email: email?.data.email,
+      email: user?.data.email,
     });
   }, [user]);
 

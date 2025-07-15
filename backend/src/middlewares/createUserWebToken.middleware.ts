@@ -11,7 +11,7 @@ function createUserJWebToken(req: Request, res: Response, next: NextFunction) {
     res.status(500).json({ message: "User info or key missing" });
     return;
   }
-  const { password, email, ...userTokenInfo } = userInfo;
+  const { password, ...userTokenInfo } = userInfo;
   const userToken = jwt.sign(userTokenInfo, jwtKey, {
     expiresIn: 24 * 60 * 60000,
   });

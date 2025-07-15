@@ -45,7 +45,7 @@ function Footer() {
             color="textDisabled"
           >
             An open platform to learn and create your own Blogs to express ideas
-            in the simples manner possible
+            in the simplest manner possible
           </Typography>
         </Stack>
         <Stack>
