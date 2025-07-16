@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useUploadImage } from "../service/PostRequests";
 import BlogComponent from "./BlogContentInput";
-import { Alert, Box, Button } from "@mui/material";
-import { UploadFile } from "@mui/icons-material";
+import { Alert, Box} from "@mui/material";
 import axios, { isAxiosError } from "axios";
 
 export default function BlogImageInput() {
