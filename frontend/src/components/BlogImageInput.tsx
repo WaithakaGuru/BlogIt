@@ -44,12 +44,18 @@ export default function BlogImageInput () {
         }
     }
 
+    const transformCloudinaryUrl = (url: string) => {
+        return url?.replace('/upload/', '/upload/w_380,h_400,c_limit/');
+    };
+
+    const url = transformCloudinaryUrl(imageUrl!);
+    console.log(url);
+
     return(
         <Box>
             {error && <Alert severity="error">{error}</Alert>}
-            <BlogComponent name="Featured Image" markDownValue={`![BlogImage](${imageUrl})`} type="file" label="I"
-            onChange={handleImageChage}/>
-            <Button variant="contained" color="secondary" endIcon={<UploadFile/>} onClick={handleImageUpload}>Upload</Button>
+            <BlogComponent name="Featured Image"  markDownValue={`![BlogImage](${url})`} type="file" label="I"
+            onChange={handleImageChage} handleImageUpload={handleImageUpload}/>
         </Box>
     )
 }

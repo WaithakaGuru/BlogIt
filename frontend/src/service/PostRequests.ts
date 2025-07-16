@@ -55,9 +55,11 @@ function useUploadImage() {
     mutationKey: ["UPLOAD_CLOUDINARY_IMAGE_URL"],
     mutationFn: async () =>{
       const info = await axInstance.post("/signature",
+        {},
       {
         headers: {Authorization: `Bearer ${token}`}, 
       })
+      console.log(token);
       return info;
   }
   })

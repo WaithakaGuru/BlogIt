@@ -1,7 +1,8 @@
-import { Box, TextField, Typography, type TextFieldProps } from "@mui/material";
+import { Box, TextField, Typography, type TextFieldProps, Button} from "@mui/material";
+import { UploadFile } from "@mui/icons-material";
 import Markdown from "react-markdown";
 
-type BlogComponentPropsType = TextFieldProps & { name: string; value?: string, markDownValue?: string };
+type BlogComponentPropsType = TextFieldProps & { name: string; value?: string, markDownValue?: string, handleImageUpload?: ()=>void };
 
 function BlogComponent({
   multiline = false,
@@ -11,11 +12,12 @@ function BlogComponent({
   onChange,
   name,
   type = "text",
+  handleImageUpload,
   markDownValue,
   label=""
 }: BlogComponentPropsType) {
   return (
-    <Box p={2}>
+    <Box p={2} position={"relative"}>
       <Typography variant="h6" gutterBottom color="secondary">
         {name} Input
       </Typography>
@@ -35,7 +37,11 @@ function BlogComponent({
         <Typography variant="h6" gutterBottom color="secondary">
           Blog {name} Preview
         </Typography>
-
+        {handleImageUpload && (
+          <Button variant="contained" color="secondary" sx={{position: "absolute", zIndex: 0, right:"2rem", top:"4rem"}}
+              endIcon={<UploadFile/>} onClick={handleImageUpload}>Upload
+          </Button>
+        )}
         <Box
           component={"div"}
           p={2}
