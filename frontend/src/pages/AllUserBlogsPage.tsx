@@ -18,6 +18,8 @@ function AllUserBlogsPage() {
   const { data: allUserBlogs } = useGetUserBlogs();
   const data = allUserBlogs;
 
+  console.log(data);
+
   return (
     <>
       <Paper
@@ -103,7 +105,7 @@ function AllUserBlogsPage() {
           </Paper>
         </Stack>
       </Paper>
-      {data?.data ? (
+      {data? (
         <Stack
           p={3}
           bgcolor={"#f5f5f5ff"}
@@ -235,7 +237,6 @@ function AllUserBlogsPage() {
       ) : (
         <NoBlogsCard />
       )}
-      )
     </>
   );
 }

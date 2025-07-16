@@ -18,6 +18,8 @@ function DashboardPage() {
   const { data } = useGetAllBlogs();
   const { data: userInfo } = useGetCurrentUserInfo();
 
+  console.log(data);
+
   return (
     <Box bgcolor={"#f9f9f9"} px={"1rem"}>
       <Paper
@@ -149,7 +151,7 @@ function DashboardPage() {
       >
         {data?.map((blog: any) => <BlogSummary key={blog.id} {...blog} />)}
       </Stack>
-      {!data?.data && <NoBlogsCard />}
+      {!data && <NoBlogsCard />}
     </Box>
   );
 }

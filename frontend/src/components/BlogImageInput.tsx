@@ -19,16 +19,16 @@ export default function BlogImageInput() {
     if (!image) return;
 
     try {
-      const imageInfo = (await signature()).data;
+      const imageInfo = await signature();
       const formData = new FormData();
       formData.append("file", image);
-      formData.append("api_key", imageInfo.apiKey);
-      formData.append("timestamp", imageInfo.timestamp);
-      formData.append("signature", imageInfo.signature);
-      formData.append("folder", imageInfo.folder);
+      formData.append("api_key", imageInfo.data.apiKey);
+      formData.append("timestamp", imageInfo.data.timestamp);
+      formData.append("signature", imageInfo.data.signature);
+      formData.append("folder", imageInfo.data.folder);
 
       const cloudinaryRes = await axios.post(
-        `https://api.cloudinary.com/v1_1/${imageInfo.cloudName}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${imageInfo.data.cloudName}/image/upload`,
         formData,
       );
 
@@ -43,7 +43,7 @@ export default function BlogImageInput() {
   }
 
   const transformCloudinaryUrl = (url: string) => {
-    return url?.replace("/upload/", "/upload/w_380,h_400,c_limit/");
+    return url?.replace("/upload/", "/upload/w_350,h_400,c_limit/");
   };
 
   const url = transformCloudinaryUrl(imageUrl!);

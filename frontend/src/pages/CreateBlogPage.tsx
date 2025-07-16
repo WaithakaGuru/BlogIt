@@ -81,7 +81,7 @@ function CreateBlogPage() {
   }
 
   async function handleCreateNewBlog() {
-    const userId = userInfo?.data.userInfo.id;
+    const userId = userInfo?.data.id;
     try {
       isPending && setIsPublishBlogBtnLoading(true);
       const newBlog = await createBlog({ ...state, userId });
@@ -145,12 +145,14 @@ function CreateBlogPage() {
         <BlogComponent
           name="Title"
           value={state.title}
+          markDownValue={state.title}
           onChange={handleTitle}
         />
         <BlogComponent
           multiline={true}
           name="Synopsis"
           value={state.synopsis}
+          markDownValue={state.synopsis}
           onChange={handleSynopsis}
         />
         <BlogComponent
@@ -158,6 +160,7 @@ function CreateBlogPage() {
           multiline={true}
           name="Content"
           value={state.content}
+          markDownValue={state.content}
           onChange={handleContent}
         />
         <Button
