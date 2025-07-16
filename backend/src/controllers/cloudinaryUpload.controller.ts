@@ -1,5 +1,5 @@
-import { Response, Request, application } from "express";
-import cloudinary from "../utils/cloudinary";
+import { Response, Request } from "express";
+import cloudinary from "../utils/cloudinary.ts";
 
 export default function cloudinaryUpload(_req: Request, res: Response){
     const timestamp = Math.round(Date.now() / 1000);
