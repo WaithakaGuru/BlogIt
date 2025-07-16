@@ -11,6 +11,7 @@ import getCurrentUserDetails from "./getCurrentUserDetails.controller.ts";
 import updateBlog from "./updateBlog.controller.ts";
 import updateUserInfo from "./updateUserInfo.controller.ts";
 import updatePassword from "./updatePassword.controller.ts";
+import cloudinaryUpload from "./cloudinaryUpload.controller.ts";
 
 export {
   getSpecificBlog,
@@ -26,4 +27,5 @@ export {
   updateBlog,
   updateUserInfo,
   updatePassword,
+  cloudinaryUpload
 };

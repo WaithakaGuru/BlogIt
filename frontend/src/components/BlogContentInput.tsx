@@ -1,7 +1,7 @@
 import { Box, TextField, Typography, type TextFieldProps } from "@mui/material";
 import Markdown from "react-markdown";
 
-type BlogComponentPropsType = TextFieldProps & { name: string; value: string, markDownValue?: string };
+type BlogComponentPropsType = TextFieldProps & { name: string; value?: string, markDownValue?: string };
 
 function BlogComponent({
   multiline = false,

@@ -1,7 +1,7 @@
 import { Alert, Stack, Typography, Button, Paper} from "@mui/material";
 import { EditNote } from "@mui/icons-material";
 import BlogComponent from "../components/BlogContentInput";
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import useCreateBlog from "../service/CreateBlog";
 import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
@@ -51,6 +51,12 @@ function CreateBlogPage() {
   const [isPublishBlogBtnLoading, setIsPublishBlogBtnLoading] = useState(false);
   const navigate = useNavigate();
   const { data: userInfo } = useGetCurrentUserInfo();
+
+  const url = localStorage.getItem("uploadedImageUrl");
+
+  useEffect(()=>{
+    dispatch({type: "HANDLE_INPUT", payload:{inputField: "featuredImageURL", value: url!}})
+  }, ["url"])
   
   function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch({

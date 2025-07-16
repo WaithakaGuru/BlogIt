@@ -197,7 +197,7 @@ function RegisterNewAccountPage() {
           Register
         </Button>
         <Typography variant="subtitle1">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <Link to={"/login"} title="create new account">
             Log in 
           </Link>{" "}
