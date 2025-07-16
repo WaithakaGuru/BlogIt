@@ -27,7 +27,7 @@ import {
 import verifyNameEmail from "../middlewares/verifyNameEmail.middleware.ts";
 const router = Router();
 
-router.post("/signature", verifyUserWebToken, cloudinaryUpload)
+router.post("/signature", verifyUserWebToken, cloudinaryUpload);
 router.post(
   "/auth/register",
   authenticateUsername,

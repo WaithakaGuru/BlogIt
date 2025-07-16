@@ -1,4 +1,4 @@
-import express,{ Request, Response }  from "express";
+import express, { Request, Response } from "express";
 import { configDotenv } from "dotenv";
 import Cors from "cors";
 import router from "./routes/Api.router.ts";
@@ -7,7 +7,7 @@ configDotenv({ path: "./.env" });
 const PORT = process.env.PORT_NUMBER;
 const app = express();
 
-app.get("/", (_req: Request, res:Response) => res.send("Welcome to BlgIt"));
+app.get("/", (_req: Request, res: Response) => res.send("Welcome to BlgIt"));
 app.use(express.json());
 app.use(
   Cors({

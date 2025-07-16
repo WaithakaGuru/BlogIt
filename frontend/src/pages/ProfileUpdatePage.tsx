@@ -12,9 +12,7 @@ import {
 import { Edit } from "@mui/icons-material";
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
-import {
-  useGetCurrentUserInfo,
-} from "../service/FetchAllBlogs";
+import { useGetCurrentUserInfo } from "../service/FetchAllBlogs";
 import { useUpdateUserInfo, useUpdatePassword } from "../service/PatchRequests";
 import checkPasswordStrength from "../utils/checkPasswordStrength";
 import { isAxiosError } from "axios";
@@ -46,12 +44,18 @@ function ProfileUpdatePage() {
   const [profileError, setProfileError] = useState(errorSuccessFirstState);
   const [profileSuccess, setProfileSuccess] = useState(errorSuccessFirstState);
   const [passwordError, setPasswordError] = useState(errorSuccessFirstState);
-  const [passwordSuccess, setPasswordSuccess] = useState(errorSuccessFirstState);
+  const [passwordSuccess, setPasswordSuccess] = useState(
+    errorSuccessFirstState,
+  );
   const [isPasswordBtnLoading, setIsPasswordBtnLoading] = useState(false);
   const [isProfileBtnLoading, setIsProfileBtnLoading] = useState(false);
 
-  const { mutateAsync: updateProfile, isPending, isSuccess } = useUpdateUserInfo();
-  const { mutateAsync: updatePassword, ...other} = useUpdatePassword();
+  const {
+    mutateAsync: updateProfile,
+    isPending,
+    isSuccess,
+  } = useUpdateUserInfo();
+  const { mutateAsync: updatePassword, ...other } = useUpdatePassword();
 
   const handleInputChange = (field: string, value: string) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
@@ -73,10 +77,12 @@ function ProfileUpdatePage() {
     }
   };
 
-  useEffect(()=>{
-     other.isPending ? setIsPasswordBtnLoading(true) : setIsPasswordBtnLoading(false);
-     isPending ? setIsProfileBtnLoading(true) : setIsProfileBtnLoading(false);
-  }, [other.isPending, isPending])
+  useEffect(() => {
+    other.isPending
+      ? setIsPasswordBtnLoading(true)
+      : setIsPasswordBtnLoading(false);
+    isPending ? setIsProfileBtnLoading(true) : setIsProfileBtnLoading(false);
+  }, [other.isPending, isPending]);
 
   const handlePasswordSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -95,9 +101,9 @@ function ProfileUpdatePage() {
       }
     } catch (err: any) {
       console.log(err);
-      if(isAxiosError(err)){
-        setPasswordError(err?.response?.data?.message );
-      }else setPasswordError("Failed to update password.");
+      if (isAxiosError(err)) {
+        setPasswordError(err?.response?.data?.message);
+      } else setPasswordError("Failed to update password.");
       setPasswordSuccess(errorSuccessFirstState);
     }
   };
@@ -265,7 +271,12 @@ function ProfileUpdatePage() {
                 onChange={(e) => handleInputChange("email", e.target.value)}
                 type="email"
               />
-              <Button variant="contained" color="secondary" type="submit" loading={isProfileBtnLoading}>
+              <Button
+                variant="contained"
+                color="secondary"
+                type="submit"
+                loading={isProfileBtnLoading}
+              >
                 Update Profile
               </Button>
             </Stack>
@@ -282,7 +293,9 @@ function ProfileUpdatePage() {
           }}
         >
           {passwordError && <Alert severity="error">{passwordError}</Alert>}
-          {passwordSuccess && <Alert severity="success">{passwordSuccess}</Alert>}  
+          {passwordSuccess && (
+            <Alert severity="success">{passwordSuccess}</Alert>
+          )}
           <Typography variant="h6" mb={2}>
             Change Password
           </Typography>
@@ -304,7 +317,12 @@ function ProfileUpdatePage() {
                   handlePasswordChange("newPassword", e.target.value)
                 }
               />
-              <Button variant="contained" color="secondary" type="submit" loading={isPasswordBtnLoading}>
+              <Button
+                variant="contained"
+                color="secondary"
+                type="submit"
+                loading={isPasswordBtnLoading}
+              >
                 Update Password
               </Button>
             </Stack>

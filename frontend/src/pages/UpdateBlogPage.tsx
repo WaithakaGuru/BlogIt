@@ -9,7 +9,7 @@ import Markdown from "react-markdown";
 import useUpdateBlog from "../service/UpdateBlog";
 
 type BlogActionType =
-   {
+  | {
       type: "HANDLE_INPUT";
       payload: {
         value: string;
@@ -21,16 +21,16 @@ type BlogActionType =
       payload: BlogStateType;
     }
   | {
-    type: "HANDLE_LOADING";
-    payload: boolean
-  }
+      type: "HANDLE_LOADING";
+      payload: boolean;
+    };
 
 type BlogStateType = {
   title: string;
   synopsis: string;
   content: string;
   featuredImageURL: string;
-  isLoading?: boolean
+  isLoading?: boolean;
 };
 
 function createBlogReducer(prevState: BlogStateType, action: BlogActionType) {
@@ -48,10 +48,11 @@ function createBlogReducer(prevState: BlogStateType, action: BlogActionType) {
         ...action.payload,
       };
 
-      case "HANDLE_LOADING": 
-        return {
-          ...prevState, isLoading: action.payload
-        }
+    case "HANDLE_LOADING":
+      return {
+        ...prevState,
+        isLoading: action.payload,
+      };
 
     default:
       return prevState;
@@ -114,7 +115,7 @@ function UpdateBlogPage() {
 
   async function handleUpdateBlog() {
     try {
-      state.isLoading && dispatch({type: "HANDLE_LOADING", payload: true});
+      state.isLoading && dispatch({ type: "HANDLE_LOADING", payload: true });
       const updatedBlog = await updateBlog();
       if (updatedBlog) {
         navigate("dashboard/blogs", { replace: true });

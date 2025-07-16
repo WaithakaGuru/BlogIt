@@ -102,8 +102,7 @@ function HomePage() {
           sx={{
             objectFit: { md: "contain", sm: "cover" },
             objectPosition: "center",
-            background:
-              "linear-gradient(135deg, #420e95ff 0%, #f107a3 100%)",
+            background: "linear-gradient(135deg, #420e95ff 0%, #f107a3 100%)",
           }}
         />
       </Stack>

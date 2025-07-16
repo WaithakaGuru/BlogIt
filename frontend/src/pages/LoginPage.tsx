@@ -23,15 +23,15 @@ function LoginPage() {
     setPass(e.target.value);
   }
 
-  useEffect(()=>{
-    (isPending) ? setIsLoginBtnLoading(true) : setIsLoginBtnLoading(false)
-  }, [isPending])
+  useEffect(() => {
+    isPending ? setIsLoginBtnLoading(true) : setIsLoginBtnLoading(false);
+  }, [isPending]);
 
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
     setError("");
     e.preventDefault();
     try {
-      isPending ?setIsLoginBtnLoading(true) : setIsLoginBtnLoading(false);
+      isPending ? setIsLoginBtnLoading(true) : setIsLoginBtnLoading(false);
       const loggedIn = await login({ identifier, enteredPassword });
       if (loggedIn) {
         const userJWToken = loggedIn.token;

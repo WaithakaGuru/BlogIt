@@ -1,6 +1,6 @@
 import useBlog from "../store/Blog.store";
 import axInstance from "../utils/AxInstance";
-import { useMutation} from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 function useRegisterNewUser() {
   const { token } = useBlog();
@@ -50,19 +50,21 @@ function useCreateNewBlog() {
 }
 
 function useUploadImage() {
-  const {token} = useBlog();
+  const { token } = useBlog();
   return useMutation({
     mutationKey: ["UPLOAD_CLOUDINARY_IMAGE_URL"],
-    mutationFn: async () =>{
-      const info = await axInstance.post("/signature",
+    mutationFn: async () => {
+      const info = await axInstance.post(
+        "/signature",
         {},
-      {
-        headers: {Authorization: `Bearer ${token}`}, 
-      })
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       console.log(token);
       return info;
-  }
-  })
+    },
+  });
 }
 
 export { useRegisterNewUser, useLogOutUser, useCreateNewBlog, useUploadImage };

@@ -49,7 +49,8 @@ function RegisterNewAccountPage() {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducerFunc, initialState);
   const [error, setError] = useState("");
-  const [isRegisterNewUserBtnLoading, setIsRegisterNewUserBtnLoading] = useState(false);
+  const [isRegisterNewUserBtnLoading, setIsRegisterNewUserBtnLoading] =
+    useState(false);
   const { mutateAsync: reigsterUser, isPending } = useRegisterNewUser();
 
   function handleFirstName(e: React.ChangeEvent<HTMLInputElement>) {
@@ -89,9 +90,11 @@ function RegisterNewAccountPage() {
     });
   }
 
-  useEffect(()=>{
-    isPending ? setIsRegisterNewUserBtnLoading(true) :  setIsRegisterNewUserBtnLoading(false);
-  }, [isPending])
+  useEffect(() => {
+    isPending
+      ? setIsRegisterNewUserBtnLoading(true)
+      : setIsRegisterNewUserBtnLoading(false);
+  }, [isPending]);
 
   async function handleRegisterNewUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -199,7 +202,7 @@ function RegisterNewAccountPage() {
         <Typography variant="subtitle1">
           Already have an account?{" "}
           <Link to={"/login"} title="create new account">
-            Log in 
+            Log in
           </Link>{" "}
         </Typography>
       </Stack>

@@ -31,9 +31,11 @@ function SingleUserBlogPage() {
     setDeleteForm(false);
   }
 
-  useEffect(()=>{
-    isPending? setIsDeleteBlogBtnLoading(true) : setIsDeleteBlogBtnLoading(false)
-  }, [isPending])
+  useEffect(() => {
+    isPending
+      ? setIsDeleteBlogBtnLoading(true)
+      : setIsDeleteBlogBtnLoading(false);
+  }, [isPending]);
 
   async function handleDeleteBlog() {
     try {

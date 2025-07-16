@@ -1,4 +1,4 @@
-import { Alert, Stack, Typography, Button, Paper} from "@mui/material";
+import { Alert, Stack, Typography, Button, Paper } from "@mui/material";
 import { EditNote } from "@mui/icons-material";
 import BlogComponent from "../components/BlogContentInput";
 import { useEffect, useReducer, useState } from "react";
@@ -54,10 +54,13 @@ function CreateBlogPage() {
 
   const url = localStorage.getItem("uploadedImageUrl");
 
-  useEffect(()=>{
-    dispatch({type: "HANDLE_INPUT", payload:{inputField: "featuredImageURL", value: url!}})
-  }, ["url"])
-  
+  useEffect(() => {
+    dispatch({
+      type: "HANDLE_INPUT",
+      payload: { inputField: "featuredImageURL", value: url! },
+    });
+  }, ["url"]);
+
   function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch({
       type: "HANDLE_INPUT",
@@ -81,7 +84,7 @@ function CreateBlogPage() {
     const userId = userInfo?.data.userInfo.id;
     try {
       isPending && setIsPublishBlogBtnLoading(true);
-     const newBlog = await createBlog({ ...state, userId });
+      const newBlog = await createBlog({ ...state, userId });
       if (newBlog) {
         navigate("/");
       }
@@ -138,7 +141,7 @@ function CreateBlogPage() {
         borderRadius={2}
       >
         {error && <Alert severity="error">{error}</Alert>}
-       <BlogImageInput/>
+        <BlogImageInput />
         <BlogComponent
           name="Title"
           value={state.title}

@@ -1,4 +1,11 @@
-import { Avatar, Box, IconButton, Stack, Typography, Paper } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Stack,
+  Typography,
+  Paper,
+} from "@mui/material";
 import {
   useGetAllBlogs,
   useGetCurrentUserInfo,
@@ -45,12 +52,15 @@ function DashboardPage() {
           >
             BlogIt Dashboard: Your Workspace to Air Out Stories in Writing
           </Typography>
-         
+
           <Stack
             direction="column"
             spacing={2}
             sx={{
-              borderLeft: { xs: "none", md: "2px dashed rgba(255,255,255,0.5)" },
+              borderLeft: {
+                xs: "none",
+                md: "2px dashed rgba(255,255,255,0.5)",
+              },
               pl: { xs: 0, md: 3 },
               width: { xs: "100%", md: "50%" },
               bgcolor: "rgba(255,255,255,0.1)",
@@ -139,9 +149,7 @@ function DashboardPage() {
       >
         {data?.map((blog: any) => <BlogSummary key={blog.id} {...blog} />)}
       </Stack>
-      {!data?.data && (
-        <NoBlogsCard/>
-      )}
+      {!data?.data && <NoBlogsCard />}
     </Box>
   );
 }

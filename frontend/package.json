@@ -22,7 +22,6 @@
     "zxcvbn": "^4.4.2",
     "axios": "^1.9.0",
     "react-router-dom": "^7.6.3"
-
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

@@ -27,5 +27,5 @@ export {
   updateBlog,
   updateUserInfo,
   updatePassword,
-  cloudinaryUpload
+  cloudinaryUpload,
 };

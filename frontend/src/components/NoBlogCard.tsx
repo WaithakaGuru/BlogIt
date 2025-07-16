@@ -10,7 +10,7 @@ const NoBlogsCard = () => {
         background: "linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%)",
         boxShadow: 3,
         borderRadius: 4,
-        maxWidth: {xs: "100%", sm: "80%", md: "70%"},
+        maxWidth: { xs: "100%", sm: "80%", md: "70%" },
         mx: "auto",
         my: 6,
       }}
@@ -22,7 +22,8 @@ const NoBlogsCard = () => {
             No Blogs Yet
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            It looks like you haven't written any stories yet. Start sharing your thoughts now!
+            It looks like you haven't written any stories yet. Start sharing
+            your thoughts now!
           </Typography>
           <Button
             variant="contained"

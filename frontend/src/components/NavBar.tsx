@@ -72,10 +72,16 @@ function NavBar() {
               mx: 1,
               py: ".85rem",
               placeSelf: "center",
-              background: path === "/dashboard" ? "linear-gradient(to right, #8653fc, #c850c0)" : "",
-               ":hover": path === "/dashboard" ?{
-                 background: "linear-gradient(to right, #7e3ff2, #ba45b6)" ,
-              }:"",
+              background:
+                path === "/dashboard"
+                  ? "linear-gradient(to right, #8653fc, #c850c0)"
+                  : "",
+              ":hover":
+                path === "/dashboard"
+                  ? {
+                      background: "linear-gradient(to right, #7e3ff2, #ba45b6)",
+                    }
+                  : "",
             }}
           >
             <Typography display={{ xs: "none", sm: "flex" }}>BlogIT</Typography>
@@ -99,12 +105,21 @@ function NavBar() {
               href="/"
               variant={path === "/" ? "contained" : "outlined"}
               title="Go to home page"
-              sx={{ m: 0, p: 0,
-                 background: path === "/" ? "linear-gradient(to right, #8653fc, #c850c0)" : "",
-               ":hover": path === "/" ?{
-                 background: "linear-gradient(to right, #7e3ff2, #ba45b6)" ,
-              }:"",
-               }}
+              sx={{
+                m: 0,
+                p: 0,
+                background:
+                  path === "/"
+                    ? "linear-gradient(to right, #8653fc, #c850c0)"
+                    : "",
+                ":hover":
+                  path === "/"
+                    ? {
+                        background:
+                          "linear-gradient(to right, #7e3ff2, #ba45b6)",
+                      }
+                    : "",
+              }}
             >
               home
             </Button>
@@ -114,10 +129,17 @@ function NavBar() {
               title="My Blogs"
               href="/dashboard/blogs"
               sx={{
-                 background: path === "/dashboard/blogs" ? "linear-gradient(to right, #8653fc, #c850c0)" : "",
-                ":hover": path === "/dashboard/blogs" ?{
-                  background: "linear-gradient(to right, #7e3ff2, #ba45b6)" ,
-                }:"",
+                background:
+                  path === "/dashboard/blogs"
+                    ? "linear-gradient(to right, #8653fc, #c850c0)"
+                    : "",
+                ":hover":
+                  path === "/dashboard/blogs"
+                    ? {
+                        background:
+                          "linear-gradient(to right, #7e3ff2, #ba45b6)",
+                      }
+                    : "",
               }}
             >
               <Typography display={{ xs: "none", sm: "flex" }}>
@@ -130,11 +152,19 @@ function NavBar() {
               variant={path === "/dashboard/profile" ? "contained" : "outlined"}
               href="/dashboard/profile"
               title="My profile"
-              sx={{ px: 1, 
-                  background: path === "/dashboard/profile" ? "linear-gradient(to right, #8653fc, #c850c0)" : "",
-                ":hover": path === "/dashboard/profile" ?{
-                  background: "linear-gradient(to right, #7e3ff2, #ba45b6)" ,
-                }:"",
+              sx={{
+                px: 1,
+                background:
+                  path === "/dashboard/profile"
+                    ? "linear-gradient(to right, #8653fc, #c850c0)"
+                    : "",
+                ":hover":
+                  path === "/dashboard/profile"
+                    ? {
+                        background:
+                          "linear-gradient(to right, #7e3ff2, #ba45b6)",
+                      }
+                    : "",
               }}
             >
               <Typography display={{ xs: "none", sm: "flex" }}>
